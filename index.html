@@ -70,6 +70,11 @@ a{color:var(--teal)}
   display:flex;align-items:center;gap:7px;background:#E8F7F2;color:#0E7C63;border:1px solid #C7EBE0;
   border-radius:999px;padding:6px 13px;font-size:11.5px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;
 }
+.pill-data{border-radius:999px;padding:6px 12px;font-size:11px;font-weight:800;letter-spacing:.5px;
+  text-transform:uppercase;border:1px solid var(--line);background:#fff;color:var(--abu);white-space:nowrap}
+.pill-data.ok{background:#E8F7F2;color:#0E7C63;border-color:#C7EBE0}
+.pill-data.warn{background:var(--amber-soft);color:#A97400;border-color:#F3E0B4}
+.pill-data.abu{background:#F2F6F7;color:var(--abu)}
 .dot{width:7px;height:7px;border-radius:99px;background:#12A594;box-shadow:0 0 0 3px rgba(18,165,148,.2)}
 .avatar{width:36px;height:36px;border-radius:11px;background:var(--navy);color:#fff;display:grid;place-items:center;
   font-weight:800;font-size:14px;flex:none}
@@ -240,6 +245,7 @@ footer{padding:34px 26px 50px;color:#93A5AD;font-size:12.5px}
   .main{margin-left:0}
   .burger{display:block}
   .topbar{padding:12px 16px}
+  .pill-data{display:none}
   .body-wrap{padding:18px 16px 10px}
   .hero{padding:24px 20px}
   .hero h3{font-size:23px}
@@ -282,6 +288,7 @@ footer{padding:34px 26px 50px;color:#93A5AD;font-size:12.5px}
       <p>Kendali operasional SPPG dan dapur MBG</p>
     </div>
     <div class="sp"></div>
+    <span class="pill-data abu" id="sumber">Data bawaan</span>
     <div class="pill-live"><span class="dot"></span> Sistem Aktif</div>
     <div class="avatar">A</div>
   </div>
@@ -2675,7 +2682,18 @@ const HERO_AKSI = [
 ];
 
 /* ====================================================================== */
-/*  5) DAFTAR ITEM PANTAUAN — INI SAJA YANG PERLU KAMU EDIT RUTIN         */
+/*  5) SUMBER DATA GOOGLE SHEET                                           */
+/*                                                                        */
+/*  Isi SHEET_ID dengan ID spreadsheet (bagian di antara /d/ dan /edit).   */
+/*  Kosongkan ("") bila ingin memakai daftar bawaan di bawah saja.        */
+/*  Sheet WAJIB dibagikan: "Siapa saja yang memiliki link" -> Pelihat.    */
+/*  Kolom baris pertama harus: nama | url | ket | grup | tag              */
+/* ====================================================================== */
+const SHEET_ID  = "10m7Syore2LUGTap0gS8TsRDRncr5Zy3xGkWOiaRBJtY";
+const SHEET_GID = "0";
+
+/* ====================================================================== */
+/*  6) DAFTAR ITEM PANTAUAN (cadangan bila Sheet tidak terbaca) — INI SAJA YANG PERLU KAMU EDIT RUTIN         */
 /*                                                                        */
 /*  - nama : judul kartu                      (wajib)                     */
 /*  - url  : alamat lengkap; kosongkan ("")  -> kartu bertanda "SEGERA"   */
@@ -2683,7 +2701,7 @@ const HERO_AKSI = [
 /*  - grup : nama kelompok (otomatis jadi menu di sidebar)                */
 /*  - tag  : kata kunci pencarian, pisahkan dengan koma                   */
 /* ====================================================================== */
-const ITEM = [
+let ITEM = [
 
   /* ---------------- KENDALI UTAMA ---------------- */
   { nama:"Dashboard Operasional", url:"", ket:"Ringkasan porsi, biaya, stok, dan temuan dalam satu layar.", grup:"Kendali Utama", tag:"OPS/DSH, dashboard, ringkasan" },
@@ -2807,10 +2825,15 @@ const toastEl = document.getElementById('toast');
 const sideEl  = document.getElementById('side');
 const veilEl  = document.getElementById('veil');
 
-const grup = [...new Set(ITEM.map(l => l.grup || 'Lainnya'))];
+let grup = [];
 let filterGrup = 'SEMUA';
+let punyaLink = 0;
 
-const punyaLink = ITEM.filter(l => l.url).length;
+function hitungUlang(){
+  grup = [...new Set(ITEM.map(l => l.grup || 'Lainnya'))];
+  punyaLink = ITEM.filter(l => l.url).length;
+  if (filterGrup !== 'SEMUA' && !grup.includes(filterGrup)) filterGrup = 'SEMUA';
+}
 
 /* ---------- ikon ---------- */
 const IC = {
@@ -2839,6 +2862,7 @@ document.getElementById('peringatan').innerHTML = PERINGATAN.length
 /* ---------- akses cepat + tombol hero ---------- */
 function cari(nama){ return ITEM.find(l => l.nama === nama); }
 
+function buildPintasan(){
 document.getElementById('quick').innerHTML = AKSES_CEPAT.map(n => {
   const l = cari(n);
   if (!l) return '';
@@ -2860,6 +2884,7 @@ document.getElementById('heroAct').innerHTML = HERO_AKSI.map((a,i) => {
          ((l && l.url) ? ' target="_blank" rel="noopener"' : ' data-item="' + esc(a.item) + '"') +
          '>' + esc(a.teks) + '</a>';
 }).join('');
+}
 
 document.getElementById('heroAct').onclick = e => {
   const a = e.target.closest('a[data-item]'); if (!a) return;
@@ -2917,6 +2942,11 @@ function buildChips(){
   p.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4v-6h16v6h-2"/><rect x="8" y="15" width="8" height="6"/></svg> Cetak semua QR';
   p.onclick = () => window.print();
   chipsEl.appendChild(p);
+  const rf = document.createElement('button');
+  rf.className = 'btn-print';
+  rf.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg> Muat ulang data';
+  rf.onclick = () => muatSheet();
+  chipsEl.appendChild(rf);
 }
 
 /* ---------- render ---------- */
@@ -3072,10 +3102,78 @@ function toast(m){
   tt = setTimeout(() => toastEl.classList.remove('show'), 1700);
 }
 
+/* ---------- sumber data: Google Sheet ---------- */
+function parseCSV(teks){
+  const baris=[]; let f='', r=[], q=false;
+  for (let i=0;i<teks.length;i++){
+    const c=teks[i];
+    if (q){
+      if (c === '"'){ if (teks[i+1] === '"'){ f+='"'; i++; } else q=false; }
+      else f+=c;
+    } else {
+      if (c === '"') q=true;
+      else if (c === ','){ r.push(f); f=''; }
+      else if (c === '\n'){ r.push(f); baris.push(r); r=[]; f=''; }
+      else if (c !== '\r') f+=c;
+    }
+  }
+  if (f !== '' || r.length){ r.push(f); baris.push(r); }
+  return baris;
+}
+
+function dariCSV(teks){
+  const b = parseCSV(teks).filter(r => r.some(x => String(x).trim() !== ''));
+  if (b.length < 2) return null;
+  const kol = b[0].map(x => String(x).trim().toLowerCase());
+  const i = n => kol.indexOf(n);
+  if (i('nama') < 0) return null;
+  const out = b.slice(1).map(r => ({
+    nama: (r[i('nama')]  || '').trim(),
+    url:  (i('url')  >= 0 ? (r[i('url')]  || '') : '').trim(),
+    ket:  (i('ket')  >= 0 ? (r[i('ket')]  || '') : '').trim(),
+    grup: (i('grup') >= 0 ? (r[i('grup')] || '') : '').trim() || 'Lainnya',
+    tag:  (i('tag')  >= 0 ? (r[i('tag')]  || '') : '').trim()
+  })).filter(x => x.nama);
+  return out.length ? out : null;
+}
+
+function statusData(t, kelas){
+  const el = document.getElementById('sumber');
+  if (el){ el.textContent = t; el.className = 'pill-data ' + (kelas || ''); }
+}
+
+async function muatSheet(diam){
+  if (!SHEET_ID){ statusData('Data bawaan', 'abu'); return; }
+  if (!diam) statusData('Memuat data…', 'abu');
+  const cb = Date.now();
+  const alamat = [
+    'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&gid=' + SHEET_GID + '&cb=' + cb,
+    'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv&gid=' + SHEET_GID + '&cb=' + cb
+  ];
+  for (const a of alamat){
+    try{
+      const res = await fetch(a, {cache:'no-store'});
+      if (!res.ok) continue;
+      const data = dariCSV(await res.text());
+      if (!data) continue;
+      ITEM = data;
+      hitungUlang(); buildNav(); buildChips(); buildPintasan(); render();
+      statusData('Data dari Google Sheet', 'ok');
+      return true;
+    }catch(e){ /* coba alamat berikutnya */ }
+  }
+  statusData('Sheet tidak terbaca — pakai data bawaan', 'warn');
+  return false;
+}
+
 qEl.addEventListener('input', render);
+hitungUlang();
 buildNav();
 buildChips();
+buildPintasan();
 render();
+muatSheet();
+setInterval(() => muatSheet(true), 300000);
 </script>
 </body>
 </html>
