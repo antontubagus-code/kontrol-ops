@@ -53,6 +53,13 @@ a{color:var(--teal)}
 .nav-item.on .n{background:rgba(255,255,255,.18);color:#fff}
 .nav-sec{font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;
   color:#6E959C;padding:14px 11px 6px}
+.side-kelola{
+  display:flex;align-items:center;gap:9px;margin:0 10px 10px;padding:11px 12px;border-radius:11px;
+  background:rgba(18,165,148,.16);border:1px solid rgba(18,165,148,.35);color:#BFEDE5;
+  font:700 13px/1.2 inherit;text-decoration:none;transition:.15s;
+}
+.side-kelola:hover{background:rgba(18,165,148,.28);color:#fff}
+.side-kelola svg{width:17px;height:17px;flex:none}
 .side-user{border-top:1px solid rgba(255,255,255,.09);padding:13px 18px;font-size:12.5px}
 .side-user strong{display:block;font-size:13px;letter-spacing:.3px}
 .side-user span{color:#8FB6BC;font-size:11.5px}
@@ -272,6 +279,10 @@ footer{padding:34px 26px 50px;color:#93A5AD;font-size:12.5px}
     </div>
   </div>
   <nav class="side-nav" id="nav"></nav>
+  <a class="side-kelola" id="kelola" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg>
+    <span>Kelola Data &amp; Link</span>
+  </a>
   <div class="side-user">
     <strong id="userName">ANTON TUBAGUS</strong>
     <span id="userRole">owner</span>
@@ -301,8 +312,6 @@ footer{padding:34px 26px 50px;color:#93A5AD;font-size:12.5px}
       <p>Setiap porsi lebih aman, bergizi, tepat waktu, dan dapat dipertanggungjawabkan.</p>
       <div class="hero-act" id="heroAct"></div>
     </section>
-
-    <section class="kpi" id="kpi"></section>
 
     <section class="panels">
       <div class="panel">
@@ -2642,27 +2651,13 @@ var qrcode = function() {
 </script>
 <script>
 /* ====================================================================== */
-/*  1) ANGKA KPI — ubah nilai "v" saja                                    */
-/* ====================================================================== */
-const KPI = [
-  { k:"Penerima Manfaat", v:"0",      d:"jiwa terdaftar" },
-  { k:"Titik Penerima",   v:"0",      d:"sekolah & posyandu" },
-  { k:"Target Porsi",     v:"0",      d:"porsi hari ini" },
-  { k:"Porsi Diproduksi", v:"900",    d:"porsi hari ini" },
-  { k:"Porsi Diterima",   v:"0",      d:"terkonfirmasi" },
-  { k:"Pengeluaran",      v:"Rp 0",   d:"hari ini" },
-  { k:"Stok Menipis",     v:"0",      d:"item di bawah minimum", warn:true },
-  { k:"Temuan Keamanan",  v:"0",      d:"belum ditutup",         warn:true }
-];
-
-/* ====================================================================== */
-/*  2) PERINGATAN — kosongkan array bila tidak ada                        */
+/*  1) PERINGATAN — kosongkan array bila tidak ada                        */
 /*     Contoh: { judul:"Suhu chiller di atas batas", ket:"Cek jam 14:00" }*/
 /* ====================================================================== */
 const PERINGATAN = [];
 
 /* ====================================================================== */
-/*  3) AKSES CEPAT — tulis nama item persis seperti di DAFTAR ITEM        */
+/*  2) AKSES CEPAT — tulis nama item persis seperti di DAFTAR ITEM        */
 /* ====================================================================== */
 const AKSES_CEPAT = [
   "Siklus Menu",
@@ -2674,7 +2669,7 @@ const AKSES_CEPAT = [
 ];
 
 /* ====================================================================== */
-/*  4) TOMBOL BESAR DI HERO                                               */
+/*  3) TOMBOL BESAR DI HERO                                               */
 /* ====================================================================== */
 const HERO_AKSI = [
   { teks:"Rencana Produksi",  item:"Rencana Produksi" },
@@ -2682,7 +2677,7 @@ const HERO_AKSI = [
 ];
 
 /* ====================================================================== */
-/*  5) SUMBER DATA GOOGLE SHEET                                           */
+/*  4) SUMBER DATA GOOGLE SHEET                                           */
 /*                                                                        */
 /*  Isi SHEET_ID dengan ID spreadsheet (bagian di antara /d/ dan /edit).   */
 /*  Kosongkan ("") bila ingin memakai daftar bawaan di bawah saja.        */
@@ -2691,10 +2686,9 @@ const HERO_AKSI = [
 /* ====================================================================== */
 const SHEET_ID  = "10m7Syore2LUGTap0gS8TsRDRncr5Zy3xGkWOiaRBJtY";
 const SHEET_GID = "131947325";
-const KPI_TAB   = "KPI";   /* nama tab berisi angka KPI; kosongkan ("") untuk pakai angka bawaan */   /* kosongkan ("") untuk memakai tab pertama */
 
 /* ====================================================================== */
-/*  6) DAFTAR ITEM PANTAUAN (cadangan bila Sheet tidak terbaca) — INI SAJA YANG PERLU KAMU EDIT RUTIN         */
+/*  5) DAFTAR ITEM PANTAUAN (cadangan bila Sheet tidak terbaca) — INI SAJA YANG PERLU KAMU EDIT RUTIN         */
 /*                                                                        */
 /*  - nama : judul kartu                      (wajib)                     */
 /*  - url  : alamat lengkap; kosongkan ("")  -> kartu bertanda "SEGERA"   */
@@ -2815,6 +2809,8 @@ const SUBJUDUL = "SPPG Indramayu Anjatan Kedungwungu";
 document.title = JUDUL + " — " + SUBJUDUL;
 document.getElementById('heroTitle').textContent = SUBJUDUL.toUpperCase();
 document.getElementById('sideTitle').textContent = SUBJUDUL.toUpperCase();
+document.getElementById('kelola').href =
+  'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/edit';
 document.getElementById('upd').textContent =
   new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
 
@@ -2844,46 +2840,6 @@ const IC = {
   ok:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>',
   warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v5M12 17.5v.5"/><path d="M10.3 3.9L2.6 17.3A2 2 0 0 0 4.3 20.3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>'
 };
-
-/* ---------- KPI ---------- */
-function renderKPI(daftar){
-  document.getElementById('kpi').innerHTML = daftar.map(s =>
-    '<div class="kpi-card' + (s.warn ? ' warn' : '') + '">' +
-      '<div class="k">' + esc(s.k) + '</div>' +
-      '<div class="v">' + esc(String(s.v).trim() === '' ? '—' : s.v) + '</div>' +
-      '<div class="d">' + esc(s.d || '') + '</div>' +
-    '</div>').join('');
-}
-renderKPI(KPI);
-
-async function muatKPI(){
-  if (!SHEET_ID || !KPI_TAB) return;
-  const dasar = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID;
-  const cb = Date.now();
-  const alamat = [
-    dasar + '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(KPI_TAB) + '&cb=' + cb,
-    dasar + '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(KPI_TAB) + '&headers=1&cb=' + cb
-  ];
-  for (const a of alamat){
-    try{
-      const res = await fetch(a, {cache:'no-store'});
-      if (!res.ok) continue;
-      const b = parseCSV(await res.text()).filter(r => r.some(x => String(x).trim() !== ''));
-      if (b.length < 2) continue;
-      const kol = b[0].map(x => String(x).trim().toLowerCase());
-      const i = n => kol.indexOf(n);
-      if (i('label') < 0) continue;
-      const daftar = b.slice(1).map(r => ({
-        k: (r[i('label')] || '').trim(),
-        v: (i('nilai') >= 0 ? (r[i('nilai')] || '') : '').trim(),
-        d: (i('ket')   >= 0 ? (r[i('ket')]   || '') : '').trim(),
-        warn: (i('warn') >= 0 ? String(r[i('warn')] || '').trim() !== '' : false)
-      })).filter(x => x.k);
-      if (daftar.length){ renderKPI(daftar); return true; }
-    }catch(e){ /* coba alamat berikutnya */ }
-  }
-  return false;
-}
 
 /* ---------- peringatan ---------- */
 document.getElementById('peringatan').innerHTML = PERINGATAN.length
@@ -2978,7 +2934,7 @@ function buildChips(){
   const rf = document.createElement('button');
   rf.className = 'btn-print';
   rf.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg> Muat ulang data';
-  rf.onclick = () => { muatSheet(); muatKPI(); };
+  rf.onclick = () => muatSheet();
   chipsEl.appendChild(rf);
 }
 
@@ -3210,9 +3166,8 @@ buildChips();
 buildPintasan();
 render();
 muatSheet();
-muatKPI();
-setInterval(() => { muatSheet(true); muatKPI(); }, 60000);
-document.addEventListener('visibilitychange', () => { if (!document.hidden) muatKPI(); });
+setInterval(() => muatSheet(true), 60000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) muatSheet(true); });
 </script>
 </body>
 </html>
