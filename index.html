@@ -2690,7 +2690,7 @@ const HERO_AKSI = [
 /*  Kolom baris pertama harus: nama | url | ket | grup | tag              */
 /* ====================================================================== */
 const SHEET_ID  = "10m7Syore2LUGTap0gS8TsRDRncr5Zy3xGkWOiaRBJtY";
-const SHEET_GID = "0";
+const SHEET_GID = "131947325";   /* kosongkan ("") untuk memakai tab pertama */
 
 /* ====================================================================== */
 /*  6) DAFTAR ITEM PANTAUAN (cadangan bila Sheet tidak terbaca) — INI SAJA YANG PERLU KAMU EDIT RUTIN         */
@@ -3146,9 +3146,13 @@ async function muatSheet(diam){
   if (!SHEET_ID){ statusData('Data bawaan', 'abu'); return; }
   if (!diam) statusData('Memuat data…', 'abu');
   const cb = Date.now();
+  const dasar = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID;
+  const g = SHEET_GID ? '&gid=' + SHEET_GID : '';
   const alamat = [
-    'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:csv&gid=' + SHEET_GID + '&cb=' + cb,
-    'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/export?format=csv&gid=' + SHEET_GID + '&cb=' + cb
+    dasar + '/gviz/tq?tqx=out:csv' + g + '&cb=' + cb,
+    dasar + '/export?format=csv' + g + '&cb=' + cb,
+    dasar + '/gviz/tq?tqx=out:csv&cb=' + cb,
+    dasar + '/export?format=csv&cb=' + cb
   ];
   for (const a of alamat){
     try{
