@@ -2651,13 +2651,24 @@ var qrcode = function() {
 </script>
 <script>
 /* ====================================================================== */
-/*  1) PERINGATAN — kosongkan array bila tidak ada                        */
-/*     Contoh: { judul:"Suhu chiller di atas batas", ket:"Cek jam 14:00" }*/
+/*  1) PERINGATAN — DIATUR DARI SPREADSHEET                               */
+/*                                                                        */
+/*  Buat tab bernama "PERINGATAN" dengan dua kolom: judul | ket.          */
+/*  Tiap baris = satu peringatan. Hapus barisnya bila sudah beres.        */
+/*  Kalau tabnya kosong, panel menampilkan "Tidak ada peringatan aktif".  */
 /* ====================================================================== */
-const PERINGATAN = [];
+const TAB_PERINGATAN = "PERINGATAN";
+let PERINGATAN = [];
 
 /* ====================================================================== */
-/*  2) AKSES CEPAT — tulis nama item persis seperti di DAFTAR ITEM        */
+/*  2) AKSES CEPAT — DIATUR DARI SPREADSHEET                              */
+/*                                                                        */
+/*  Di tab ITEM ada kolom "pintasan".                                     */
+/*    ya       -> item muncul di kotak Akses Cepat                        */
+/*    utama    -> selain masuk Akses Cepat, jadi tombol besar di header   */
+/*    kosong   -> tidak muncul                                            */
+/*                                                                        */
+/*  Daftar di bawah hanya cadangan bila kolom itu belum ada isinya.       */
 /* ====================================================================== */
 const AKSES_CEPAT = [
   "Siklus Menu",
@@ -2842,22 +2853,30 @@ const IC = {
 };
 
 /* ---------- peringatan ---------- */
+function renderPeringatan(){
 document.getElementById('peringatan').innerHTML = PERINGATAN.length
   ? '<ul class="warn-list">' + PERINGATAN.map(p =>
       '<li>' + IC.warn + '<div><b>' + esc(p.judul) + '</b><span>' + esc(p.ket || '') + '</span></div></li>').join('') + '</ul>'
   : '<div class="warn-empty"><div class="ic">' + IC.ok + '</div><div>' +
     '<strong>Tidak ada peringatan aktif</strong>Operasional dalam kondisi terpantau.</div></div>';
+}
+renderPeringatan();
 
 /* ---------- akses cepat + tombol hero ---------- */
 function cari(nama){ return ITEM.find(l => l.nama === nama); }
 
+function daftarPintas(){
+  const ditandai = ITEM.filter(l => l.pintas);
+  if (ditandai.length) return ditandai;
+  return AKSES_CEPAT.map(n => cari(n)).filter(Boolean);
+}
+
 function buildPintasan(){
-document.getElementById('quick').innerHTML = AKSES_CEPAT.map(n => {
-  const l = cari(n);
-  if (!l) return '';
-  return '<button data-nama="' + esc(n) + '">' + esc(l.nama) +
-         '<em>' + esc(l.url ? l.grup : 'belum ada link') + '</em></button>';
-}).join('');
+document.getElementById('quick').innerHTML = daftarPintas().map(l =>
+  '<button data-nama="' + esc(l.nama) + '">' + esc(l.nama) +
+  '<em>' + esc(l.url ? l.grup : 'belum ada link') + '</em></button>').join('')
+  || '<div style="color:var(--abu);font-size:13px">Belum ada pintasan. ' +
+     'Isi kolom <b>pintasan</b> dengan kata <b>ya</b> di spreadsheet.</div>';
 
 document.getElementById('quick').onclick = e => {
   const b = e.target.closest('button'); if (!b) return;
@@ -2866,7 +2885,11 @@ document.getElementById('quick').onclick = e => {
   else { filterGrup = l.grup; qEl.value = l.nama; buildNav(); buildChips(); render(); toast('Item ini belum punya link'); }
 };
 
-document.getElementById('heroAct').innerHTML = HERO_AKSI.map((a,i) => {
+const utama = ITEM.filter(l => /utama/i.test(l.pintas));
+const tombol = utama.length
+  ? utama.slice(0, 2).map(l => ({ teks: l.nama, item: l.nama }))
+  : HERO_AKSI;
+document.getElementById('heroAct').innerHTML = tombol.map((a,i) => {
   const l = cari(a.item);
   const href = (l && l.url) ? esc(l.url) : '#';
   return '<a class="' + (i === 0 ? 'a1' : 'a2') + '" href="' + href + '"' +
@@ -2934,7 +2957,7 @@ function buildChips(){
   const rf = document.createElement('button');
   rf.className = 'btn-print';
   rf.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg> Muat ulang data';
-  rf.onclick = () => muatSheet();
+  rf.onclick = () => { muatSheet(); muatPeringatan(); };
   chipsEl.appendChild(rf);
 }
 
@@ -3121,7 +3144,8 @@ function dariCSV(teks){
     url:  (i('url')  >= 0 ? (r[i('url')]  || '') : '').trim(),
     ket:  (i('ket')  >= 0 ? (r[i('ket')]  || '') : '').trim(),
     grup: (i('grup') >= 0 ? (r[i('grup')] || '') : '').trim() || 'Lainnya',
-    tag:  (i('tag')  >= 0 ? (r[i('tag')]  || '') : '').trim()
+    tag:  (i('tag')  >= 0 ? (r[i('tag')]  || '') : '').trim(),
+    pintas: (i('pintasan') >= 0 ? String(r[i('pintasan')] || '').trim() : '')
   })).filter(x => x.nama);
   return out.length ? out : null;
 }
@@ -3151,12 +3175,34 @@ async function muatSheet(diam){
       if (!data) continue;
       ITEM = data;
       hitungUlang(); buildNav(); buildChips(); buildPintasan(); render();
+      muatPeringatan();
       statusData('Data dari Google Sheet', 'ok');
       return true;
     }catch(e){ /* coba alamat berikutnya */ }
   }
   statusData('Sheet tidak terbaca — pakai data bawaan', 'warn');
   return false;
+}
+
+async function muatPeringatan(){
+  if (!SHEET_ID || !TAB_PERINGATAN) return;
+  const dasar = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID;
+  const cb = Date.now();
+  try{
+    const res = await fetch(dasar + '/gviz/tq?tqx=out:csv&sheet=' +
+      encodeURIComponent(TAB_PERINGATAN) + '&cb=' + cb, {cache:'no-store'});
+    if (!res.ok) return;
+    const b = parseCSV(await res.text()).filter(r => r.some(x => String(x).trim() !== ''));
+    if (b.length < 1) return;
+    const kol = b[0].map(x => String(x).trim().toLowerCase());
+    const iJ = kol.indexOf('judul'), iK = kol.indexOf('ket');
+    if (iJ < 0) return;
+    PERINGATAN = b.slice(1).map(r => ({
+      judul: (r[iJ] || '').trim(),
+      ket:   (iK >= 0 ? (r[iK] || '') : '').trim()
+    })).filter(x => x.judul);
+    renderPeringatan();
+  }catch(e){ /* tab belum ada -> biarkan kosong */ }
 }
 
 qEl.addEventListener('input', render);
@@ -3166,7 +3212,8 @@ buildChips();
 buildPintasan();
 render();
 muatSheet();
-setInterval(() => muatSheet(true), 60000);
+muatPeringatan();
+setInterval(() => { muatSheet(true); muatPeringatan(); }, 60000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) muatSheet(true); });
 </script>
 </body>
