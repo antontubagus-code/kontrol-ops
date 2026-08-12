@@ -3211,7 +3211,8 @@ buildPintasan();
 render();
 muatSheet();
 muatKPI();
-setInterval(() => { muatSheet(true); muatKPI(); }, 300000);
+setInterval(() => { muatSheet(true); muatKPI(); }, 60000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) muatKPI(); });
 </script>
 </body>
 </html>
