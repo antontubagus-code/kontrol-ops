@@ -4,18 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kontrol Operasional — SPPG Indramayu Anjatan Kedungwungu</title>
-<meta name="description" content="Pusat akses dokumen dan lembar kerja operasional SPPG Indramayu Anjatan Kedungwungu.">
+<meta name="description" content="Pusat kendali operasional, dokumen, dan lembar kerja SPPG Indramayu Anjatan Kedungwungu.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23137A7F'/><rect x='22' y='22' width='24' height='24' fill='white'/><rect x='54' y='22' width='24' height='24' fill='white'/><rect x='22' y='54' width='24' height='24' fill='white'/><rect x='56' y='56' width='10' height='10' fill='white'/><rect x='68' y='68' width='10' height='10' fill='white'/></svg>">
 
 <!-- ==================================================================== -->
-<!--  BAGIAN YANG PERLU KAMU EDIT ADA DI BAWAH INI (cari: DAFTAR LINK)    -->
+<!--  YANG PERLU KAMU EDIT ADA DI BAWAH (cari: DAFTAR ITEM / ANGKA KPI)   -->
 <!-- ==================================================================== -->
 
 <style>
 :root{
-  --navy:#0B3C49; --teal:#137A7F; --teal-soft:#E6F2F2; --amber:#F0A500;
-  --cream:#FFF8E7; --ink:#1F2D33; --abu:#6B7C85; --line:#E1E9EC; --bg:#F5F8F9;
+  --navy:#0B3C49; --navy-2:#08303A; --teal:#137A7F; --teal-soft:#E6F2F2;
+  --emerald:#12A594; --amber:#F0A500; --amber-soft:#FFF4DA;
+  --ink:#1F2D33; --abu:#6B7C85; --line:#E1E9EC; --bg:#F5F8F9;
   --radius:16px; --shadow:0 1px 2px rgba(11,60,73,.06), 0 8px 24px rgba(11,60,73,.07);
+  --side:268px;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -24,27 +26,122 @@ body{
   font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 a{color:var(--teal)}
-.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
 
-/* ---------- header ---------- */
-header{background:linear-gradient(160deg,var(--navy) 0%,#12525F 100%);color:#fff;padding:34px 0 30px}
-.brand{display:flex;align-items:center;gap:14px}
-.logo{width:46px;height:46px;border-radius:12px;background:var(--teal);display:grid;place-items:center;flex:none}
-.logo svg{width:26px;height:26px}
-h1{margin:0;font-size:22px;font-weight:700;letter-spacing:-.2px}
-.sub{margin:2px 0 0;font-size:13.5px;color:#B6D4D8}
-.search{margin-top:22px;position:relative}
-.search input{
-  width:100%;padding:14px 16px 14px 46px;border-radius:12px;border:1px solid rgba(255,255,255,.18);
-  background:rgba(255,255,255,.12);color:#fff;font-size:15px;outline:none;
+/* ================= SIDEBAR ================= */
+.side{
+  position:fixed; inset:0 auto 0 0; width:var(--side); z-index:60;
+  background:linear-gradient(170deg,var(--navy) 0%,var(--navy-2) 100%);
+  color:#fff; display:flex; flex-direction:column;
 }
-.search input::placeholder{color:#9EC2C7}
-.search input:focus{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.4)}
-.search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;opacity:.65}
-.stats{margin-top:14px;font-size:13px;color:#9EC2C7}
+.side-brand{display:flex;gap:12px;align-items:center;padding:18px 18px;border-bottom:1px solid rgba(255,255,255,.09)}
+.logo{width:42px;height:42px;border-radius:12px;background:var(--teal);display:grid;place-items:center;flex:none}
+.logo svg{width:23px;height:23px}
+.side-brand h1{margin:0;font-size:13.5px;font-weight:800;letter-spacing:.2px;line-height:1.25}
+.side-brand p{margin:3px 0 0;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:#8FB6BC}
+.side-nav{flex:1;overflow-y:auto;padding:12px 10px 8px}
+.side-nav::-webkit-scrollbar{width:6px}
+.side-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:99px}
+.nav-item{
+  display:flex;align-items:center;gap:9px;width:100%;text-align:left;border:0;cursor:pointer;
+  background:transparent;color:#D3E4E7;font:600 13.5px/1.3 inherit;
+  padding:9px 11px;border-radius:10px;margin-bottom:2px;transition:.15s;
+}
+.nav-item:hover{background:rgba(255,255,255,.08);color:#fff}
+.nav-item.on{background:rgba(18,165,148,.22);color:#fff;box-shadow:inset 3px 0 0 var(--emerald)}
+.nav-item .n{margin-left:auto;font-size:11px;font-weight:800;color:#8FB6BC;background:rgba(255,255,255,.09);
+  padding:1px 7px;border-radius:99px;flex:none}
+.nav-item.on .n{background:rgba(255,255,255,.18);color:#fff}
+.nav-sec{font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;
+  color:#6E959C;padding:14px 11px 6px}
+.side-user{border-top:1px solid rgba(255,255,255,.09);padding:13px 18px;font-size:12.5px}
+.side-user strong{display:block;font-size:13px;letter-spacing:.3px}
+.side-user span{color:#8FB6BC;font-size:11.5px}
 
-/* ---------- toolbar ---------- */
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;padding:20px 0 4px}
+/* ================= MAIN ================= */
+.main{margin-left:var(--side);min-height:100vh;display:flex;flex-direction:column}
+.topbar{
+  position:sticky;top:0;z-index:40;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);padding:14px 26px;display:flex;align-items:center;gap:14px;
+}
+.topbar h2{margin:0;font-size:19px;font-weight:800;color:var(--navy);letter-spacing:-.2px}
+.topbar p{margin:1px 0 0;font-size:12.5px;color:var(--abu)}
+.topbar .sp{flex:1}
+.pill-live{
+  display:flex;align-items:center;gap:7px;background:#E8F7F2;color:#0E7C63;border:1px solid #C7EBE0;
+  border-radius:999px;padding:6px 13px;font-size:11.5px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;
+}
+.dot{width:7px;height:7px;border-radius:99px;background:#12A594;box-shadow:0 0 0 3px rgba(18,165,148,.2)}
+.avatar{width:36px;height:36px;border-radius:11px;background:var(--navy);color:#fff;display:grid;place-items:center;
+  font-weight:800;font-size:14px;flex:none}
+.burger{display:none;border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 9px;cursor:pointer}
+.burger svg{width:19px;height:19px;display:block;stroke:var(--navy)}
+
+.body-wrap{padding:22px 26px 10px;max-width:1400px;width:100%}
+
+/* ---------- hero ---------- */
+.hero{
+  border-radius:20px;padding:30px 32px;color:#fff;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--navy) 0%,#0F5563 55%,#12706B 100%);
+}
+.hero::after{content:"";position:absolute;right:-70px;top:-70px;width:280px;height:280px;border-radius:50%;
+  background:rgba(255,255,255,.05)}
+.hero .kick{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:#7FD8C9}
+.hero h3{margin:8px 0 0;font-size:30px;font-weight:800;line-height:1.15;letter-spacing:-.5px;max-width:640px}
+.hero p{margin:10px 0 0;font-size:14.5px;color:#C3DDE1;max-width:560px}
+.hero-act{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;position:relative;z-index:1}
+.hero-act a{
+  display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:11px 18px;
+  font-size:14px;font-weight:700;text-decoration:none;transition:.15s;
+}
+.hero-act .a1{background:var(--emerald);color:#06251F}
+.hero-act .a1:hover{background:#15BBA8}
+.hero-act .a2{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.hero-act .a2:hover{background:rgba(255,255,255,.2)}
+
+/* ---------- KPI ---------- */
+.kpi{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));margin-top:18px}
+.kpi-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 17px;box-shadow:var(--shadow)}
+.kpi-card .k{font-size:12.5px;font-weight:700;color:var(--abu)}
+.kpi-card .v{font-size:27px;font-weight:800;color:var(--navy);letter-spacing:-.6px;margin-top:5px;line-height:1.1}
+.kpi-card .d{font-size:11.5px;color:#93A5AD;margin-top:3px}
+.kpi-card.warn{border-color:#F6DFB0;background:linear-gradient(180deg,#FFFCF5,#fff)}
+.kpi-card.warn .v{color:#B47600}
+
+/* ---------- panel 2 kolom ---------- */
+.panels{display:grid;gap:16px;grid-template-columns:1.05fr .95fr;margin-top:18px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.panel-h{padding:15px 18px 12px;border-bottom:1px solid var(--line)}
+.panel-h .kick{font-size:10.5px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--abu)}
+.panel-h h4{margin:3px 0 0;font-size:16px;font-weight:800;color:var(--navy)}
+.panel-b{padding:16px 18px 18px}
+.warn-empty{display:flex;gap:12px;align-items:flex-start;color:var(--abu);font-size:13.5px}
+.warn-empty .ic{width:34px;height:34px;border-radius:10px;background:#E8F7F2;display:grid;place-items:center;flex:none}
+.warn-empty .ic svg{width:18px;height:18px;stroke:#0E7C63}
+.warn-empty strong{display:block;color:var(--navy);font-size:14px;margin-bottom:2px}
+.warn-list{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.warn-list li{display:flex;gap:11px;align-items:flex-start;background:var(--amber-soft);border:1px solid #F6E4BC;
+  border-radius:11px;padding:10px 12px;font-size:13px}
+.warn-list b{display:block;color:#8A5B00;font-size:13.5px}
+.warn-list span{color:#9A7530}
+.quick{display:grid;gap:9px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.quick button{
+  border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px 13px;cursor:pointer;
+  text-align:left;font:700 13.5px/1.25 inherit;color:var(--navy);transition:.15s;display:flex;flex-direction:column;gap:4px;
+}
+.quick button:hover{border-color:var(--teal);background:var(--teal-soft)}
+.quick button em{font-style:normal;font-size:11px;font-weight:600;color:var(--abu)}
+
+/* ---------- search + toolbar ---------- */
+.searchbar{margin-top:22px;position:relative}
+.searchbar input{
+  width:100%;padding:14px 16px 14px 46px;border-radius:13px;border:1px solid var(--line);
+  background:#fff;color:var(--ink);font-size:15px;outline:none;box-shadow:var(--shadow);
+}
+.searchbar input::placeholder{color:#9FB0B7}
+.searchbar input:focus{border-color:var(--teal)}
+.searchbar svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;
+  stroke:var(--abu);fill:none;stroke-width:2}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:16px 0 4px}
 .chip{
   border:1px solid var(--line);background:#fff;color:var(--abu);border-radius:999px;
   padding:8px 15px;font-size:13.5px;font-weight:600;cursor:pointer;transition:.15s;white-space:nowrap;
@@ -59,29 +156,35 @@ h1{margin:0;font-size:22px;font-weight:700;letter-spacing:-.2px}
 }
 .btn-print svg{width:16px;height:16px;flex:none}
 .btn-print:hover{border-color:var(--navy);color:var(--navy)}
+.stats{font-size:12.5px;color:var(--abu);padding-top:8px}
+.stats b{color:var(--navy)}
 
-/* ---------- grup ---------- */
+/* ---------- grup + kartu ---------- */
 .group{margin:26px 0 0}
 .group h2{
   font-size:12px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;
   color:var(--abu);margin:0 0 12px;display:flex;align-items:center;gap:10px;
 }
 .group h2::after{content:"";flex:1;height:1px;background:var(--line)}
-
-/* ---------- kartu ---------- */
 .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
 .card{
   background:#fff;border:1px solid var(--line);border-radius:var(--radius);
   box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
 }
+.card.soon{background:#FCFDFD;border-style:dashed}
 .card-top{display:flex;gap:14px;padding:16px 16px 12px}
 .qr{
   width:98px;height:98px;flex:none;border-radius:10px;background:#fff;
   border:1px solid var(--line);display:grid;place-items:center;padding:5px;
 }
 .qr canvas,.qr img{width:100%!important;height:100%!important;display:block;image-rendering:pixelated}
+.qr.kosong{background:repeating-linear-gradient(45deg,#F3F7F8,#F3F7F8 6px,#EAF1F3 6px,#EAF1F3 12px);
+  font-size:10.5px;color:#93A5AD;text-align:center;font-weight:600;padding:8px}
 .meta{min-width:0;flex:1}
 .title{margin:0;font-size:15.5px;font-weight:700;line-height:1.3;color:var(--navy)}
+.badge{display:inline-block;margin-left:6px;font-size:9.5px;font-weight:800;letter-spacing:.6px;
+  text-transform:uppercase;background:var(--amber-soft);color:#A97400;border:1px solid #F3E0B4;
+  padding:2px 6px;border-radius:5px;vertical-align:middle}
 .desc{margin:5px 0 0;font-size:13px;color:var(--abu)}
 .url{
   margin:8px 0 0;font-size:11.5px;color:#93A5AD;word-break:break-all;
@@ -91,7 +194,7 @@ h1{margin:0;font-size:22px;font-weight:700;letter-spacing:-.2px}
 .tag{font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
   background:var(--teal-soft);color:var(--teal);padding:3px 8px;border-radius:6px}
 .actions{display:flex;border-top:1px solid var(--line);margin-top:auto}
-.actions button,.actions a{
+.actions>*{
   flex:1;border:0;background:#fff;padding:12px 6px;font-size:13px;font-weight:600;
   color:var(--abu);cursor:pointer;text-align:center;text-decoration:none;
   display:flex;align-items:center;justify-content:center;gap:6px;transition:.15s;
@@ -100,66 +203,132 @@ h1{margin:0;font-size:22px;font-weight:700;letter-spacing:-.2px}
 .actions .go{color:var(--teal)}
 .actions button:hover,.actions a:hover{background:var(--teal-soft);color:var(--teal)}
 .actions svg{width:15px;height:15px}
+.actions .mati{color:#B6C4C9;cursor:not-allowed;background:#FAFCFC}
+.actions .mati:hover{background:#FAFCFC;color:#B6C4C9}
 
 .empty{text-align:center;padding:70px 20px;color:var(--abu)}
 .empty strong{display:block;font-size:17px;color:var(--navy);margin-bottom:6px}
+footer{padding:34px 26px 50px;color:#93A5AD;font-size:12.5px}
 
-footer{padding:40px 0 56px;text-align:center;color:#93A5AD;font-size:12.5px}
-
-/* ---------- toast ---------- */
 #toast{
   position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);
   background:var(--navy);color:#fff;padding:11px 20px;border-radius:999px;
   font-size:13.5px;font-weight:600;opacity:0;pointer-events:none;transition:.22s;z-index:99;
 }
 #toast.show{opacity:1;transform:translate(-50%,0)}
+.veil{display:none;position:fixed;inset:0;background:rgba(11,60,73,.45);z-index:55}
+.veil.on{display:block}
 
-/* ---------- cetak: 1 halaman penuh QR untuk ditempel ---------- */
+/* ---------- cetak ---------- */
 @media print{
-  header,.toolbar,.actions,footer,#toast{display:none!important}
+  .side,.topbar,.hero,.kpi,.panels,.searchbar,.toolbar,.stats,.actions,footer,#toast,.veil{display:none!important}
+  .main{margin-left:0}
   body{background:#fff}
+  .body-wrap{padding:0}
   .grid{grid-template-columns:repeat(3,1fr);gap:10px}
   .card{box-shadow:none;break-inside:avoid;page-break-inside:avoid}
+  .card.soon{display:none}
   .card-top{flex-direction:column;align-items:center;text-align:center}
   .qr{width:150px;height:150px}
   .url{display:none}
 }
+@media (max-width:1080px){ .panels{grid-template-columns:1fr} }
+@media (max-width:900px){
+  :root{--side:260px}
+  .side{transform:translateX(-100%);transition:.22s}
+  .side.open{transform:none}
+  .main{margin-left:0}
+  .burger{display:block}
+  .topbar{padding:12px 16px}
+  .body-wrap{padding:18px 16px 10px}
+  .hero{padding:24px 20px}
+  .hero h3{font-size:23px}
+}
 @media (max-width:520px){
-  h1{font-size:19px}
   .grid{grid-template-columns:1fr}
+  .topbar h2{font-size:16px}
+  .kpi{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="wrap">
-    <div class="brand">
-      <div class="logo">
-        <svg viewBox="0 0 100 100" fill="#fff"><rect x="8" y="8" width="30" height="30"/><rect x="62" y="8" width="30" height="30"/><rect x="8" y="62" width="30" height="30"/><rect x="62" y="62" width="14" height="14"/><rect x="78" y="78" width="14" height="14"/></svg>
-      </div>
-      <div>
-        <h1 id="siteTitle">Pusat Link &amp; QR</h1>
-        <p class="sub" id="siteSub">SPPG Indramayu Anjatan — akses cepat semua tautan</p>
-      </div>
+<div class="veil" id="veil"></div>
+
+<aside class="side" id="side">
+  <div class="side-brand">
+    <div class="logo">
+      <svg viewBox="0 0 100 100" fill="#fff"><rect x="8" y="8" width="30" height="30"/><rect x="62" y="8" width="30" height="30"/><rect x="8" y="62" width="30" height="30"/><rect x="62" y="62" width="14" height="14"/><rect x="78" y="78" width="14" height="14"/></svg>
     </div>
-    <div class="search">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-      <input id="q" type="search" placeholder="Cari link… (nama, keterangan, atau tag)" autocomplete="off">
+    <div>
+      <h1 id="sideTitle">SPPG INDRAMAYU ANJATAN KEDUNGWUNGU</h1>
+      <p>Kendali Operasional</p>
+    </div>
+  </div>
+  <nav class="side-nav" id="nav"></nav>
+  <div class="side-user">
+    <strong id="userName">ANTON TUBAGUS</strong>
+    <span id="userRole">owner</span>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <button class="burger" id="burger" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div>
+      <h2 id="pageTitle">Dashboard</h2>
+      <p>Kendali operasional SPPG dan dapur MBG</p>
+    </div>
+    <div class="sp"></div>
+    <div class="pill-live"><span class="dot"></span> Sistem Aktif</div>
+    <div class="avatar">A</div>
+  </div>
+
+  <div class="body-wrap">
+
+    <section class="hero">
+      <div class="kick">Kendali Operasional</div>
+      <h3 id="heroTitle">SPPG INDRAMAYU ANJATAN KEDUNGWUNGU</h3>
+      <p>Setiap porsi lebih aman, bergizi, tepat waktu, dan dapat dipertanggungjawabkan.</p>
+      <div class="hero-act" id="heroAct"></div>
+    </section>
+
+    <section class="kpi" id="kpi"></section>
+
+    <section class="panels">
+      <div class="panel">
+        <div class="panel-h">
+          <div class="kick">Peringatan</div>
+          <h4>Butuh Tindak Lanjut</h4>
+        </div>
+        <div class="panel-b" id="peringatan"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h">
+          <div class="kick">Akses Cepat</div>
+          <h4>Modul Utama Hari Ini</h4>
+        </div>
+        <div class="panel-b"><div class="quick" id="quick"></div></div>
+      </div>
+    </section>
+
+    <div class="searchbar">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Cari item pantauan… (nama, keterangan, kode, atau tag)" autocomplete="off">
     </div>
     <div class="stats" id="stats"></div>
+    <div class="toolbar" id="chips"></div>
+    <div id="list"></div>
   </div>
-</header>
 
-<div class="wrap">
-  <div class="toolbar" id="chips"></div>
-  <div id="list"></div>
+  <footer>
+    Scan QR dengan kamera HP, atau ketuk <strong>Buka</strong>. Item bertanda <em>segera</em> belum punya tautan —
+    isi kolom <code>url</code> pada daftar item untuk mengaktifkannya. •
+    Terakhir diperbarui <span id="upd"></span>
+  </footer>
 </div>
-
-<footer>
-  Scan QR dengan kamera HP, atau ketuk <strong>Buka</strong>. •
-  Terakhir diperbarui <span id="upd"></span>
-</footer>
 
 <div id="toast"></div>
 
@@ -2466,143 +2635,157 @@ var qrcode = function() {
 </script>
 <script>
 /* ====================================================================== */
-/*  DAFTAR LINK — INI SAJA YANG PERLU KAMU EDIT                           */
-/*                                                                        */
-/*  Salin-tempel satu blok { ... } untuk menambah link baru.              */
-/*  - nama   : judul yang tampil di kartu          (wajib)                */
-/*  - url    : alamat lengkap, awali dengan https  (wajib)                */
-/*  - ket    : keterangan singkat                  (boleh dikosongkan)    */
-/*  - grup   : nama kelompok, kartu otomatis dikelompokkan                */
-/*  - tag    : kata kunci untuk pencarian, pisahkan dengan koma           */
-/*                                                                        */
-/*  Hapus contoh di bawah ini, ganti dengan link barcode milikmu.         */
+/*  1) ANGKA KPI — ubah nilai "v" saja                                    */
 /* ====================================================================== */
+const KPI = [
+  { k:"Penerima Manfaat", v:"0",      d:"jiwa terdaftar" },
+  { k:"Titik Penerima",   v:"0",      d:"sekolah & posyandu" },
+  { k:"Target Porsi",     v:"0",      d:"porsi hari ini" },
+  { k:"Porsi Diproduksi", v:"900",    d:"porsi hari ini" },
+  { k:"Porsi Diterima",   v:"0",      d:"terkonfirmasi" },
+  { k:"Pengeluaran",      v:"Rp 0",   d:"hari ini" },
+  { k:"Stok Menipis",     v:"0",      d:"item di bawah minimum", warn:true },
+  { k:"Temuan Keamanan",  v:"0",      d:"belum ditutup",         warn:true }
+];
 
-const LINKS = [
+/* ====================================================================== */
+/*  2) PERINGATAN — kosongkan array bila tidak ada                        */
+/*     Contoh: { judul:"Suhu chiller di atas batas", ket:"Cek jam 14:00" }*/
+/* ====================================================================== */
+const PERINGATAN = [];
 
-  {
-    nama: "Siklus Menu",
-    url:  "https://drive.google.com/drive/folders/1pg12p4W2g6V_6W_eelS1xlP7hdiHVW2e?usp=drive_link",
-    ket:  "Rencana menu harian dalam seminggu. Update tiap hari 09:00 oleh Ahli Gizi (Sobirin, S.Gz).",
-    grup: "Gizi & Menu",
-    tag:  "GIZI/SOP-MENU, menu, siklus, folder"
-  },
+/* ====================================================================== */
+/*  3) AKSES CEPAT — tulis nama item persis seperti di DAFTAR ITEM        */
+/* ====================================================================== */
+const AKSES_CEPAT = [
+  "Siklus Menu",
+  "Penerimaan Bahan Baku & Ops",
+  "Stok Opname",
+  "Checklist Keamanan Pangan",
+  "Kontrol Suhu Makanan",
+  "Serah Terima Makanan"
+];
 
-  {
-    nama: "Instruksi Persiapan",
-    url:  "https://drive.google.com/drive/folders/1c0of0vrX8EJ0HEezZ8bLuqRdGZvt2QYc?usp=drive_link",
-    ket:  "Panduan prep bahan sebelum masak. Terbit tiap hari operasional paling lambat 19:00.",
-    grup: "Gizi & Menu",
-    tag:  "OP/SOP-PRP, persiapan, prep, folder"
-  },
+/* ====================================================================== */
+/*  4) TOMBOL BESAR DI HERO                                               */
+/* ====================================================================== */
+const HERO_AKSI = [
+  { teks:"Rencana Produksi",  item:"Rencana Produksi" },
+  { teks:"Distribusi Makanan", item:"Distribusi Makanan" }
+];
 
-  {
-    nama: "Instruksi Pengolahan",
-    url:  "https://drive.google.com/drive/folders/1N-GwA2ynurVWW8gqVwWRsgKT5P1Kq9Em?usp=drive_link",
-    ket:  "Panduan produksi dapur per tahap masak. Update Ahli Gizi tiap hari 19:00.",
-    grup: "Gizi & Menu",
-    tag:  "GIZI/SOP-PGL, pengolahan, masak, folder"
-  },
+/* ====================================================================== */
+/*  5) DAFTAR ITEM PANTAUAN — INI SAJA YANG PERLU KAMU EDIT RUTIN         */
+/*                                                                        */
+/*  - nama : judul kartu                      (wajib)                     */
+/*  - url  : alamat lengkap; kosongkan ("")  -> kartu bertanda "SEGERA"   */
+/*  - ket  : keterangan singkat                                           */
+/*  - grup : nama kelompok (otomatis jadi menu di sidebar)                */
+/*  - tag  : kata kunci pencarian, pisahkan dengan koma                   */
+/* ====================================================================== */
+const ITEM = [
 
-  {
-    nama: "Instruksi Pemorsian",
-    url:  "https://drive.google.com/drive/folders/1Pflgsiy2dmoJ7DaTXyrA0rkYU0cTv5dG?usp=sharing",
-    ket:  "Panduan pemorsian. Update Ahli Gizi paling lambat 21:00 untuk hari berikutnya.",
-    grup: "Gizi & Menu",
-    tag:  "GIZI/SOP-PMR, pemorsian, porsi, folder"
-  },
+  /* ---------------- KENDALI UTAMA ---------------- */
+  { nama:"Dashboard Operasional", url:"", ket:"Ringkasan porsi, biaya, stok, dan temuan dalam satu layar.", grup:"Kendali Utama", tag:"OPS/DSH, dashboard, ringkasan" },
+  { nama:"Laporan Operasional", url:"", ket:"Laporan harian, mingguan, dan bulanan operasional SPPG.", grup:"Kendali Utama", tag:"OPS/LAP, laporan, rekap" },
 
-  {
-    nama: "RAB Bahan Baku & Ops",
-    url:  "https://drive.google.com/drive/folders/11Salm5sqIECXIYmFDi6j7qsjjUahWWdN?usp=drive_link",
-    ket:  "Rencana Anggaran Belanja. Update tiap malam paling lambat 20:00 oleh Akuntan (Elian Bikry Labique, S.Ak).",
-    grup: "Keuangan & Pengadaan",
-    tag:  "KEU/SOP-RAB, rab, anggaran, belanja, folder"
-  },
+  /* ---------------- DATA MASTER ---------------- */
+  { nama:"Data SPPG & Dapur MBG", url:"", ket:"Profil dapur, kapasitas, legalitas, dan penanggung jawab.", grup:"Data Master", tag:"MST/SPPG, profil, dapur" },
+  { nama:"Data Penerima Manfaat", url:"", ket:"Daftar penerima manfaat beserta kategori dan jumlahnya.", grup:"Data Master", tag:"MST/PM, penerima, siswa, balita" },
+  { nama:"Sekolah & Titik Penerima", url:"", ket:"Daftar sekolah, posyandu, dan titik serah terima.", grup:"Data Master", tag:"MST/TTK, sekolah, posyandu, titik" },
+  { nama:"Perencanaan Kebutuhan Porsi", url:"", ket:"Proyeksi kebutuhan porsi per titik per hari operasional.", grup:"Data Master", tag:"MST/KBP, porsi, kebutuhan" },
 
-  {
-    nama: "Penawaran Harga",
-    url:  "https://docs.google.com/spreadsheets/d/1nJdaALtZRpQ09uyoarrFzXr4RFQcuVWf1M7CAPWMxyE/edit?usp=sharing",
-    ket:  "Form harga dari pemasok bahan baku. Update tiap hari oleh Akuntan.",
-    grup: "Keuangan & Pengadaan",
-    tag:  "LOG/SOP-PNH, harga, pemasok, het"
-  },
+  /* ---------------- GIZI & MENU ---------------- */
+  { nama:"Siklus Menu", url:"https://drive.google.com/drive/folders/1pg12p4W2g6V_6W_eelS1xlP7hdiHVW2e?usp=drive_link", ket:"Rencana menu harian dalam seminggu. Update tiap hari 09:00 oleh Ahli Gizi (Sobirin, S.Gz).", grup:"Gizi & Menu", tag:"GIZI/SOP-MENU, menu, siklus, folder" },
+  { nama:"Instruksi Persiapan", url:"https://drive.google.com/drive/folders/1c0of0vrX8EJ0HEezZ8bLuqRdGZvt2QYc?usp=drive_link", ket:"Panduan prep bahan sebelum masak. Terbit tiap hari operasional paling lambat 19:00.", grup:"Gizi & Menu", tag:"OP/SOP-PRP, persiapan, prep, folder" },
+  { nama:"Instruksi Pengolahan", url:"https://drive.google.com/drive/folders/1N-GwA2ynurVWW8gqVwWRsgKT5P1Kq9Em?usp=drive_link", ket:"Panduan produksi dapur per tahap masak. Update Ahli Gizi tiap hari 19:00.", grup:"Gizi & Menu", tag:"GIZI/SOP-PGL, pengolahan, masak, folder" },
+  { nama:"Instruksi Pemorsian", url:"https://drive.google.com/drive/folders/1Pflgsiy2dmoJ7DaTXyrA0rkYU0cTv5dG?usp=sharing", ket:"Panduan pemorsian. Update Ahli Gizi paling lambat 21:00 untuk hari berikutnya.", grup:"Gizi & Menu", tag:"GIZI/SOP-PMR, pemorsian, porsi, folder" },
+  { nama:"Database Bahan Pangan", url:"", ket:"Daftar bahan pangan beserta kandungan gizi acuan.", grup:"Gizi & Menu", tag:"GIZI/DBP, bahan, gizi" },
+  { nama:"Standar Gizi", url:"", ket:"Acuan AKG per kelompok penerima manfaat.", grup:"Gizi & Menu", tag:"GIZI/STD, akg, standar" },
+  { nama:"Resep Standar & Takaran Porsi", url:"", ket:"Resep baku dan gramasi per porsi tiap menu.", grup:"Gizi & Menu", tag:"GIZI/RSP, resep, gramasi" },
+  { nama:"Persetujuan Menu & Gizi", url:"", ket:"Alur pengajuan dan persetujuan menu sebelum diproduksi.", grup:"Gizi & Menu", tag:"GIZI/APR, persetujuan, approval" },
+  { nama:"Alergi & Diet Khusus", url:"", ket:"Catatan alergi dan kebutuhan diet khusus penerima manfaat.", grup:"Gizi & Menu", tag:"GIZI/ALG, alergi, diet" },
 
-  {
-    nama: "Penerimaan Bahan Baku & Ops",
-    url:  "https://drive.google.com/drive/folders/1856-jC62ceQLWi7BwUwN8LsrHkFL-11g?usp=sharing",
-    ket:  "Lembar penerimaan bahan baku harian dan barang operasional. Diisi asisten lapangan tiap selesai penerimaan.",
-    grup: "Logistik & Gudang",
-    tag:  "LOG/SOP, penerimaan, bahan baku, folder"
-  },
+  /* ---------------- LEMBAR KERJA HARIAN ---------------- */
+  { nama:"Lembar Kerja PJ Persiapan", url:"https://docs.google.com/spreadsheets/d/1j8RQiLCo6CWSJEpTZCiP0ml9nHlyRkB4D4BnTuWu4gk/edit?usp=sharing", ket:"Bahan sebelum/sesudah perlakuan, sampah, kecukupan porsi, suhu ruangan & air RO. Diisi sebelum meninggalkan area kerja.", grup:"Lembar Kerja Harian", tag:"OP/SOP-LKP, persiapan, pj" },
+  { nama:"Lembar Kerja PJ Pemorsian", url:"https://docs.google.com/spreadsheets/d/15EPD9LLw2CgvYLJh4p49f5dXpTVCerTrxS7GU9kspqE/edit?usp=sharing", ket:"Gramasi per porsi, kecukupan bahan olahan, sisa pangan matang. Diisi tiap selesai pemorsian.", grup:"Lembar Kerja Harian", tag:"OP/SOP-LKM, pemorsian, pj, gramasi" },
+  { nama:"Lembar Kerja PJ Distribusi", url:"https://docs.google.com/spreadsheets/d/12Okdtl0U0kokBq1IzmlJkewS9o7m36iXJ8clQ0F9yOQ/edit?usp=sharing", ket:"Ompreng hilang, freelance distribusi, KM mobil. Paling lambat 15:00.", grup:"Lembar Kerja Harian", tag:"OP/SOP-LKD, distribusi, pj, ompreng" },
+  { nama:"Lembar Kerja PJ Ompreng", url:"https://docs.google.com/spreadsheets/d/16qRSrJnMYDyenENrsUrDkZN_nXPgFnCTBlXoCB0l040/edit?usp=sharing", ket:"Sampah ompreng sekolah/posyandu, ompreng hilang/rusak. Diisi PJ Cuci Ompreng paling lambat 20:00.", grup:"Lembar Kerja Harian", tag:"OP/SOP-LKO, ompreng, cuci, pj" },
+  { nama:"Lembar Kerja Asisten Lapangan", url:"https://docs.google.com/spreadsheets/d/13Xu2HfA-HTPTnq34D8N_7cmGu5wkIMi0tBQDemR1mEQ/edit?usp=sharing", ket:"Penerimaan bahan baku, kontrol tim relawan, jumlah freelance, pembelian barang ops. Batas 15:00.", grup:"Lembar Kerja Harian", tag:"OP/SOP-LKA, aslap, lapangan, relawan" },
 
-  {
-    nama: "Rekap Pemakaian Bahan Baku",
-    url:  "https://docs.google.com/spreadsheets/d/1Y7wGz8vLcgk-wtpTukUQeXDuHqXqKOq3F7PwWDVneYs/edit?usp=sharing",
-    ket:  "Beras, protein, sayuran, gas, air RO, minyak, bumbu. Diisi PJ Pengolahan setelah proses selesai.",
-    grup: "Logistik & Gudang",
-    tag:  "LOG/SOP-RPB, pemakaian, rekap"
-  },
+  /* ---------------- RENCANA & TIM ---------------- */
+  { nama:"Kalender Operasional", url:"", ket:"Hari operasional, libur, dan agenda besar dapur.", grup:"Rencana & Tim", tag:"PLN/KAL, kalender, agenda" },
+  { nama:"Tugas Tim", url:"", ket:"Pembagian tugas harian per penanggung jawab.", grup:"Rencana & Tim", tag:"PLN/TGS, tugas, tim" },
+  { nama:"Target & Milestone Operasional", url:"", ket:"Target capaian operasional beserta tenggatnya.", grup:"Rencana & Tim", tag:"PLN/TGT, target, milestone" },
 
-  {
-    nama: "Stok Opname",
-    url:  "https://drive.google.com/drive/folders/1nnLsTSoTr17XlD29ovgAaoVpLTGZLl1G?usp=drive_link",
-    ket:  "Hasil perhitungan fisik stok gudang. Diinput paling lambat 16:00 oleh admin gudang (Salsa).",
-    grup: "Logistik & Gudang",
-    tag:  "LOG/SOP-OPN, opname, stok, gudang, folder"
-  },
+  /* ---------------- PENGADAAN & GUDANG ---------------- */
+  { nama:"Penawaran Harga", url:"https://docs.google.com/spreadsheets/d/1nJdaALtZRpQ09uyoarrFzXr4RFQcuVWf1M7CAPWMxyE/edit?usp=sharing", ket:"Form harga dari pemasok bahan baku. Update tiap hari oleh Akuntan.", grup:"Pengadaan & Gudang", tag:"LOG/SOP-PNH, harga, pemasok, het" },
+  { nama:"Penerimaan Bahan Baku & Ops", url:"https://drive.google.com/drive/folders/1856-jC62ceQLWi7BwUwN8LsrHkFL-11g?usp=sharing", ket:"Lembar penerimaan bahan baku harian dan barang operasional. Diisi asisten lapangan tiap selesai penerimaan.", grup:"Pengadaan & Gudang", tag:"LOG/SOP, penerimaan, bahan baku, folder" },
+  { nama:"Rekap Pemakaian Bahan Baku", url:"https://docs.google.com/spreadsheets/d/1Y7wGz8vLcgk-wtpTukUQeXDuHqXqKOq3F7PwWDVneYs/edit?usp=sharing", ket:"Beras, protein, sayuran, gas, air RO, minyak, bumbu. Diisi PJ Pengolahan setelah proses selesai.", grup:"Pengadaan & Gudang", tag:"LOG/SOP-RPB, pemakaian, rekap" },
+  { nama:"Stok Opname", url:"https://drive.google.com/drive/folders/1nnLsTSoTr17XlD29ovgAaoVpLTGZLl1G?usp=drive_link", ket:"Hasil perhitungan fisik stok gudang. Diinput paling lambat 16:00 oleh admin gudang (Salsa).", grup:"Pengadaan & Gudang", tag:"LOG/SOP-OPN, opname, stok, gudang, folder" },
+  { nama:"Supplier & Mitra Pangan", url:"", ket:"Data pemasok, kontak, dan status kemitraan.", grup:"Pengadaan & Gudang", tag:"PRC/SUP, supplier, mitra" },
+  { nama:"Permintaan Pembelian", url:"", ket:"Pengajuan kebutuhan pembelian dari dapur ke pengadaan.", grup:"Pengadaan & Gudang", tag:"PRC/PR, permintaan, pembelian" },
+  { nama:"Purchase Order", url:"", ket:"Pesanan resmi ke pemasok beserta status kirimnya.", grup:"Pengadaan & Gudang", tag:"PRC/PO, po, pesanan" },
+  { nama:"Kontrak Supplier", url:"", ket:"Dokumen kontrak dan masa berlaku tiap pemasok.", grup:"Pengadaan & Gudang", tag:"PRC/KTR, kontrak, perjanjian" },
+  { nama:"Pemeriksaan Kualitas Bahan", url:"", ket:"Cek mutu bahan saat diterima: fisik, suhu, kemasan.", grup:"Pengadaan & Gudang", tag:"PRC/QC, kualitas, mutu" },
+  { nama:"Stok & Gudang Bahan", url:"", ket:"Posisi stok terkini beserta batas minimum tiap bahan.", grup:"Pengadaan & Gudang", tag:"WHS/STK, stok, gudang" },
+  { nama:"Mutasi Stok", url:"", ket:"Catatan barang masuk, keluar, dan penyesuaian stok.", grup:"Pengadaan & Gudang", tag:"WHS/MUT, mutasi, keluar masuk" },
 
-  {
-    nama: "Lembar Kerja PJ Persiapan",
-    url:  "https://docs.google.com/spreadsheets/d/1j8RQiLCo6CWSJEpTZCiP0ml9nHlyRkB4D4BnTuWu4gk/edit?usp=sharing",
-    ket:  "Bahan sebelum/sesudah perlakuan, sampah, kecukupan porsi, suhu ruangan & air RO. Diisi sebelum meninggalkan area kerja.",
-    grup: "Lembar Kerja Harian",
-    tag:  "OP/SOP-LKP, persiapan, pj"
-  },
+  /* ---------------- PRODUKSI ---------------- */
+  { nama:"Rencana Produksi", url:"", ket:"Jumlah porsi yang akan diproduksi per menu per hari.", grup:"Produksi", tag:"PRD/RCP, rencana, produksi" },
+  { nama:"Persiapan Bahan", url:"", ket:"Progres prep bahan sebelum masuk tahap masak.", grup:"Produksi", tag:"PRD/PRP, prep, persiapan" },
+  { nama:"Proses Produksi & Memasak", url:"", ket:"Pemantauan tahap masak beserta jam mulai dan selesai.", grup:"Produksi", tag:"PRD/MSK, masak, produksi" },
+  { nama:"Pengemasan & Pembagian Porsi", url:"", ket:"Pemorsian ke ompreng dan pengecekan kelengkapannya.", grup:"Produksi", tag:"PRD/PKG, kemas, porsi" },
+  { nama:"Sisa Makanan & Limbah", url:"", ket:"Sisa pangan matang dan limbah dapur per hari.", grup:"Produksi", tag:"PRD/LMB, sisa, limbah, waste" },
 
-  {
-    nama: "Lembar Kerja PJ Pemorsian",
-    url:  "https://docs.google.com/spreadsheets/d/15EPD9LLw2CgvYLJh4p49f5dXpTVCerTrxS7GU9kspqE/edit?usp=sharing",
-    ket:  "Gramasi per porsi, kecukupan bahan olahan, sisa pangan matang. Diisi tiap selesai pemorsian.",
-    grup: "Lembar Kerja Harian",
-    tag:  "OP/SOP-LKM, pemorsian, pj, gramasi"
-  },
+  /* ---------------- KEAMANAN PANGAN ---------------- */
+  { nama:"Checklist Keamanan Pangan", url:"", ket:"Ceklis harian keamanan pangan sesuai HACCP.", grup:"Keamanan Pangan", tag:"KMN/CHK, haccp, checklist" },
+  { nama:"Kontrol Suhu Makanan", url:"", ket:"Suhu masak, suhu simpan, dan suhu saat distribusi.", grup:"Keamanan Pangan", tag:"KMN/SUH, suhu, chiller" },
+  { nama:"Sanitasi & Kebersihan", url:"", ket:"Jadwal dan bukti sanitasi area serta peralatan.", grup:"Keamanan Pangan", tag:"KMN/SAN, sanitasi, kebersihan" },
+  { nama:"Sampel Makanan", url:"", ket:"Penyimpanan sampel makanan wajib 24 jam.", grup:"Keamanan Pangan", tag:"KMN/SMP, sampel, retain" },
+  { nama:"Pengujian Laboratorium", url:"", ket:"Hasil uji lab bahan dan makanan matang.", grup:"Keamanan Pangan", tag:"KMN/LAB, lab, uji" },
+  { nama:"Insiden & Dugaan Keracunan", url:"", ket:"Pelaporan cepat insiden dan dugaan keracunan pangan.", grup:"Keamanan Pangan", tag:"KMN/INS, insiden, keracunan" },
 
-  {
-    nama: "Lembar Kerja PJ Distribusi",
-    url:  "https://docs.google.com/spreadsheets/d/12Okdtl0U0kokBq1IzmlJkewS9o7m36iXJ8clQ0F9yOQ/edit?usp=sharing",
-    ket:  "Ompreng hilang, freelance distribusi, KM mobil. Paling lambat 15:00.",
-    grup: "Lembar Kerja Harian",
-    tag:  "OP/SOP-LKD, distribusi, pj, ompreng"
-  },
+  /* ---------------- DISTRIBUSI ---------------- */
+  { nama:"Rute Distribusi", url:"", ket:"Rute pengantaran per armada dan urutan titiknya.", grup:"Distribusi", tag:"DST/RUT, rute, antar" },
+  { nama:"Kendaraan Distribusi", url:"", ket:"Data armada, KM, servis, dan kelayakan jalan.", grup:"Distribusi", tag:"DST/KND, kendaraan, armada" },
+  { nama:"Distribusi Makanan", url:"", ket:"Realisasi pengiriman porsi ke tiap titik penerima.", grup:"Distribusi", tag:"DST/DIS, distribusi, kirim" },
+  { nama:"Serah Terima Makanan", url:"", ket:"Bukti serah terima porsi dan tanda tangan penerima.", grup:"Distribusi", tag:"DST/SRT, serah terima, bap" },
+  { nama:"Keluhan & Pengaduan", url:"", ket:"Kanal keluhan dari sekolah, orang tua, dan mitra.", grup:"Distribusi", tag:"DST/KLH, keluhan, aduan" },
 
-  {
-    nama: "Lembar Kerja PJ Ompreng",
-    url:  "https://docs.google.com/spreadsheets/d/16qRSrJnMYDyenENrsUrDkZN_nXPgFnCTBlXoCB0l040/edit?usp=sharing",
-    ket:  "Sampah ompreng sekolah/posyandu, ompreng hilang/rusak. Diisi PJ Cuci Ompreng paling lambat 20:00.",
-    grup: "Lembar Kerja Harian",
-    tag:  "OP/SOP-LKO, ompreng, cuci, pj"
-  },
+  /* ---------------- KEUANGAN ---------------- */
+  { nama:"RAB Bahan Baku & Ops", url:"https://drive.google.com/drive/folders/11Salm5sqIECXIYmFDi6j7qsjjUahWWdN?usp=drive_link", ket:"Rencana Anggaran Belanja. Update tiap malam paling lambat 20:00 oleh Akuntan (Elian Bikry Labique, S.Ak).", grup:"Keuangan", tag:"KEU/SOP-RAB, rab, anggaran, belanja, folder" },
+  { nama:"Anggaran Operasional", url:"", ket:"Pagu anggaran bulanan beserta realisasinya.", grup:"Keuangan", tag:"KEU/ANG, anggaran, pagu" },
+  { nama:"Tagihan & Invoice Supplier", url:"", ket:"Invoice masuk dari pemasok dan status verifikasinya.", grup:"Keuangan", tag:"KEU/INV, invoice, tagihan" },
+  { nama:"Pembayaran Supplier", url:"", ket:"Jadwal dan bukti pembayaran ke pemasok.", grup:"Keuangan", tag:"KEU/BYR, bayar, transfer" },
+  { nama:"Pengeluaran Operasional", url:"", ket:"Belanja harian operasional di luar bahan baku.", grup:"Keuangan", tag:"KEU/OPS, pengeluaran, belanja" },
+  { nama:"Perhitungan Biaya per Porsi", url:"", ket:"HPP per porsi: bahan, gas, upah, dan penunjang.", grup:"Keuangan", tag:"KEU/HPP, hpp, biaya porsi" },
 
-  {
-    nama: "Lembar Kerja Asisten Lapangan",
-    url:  "https://docs.google.com/spreadsheets/d/13Xu2HfA-HTPTnq34D8N_7cmGu5wkIMi0tBQDemR1mEQ/edit?usp=sharing",
-    ket:  "Penerimaan bahan baku, kontrol tim relawan, jumlah freelance, pembelian barang ops. Batas 15:00.",
-    grup: "Lembar Kerja Harian",
-    tag:  "OP/SOP-LKA, aslap, lapangan, relawan"
-  },
+  /* ---------------- SDM ---------------- */
+  { nama:"Absen Kehadiran — SIPGN", url:"https://sipgn-siphr.bgn.go.id/sign-in", ket:"Login SIPGN lalu buka menu Absensi. Aktifkan GPS. Absen masuk & pulang wajib dilakukan sendiri di lokasi.", grup:"SDM", tag:"SDM/SOP-ABS, absen, sipgn, kehadiran, bgn" },
+  { nama:"Data Karyawan & Tim", url:"", ket:"Data pegawai, relawan, dan freelance beserta posisinya.", grup:"SDM", tag:"SDM/KRY, karyawan, tim" },
+  { nama:"Absensi Tim", url:"", ket:"Rekap kehadiran harian tim dapur dan lapangan.", grup:"SDM", tag:"SDM/ABS, absensi, rekap" },
+  { nama:"Shift Kerja", url:"", ket:"Pembagian shift dan rotasi tim per hari operasional.", grup:"SDM", tag:"SDM/SHF, shift, jadwal" },
+  { nama:"Timesheet", url:"", ket:"Jam kerja tercatat untuk dasar perhitungan upah.", grup:"SDM", tag:"SDM/TMS, timesheet, jam kerja" },
+  { nama:"Payroll & Gaji", url:"", ket:"Perhitungan upah, potongan, dan bukti transfer.", grup:"SDM", tag:"SDM/PAY, gaji, upah, payroll" },
+  { nama:"Pelatihan & Kompetensi", url:"", ket:"Riwayat pelatihan dan sertifikat tiap anggota tim.", grup:"SDM", tag:"SDM/PLT, pelatihan, sertifikat" },
+  { nama:"Pemeriksaan Kesehatan Petugas", url:"", ket:"Cek kesehatan berkala penjamah makanan.", grup:"SDM", tag:"SDM/KES, kesehatan, penjamah" },
 
-  {
-    nama: "Absen Kehadiran — SIPGN",
-    url:  "https://sipgn-siphr.bgn.go.id/sign-in",
-    ket:  "Login SIPGN lalu buka menu Absensi. Aktifkan GPS. Absen masuk & pulang wajib dilakukan sendiri di lokasi.",
-    grup: "SDM",
-    tag:  "SDM/SOP-ABS, absen, sipgn, kehadiran, bgn"
-  }
+  /* ---------------- AUDIT & DOKUMEN ---------------- */
+  { nama:"Peralatan Dapur", url:"", ket:"Inventaris peralatan dapur beserta kondisinya.", grup:"Audit & Dokumen", tag:"AST/ALT, peralatan, inventaris" },
+  { nama:"Pemeliharaan Peralatan", url:"", ket:"Jadwal servis, kalibrasi, dan perbaikan alat.", grup:"Audit & Dokumen", tag:"AST/MTC, servis, kalibrasi" },
+  { nama:"Audit Internal & Kepatuhan", url:"", ket:"Temuan audit internal dan status kepatuhannya.", grup:"Audit & Dokumen", tag:"AUD/INT, audit, kepatuhan" },
+  { nama:"Tindakan Korektif", url:"", ket:"Rencana perbaikan atas temuan beserta tenggatnya.", grup:"Audit & Dokumen", tag:"AUD/CAP, korektif, capa" },
+  { nama:"Dokumen & SOP Digital", url:"", ket:"Pusat SOP, formulir, dan dokumen mutu versi terbaru.", grup:"Audit & Dokumen", tag:"DOK/SOP, sop, dokumen" },
+  { nama:"Audit Aktivitas", url:"", ket:"Jejak aktivitas pengguna pada sistem operasional.", grup:"Audit & Dokumen", tag:"AUD/LOG, log, aktivitas" },
+
+  /* ---------------- SISTEM ---------------- */
+  { nama:"Pengguna & Hak Akses", url:"", ket:"Daftar pengguna sistem beserta perannya.", grup:"Sistem", tag:"SYS/USR, pengguna, akses" },
+  { nama:"Pengaturan", url:"", ket:"Konfigurasi umum sistem dan identitas dapur.", grup:"Sistem", tag:"SYS/SET, pengaturan, konfigurasi" }
 
 ];
 
-/* ---------- JUDUL HALAMAN (boleh diganti) ---------- */
+/* ---------- IDENTITAS HALAMAN (boleh diganti) ---------- */
 const JUDUL    = "Kontrol Operasional";
 const SUBJUDUL = "SPPG Indramayu Anjatan Kedungwungu";
 
@@ -2610,22 +2793,109 @@ const SUBJUDUL = "SPPG Indramayu Anjatan Kedungwungu";
 /*  DI BAWAH INI TIDAK PERLU DIUBAH                                       */
 /* ====================================================================== */
 
-document.getElementById('siteTitle').textContent = JUDUL;
-document.getElementById('siteSub').textContent   = SUBJUDUL;
-document.title = JUDUL + " — " + SUBJUDUL.split('—')[0].trim();
+document.title = JUDUL + " — " + SUBJUDUL;
+document.getElementById('heroTitle').textContent = SUBJUDUL.toUpperCase();
+document.getElementById('sideTitle').textContent = SUBJUDUL.toUpperCase();
 document.getElementById('upd').textContent =
   new Date().toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
 
 const listEl  = document.getElementById('list');
 const chipsEl = document.getElementById('chips');
+const navEl   = document.getElementById('nav');
 const qEl     = document.getElementById('q');
 const toastEl = document.getElementById('toast');
+const sideEl  = document.getElementById('side');
+const veilEl  = document.getElementById('veil');
 
-const grup = [...new Set(LINKS.map(l => l.grup || 'Lainnya'))];
+const grup = [...new Set(ITEM.map(l => l.grup || 'Lainnya'))];
 let filterGrup = 'SEMUA';
 
-document.getElementById('stats').textContent =
-  LINKS.length + ' link dalam ' + grup.length + ' kelompok';
+const punyaLink = ITEM.filter(l => l.url).length;
+
+/* ---------- ikon ---------- */
+const IC = {
+  go:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>',
+  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>',
+  dl:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v11M8 11l4 4 4-4M4 19h16"/></svg>',
+  ok:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>',
+  warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v5M12 17.5v.5"/><path d="M10.3 3.9L2.6 17.3A2 2 0 0 0 4.3 20.3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>'
+};
+
+/* ---------- KPI ---------- */
+document.getElementById('kpi').innerHTML = KPI.map(s =>
+  '<div class="kpi-card' + (s.warn ? ' warn' : '') + '">' +
+    '<div class="k">' + esc(s.k) + '</div>' +
+    '<div class="v">' + esc(s.v) + '</div>' +
+    '<div class="d">' + esc(s.d || '') + '</div>' +
+  '</div>').join('');
+
+/* ---------- peringatan ---------- */
+document.getElementById('peringatan').innerHTML = PERINGATAN.length
+  ? '<ul class="warn-list">' + PERINGATAN.map(p =>
+      '<li>' + IC.warn + '<div><b>' + esc(p.judul) + '</b><span>' + esc(p.ket || '') + '</span></div></li>').join('') + '</ul>'
+  : '<div class="warn-empty"><div class="ic">' + IC.ok + '</div><div>' +
+    '<strong>Tidak ada peringatan aktif</strong>Operasional dalam kondisi terpantau.</div></div>';
+
+/* ---------- akses cepat + tombol hero ---------- */
+function cari(nama){ return ITEM.find(l => l.nama === nama); }
+
+document.getElementById('quick').innerHTML = AKSES_CEPAT.map(n => {
+  const l = cari(n);
+  if (!l) return '';
+  return '<button data-nama="' + esc(n) + '">' + esc(l.nama) +
+         '<em>' + esc(l.url ? l.grup : 'belum ada link') + '</em></button>';
+}).join('');
+
+document.getElementById('quick').onclick = e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const l = cari(b.dataset.nama); if (!l) return;
+  if (l.url) window.open(l.url, '_blank', 'noopener');
+  else { filterGrup = l.grup; qEl.value = l.nama; buildNav(); buildChips(); render(); toast('Item ini belum punya link'); }
+};
+
+document.getElementById('heroAct').innerHTML = HERO_AKSI.map((a,i) => {
+  const l = cari(a.item);
+  const href = (l && l.url) ? esc(l.url) : '#';
+  return '<a class="' + (i === 0 ? 'a1' : 'a2') + '" href="' + href + '"' +
+         ((l && l.url) ? ' target="_blank" rel="noopener"' : ' data-item="' + esc(a.item) + '"') +
+         '>' + esc(a.teks) + '</a>';
+}).join('');
+
+document.getElementById('heroAct').onclick = e => {
+  const a = e.target.closest('a[data-item]'); if (!a) return;
+  e.preventDefault();
+  const l = cari(a.dataset.item); if (!l) return;
+  filterGrup = l.grup; qEl.value = l.nama; buildNav(); buildChips(); render();
+  document.getElementById('list').scrollIntoView({behavior:'smooth'});
+  toast('Item ini belum punya link');
+};
+
+/* ---------- sidebar ---------- */
+function buildNav(){
+  let h = '<div class="nav-sec">Kendali</div>' +
+    '<button class="nav-item' + (filterGrup === 'SEMUA' ? ' on' : '') + '" data-g="SEMUA">' +
+    'Semua Item<span class="n">' + ITEM.length + '</span></button>' +
+    '<div class="nav-sec">Kelompok</div>';
+  grup.forEach(g => {
+    const n = ITEM.filter(l => (l.grup || 'Lainnya') === g).length;
+    h += '<button class="nav-item' + (g === filterGrup ? ' on' : '') + '" data-g="' + esc(g) + '">' +
+         esc(g) + '<span class="n">' + n + '</span></button>';
+  });
+  navEl.innerHTML = h;
+}
+navEl.onclick = e => {
+  const b = e.target.closest('.nav-item'); if (!b) return;
+  filterGrup = b.dataset.g;
+  document.getElementById('pageTitle').textContent = filterGrup === 'SEMUA' ? 'Dashboard' : filterGrup;
+  buildNav(); buildChips(); render(); tutupSide();
+  document.getElementById('list').scrollIntoView({behavior:'smooth', block:'start'});
+};
+
+function bukaSide(){ sideEl.classList.add('open'); veilEl.classList.add('on'); }
+function tutupSide(){ sideEl.classList.remove('open'); veilEl.classList.remove('on'); }
+document.getElementById('burger').onclick = () =>
+  sideEl.classList.contains('open') ? tutupSide() : bukaSide();
+veilEl.onclick = tutupSide;
 
 /* ---------- chip filter ---------- */
 function buildChips(){
@@ -2634,7 +2904,11 @@ function buildChips(){
     const b = document.createElement('button');
     b.className = 'chip' + (g === filterGrup ? ' on' : '');
     b.textContent = g === 'SEMUA' ? 'Semua' : g;
-    b.onclick = () => { filterGrup = g; buildChips(); render(); };
+    b.onclick = () => {
+      filterGrup = g;
+      document.getElementById('pageTitle').textContent = g === 'SEMUA' ? 'Dashboard' : g;
+      buildChips(); buildNav(); render();
+    };
     chipsEl.appendChild(b);
   });
   const sp = document.createElement('div'); sp.className = 'spacer'; chipsEl.appendChild(sp);
@@ -2645,21 +2919,19 @@ function buildChips(){
   chipsEl.appendChild(p);
 }
 
-/* ---------- ikon ---------- */
-const IC = {
-  go:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>',
-  copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>',
-  dl:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v11M8 11l4 4 4-4M4 19h16"/></svg>'
-};
-
 /* ---------- render ---------- */
 function render(){
   const kata = qEl.value.trim().toLowerCase();
-  const cocok = LINKS.filter(l => {
+  const cocok = ITEM.filter(l => {
     if (filterGrup !== 'SEMUA' && (l.grup || 'Lainnya') !== filterGrup) return false;
     if (!kata) return true;
     return [l.nama, l.ket, l.tag, l.grup, l.url].join(' ').toLowerCase().includes(kata);
   });
+
+  document.getElementById('stats').innerHTML =
+    '<b>' + ITEM.length + '</b> item dipantau dalam <b>' + grup.length + '</b> kelompok • ' +
+    '<b>' + punyaLink + '</b> sudah punya tautan • <b>' + (ITEM.length - punyaLink) + '</b> menunggu tautan' +
+    (cocok.length !== ITEM.length ? ' • menampilkan <b>' + cocok.length + '</b>' : '');
 
   if (!cocok.length){
     listEl.innerHTML = '<div class="empty"><strong>Tidak ada yang cocok</strong>Coba kata kunci lain, atau pilih kelompok "Semua".</div>';
@@ -2681,38 +2953,43 @@ function render(){
     grid.className = 'grid';
 
     isi.forEach(l => {
+      const ada = !!l.url;
       const card = document.createElement('article');
-      card.className = 'card';
+      card.className = 'card' + (ada ? '' : ' soon');
 
       const tags = (l.tag || '').split(',').map(t => t.trim()).filter(Boolean)
         .map(t => '<span class="tag">' + esc(t) + '</span>').join('');
 
       card.innerHTML =
         '<div class="card-top">' +
-          '<div class="qr"></div>' +
+          '<div class="qr' + (ada ? '' : ' kosong') + '">' + (ada ? '' : 'Belum ada link') + '</div>' +
           '<div class="meta">' +
-            '<h3 class="title">' + esc(l.nama) + '</h3>' +
+            '<h3 class="title">' + esc(l.nama) + (ada ? '' : '<span class="badge">segera</span>') + '</h3>' +
             (l.ket ? '<p class="desc">' + esc(l.ket) + '</p>' : '') +
-            '<p class="url">' + esc(pendek(l.url)) + '</p>' +
+            '<p class="url">' + (ada ? esc(pendek(l.url)) : 'tautan belum diisi') + '</p>' +
             (tags ? '<div class="tags">' + tags + '</div>' : '') +
           '</div>' +
         '</div>' +
         '<div class="actions">' +
-          '<a class="go" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + IC.go + 'Buka</a>' +
-          '<button class="salin">' + IC.copy + 'Salin</button>' +
-          '<button class="unduh">' + IC.dl + 'QR</button>' +
+          (ada
+            ? '<a class="go" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + IC.go + 'Buka</a>' +
+              '<button class="salin">' + IC.copy + 'Salin</button>' +
+              '<button class="unduh">' + IC.dl + 'QR</button>'
+            : '<span class="mati">' + IC.go + 'Buka</span>' +
+              '<span class="mati">' + IC.copy + 'Salin</span>' +
+              '<span class="mati">' + IC.dl + 'QR</span>') +
         '</div>';
 
-      const box = card.querySelector('.qr');
-      gambarQR(box, l.url);
-
-      card.querySelector('.salin').onclick = () => {
-        navigator.clipboard.writeText(l.url)
-          .then(() => toast('Link disalin'))
-          .catch(() => toast('Gagal menyalin'));
-      };
-
-      card.querySelector('.unduh').onclick = () => unduhQR(box, l.nama);
+      if (ada){
+        const box = card.querySelector('.qr');
+        gambarQR(box, l.url);
+        card.querySelector('.salin').onclick = () => {
+          navigator.clipboard.writeText(l.url)
+            .then(() => toast('Link disalin'))
+            .catch(() => toast('Gagal menyalin'));
+        };
+        card.querySelector('.unduh').onclick = () => unduhQR(box, l.nama);
+      }
 
       grid.appendChild(card);
     });
@@ -2722,7 +2999,6 @@ function render(){
   });
 }
 
-
 /* ---------- gambar QR ke canvas (tanpa internet) ---------- */
 function gambarQR(box, teks){
   try{
@@ -2730,8 +3006,8 @@ function gambarQR(box, teks){
     qr.addData(teks);
     qr.make();
     const n = qr.getModuleCount();
-    const quiet = 4;                 // margin wajib standar QR
-    const skala = 8;                 // 8 px per modul → tajam saat diunduh
+    const quiet = 4;
+    const skala = 8;
     const sisi = (n + quiet*2) * skala;
 
     const c = document.createElement('canvas');
@@ -2751,7 +3027,7 @@ function gambarQR(box, teks){
   }
 }
 
-/* ---------- unduh QR sebagai PNG (dengan bingkai putih + judul) ---------- */
+/* ---------- unduh QR sebagai PNG ---------- */
 function unduhQR(box, nama){
   const src = box.querySelector('canvas');
   if (!src){ toast('QR belum siap'); return; }
@@ -2797,6 +3073,7 @@ function toast(m){
 }
 
 qEl.addEventListener('input', render);
+buildNav();
 buildChips();
 render();
 </script>
