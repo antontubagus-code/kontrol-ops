@@ -2690,7 +2690,8 @@ const HERO_AKSI = [
 /*  Kolom baris pertama harus: nama | url | ket | grup | tag              */
 /* ====================================================================== */
 const SHEET_ID  = "10m7Syore2LUGTap0gS8TsRDRncr5Zy3xGkWOiaRBJtY";
-const SHEET_GID = "131947325";   /* kosongkan ("") untuk memakai tab pertama */
+const SHEET_GID = "131947325";
+const KPI_TAB   = "KPI";   /* nama tab berisi angka KPI; kosongkan ("") untuk pakai angka bawaan */   /* kosongkan ("") untuk memakai tab pertama */
 
 /* ====================================================================== */
 /*  6) DAFTAR ITEM PANTAUAN (cadangan bila Sheet tidak terbaca) — INI SAJA YANG PERLU KAMU EDIT RUTIN         */
@@ -2845,12 +2846,44 @@ const IC = {
 };
 
 /* ---------- KPI ---------- */
-document.getElementById('kpi').innerHTML = KPI.map(s =>
-  '<div class="kpi-card' + (s.warn ? ' warn' : '') + '">' +
-    '<div class="k">' + esc(s.k) + '</div>' +
-    '<div class="v">' + esc(s.v) + '</div>' +
-    '<div class="d">' + esc(s.d || '') + '</div>' +
-  '</div>').join('');
+function renderKPI(daftar){
+  document.getElementById('kpi').innerHTML = daftar.map(s =>
+    '<div class="kpi-card' + (s.warn ? ' warn' : '') + '">' +
+      '<div class="k">' + esc(s.k) + '</div>' +
+      '<div class="v">' + esc(String(s.v).trim() === '' ? '—' : s.v) + '</div>' +
+      '<div class="d">' + esc(s.d || '') + '</div>' +
+    '</div>').join('');
+}
+renderKPI(KPI);
+
+async function muatKPI(){
+  if (!SHEET_ID || !KPI_TAB) return;
+  const dasar = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID;
+  const cb = Date.now();
+  const alamat = [
+    dasar + '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(KPI_TAB) + '&cb=' + cb,
+    dasar + '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(KPI_TAB) + '&headers=1&cb=' + cb
+  ];
+  for (const a of alamat){
+    try{
+      const res = await fetch(a, {cache:'no-store'});
+      if (!res.ok) continue;
+      const b = parseCSV(await res.text()).filter(r => r.some(x => String(x).trim() !== ''));
+      if (b.length < 2) continue;
+      const kol = b[0].map(x => String(x).trim().toLowerCase());
+      const i = n => kol.indexOf(n);
+      if (i('label') < 0) continue;
+      const daftar = b.slice(1).map(r => ({
+        k: (r[i('label')] || '').trim(),
+        v: (i('nilai') >= 0 ? (r[i('nilai')] || '') : '').trim(),
+        d: (i('ket')   >= 0 ? (r[i('ket')]   || '') : '').trim(),
+        warn: (i('warn') >= 0 ? String(r[i('warn')] || '').trim() !== '' : false)
+      })).filter(x => x.k);
+      if (daftar.length){ renderKPI(daftar); return true; }
+    }catch(e){ /* coba alamat berikutnya */ }
+  }
+  return false;
+}
 
 /* ---------- peringatan ---------- */
 document.getElementById('peringatan').innerHTML = PERINGATAN.length
@@ -2945,7 +2978,7 @@ function buildChips(){
   const rf = document.createElement('button');
   rf.className = 'btn-print';
   rf.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg> Muat ulang data';
-  rf.onclick = () => muatSheet();
+  rf.onclick = () => { muatSheet(); muatKPI(); };
   chipsEl.appendChild(rf);
 }
 
@@ -3177,7 +3210,8 @@ buildChips();
 buildPintasan();
 render();
 muatSheet();
-setInterval(() => muatSheet(true), 300000);
+muatKPI();
+setInterval(() => { muatSheet(true); muatKPI(); }, 300000);
 </script>
 </body>
 </html>
