@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+  <html lang="id">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pusat SOP — SPPG Indramayu Anjatan Kedungwungu</title>
+  <meta name="description" content="Katalog 50 Standar Operasional Prosedur dapur MBG SPPG Indramayu Anjatan Kedungwungu.">
+  <style>
+  :root{--bg:#f4f7f7;--card:#fff;--ink:#12211f;--muted:#5d716e;--line:#e0e8e7;--teal:#0f5f57;--teal2:#0b4a44;--soft:#e6f1ef;--amber:#9a6b00;--amber-s:#fdf3dd}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+a{color:inherit}
+  .top{background:var(--teal);color:#fff;padding:22px 20px}
+.top .in{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:13px}
+.mark{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.16);display:grid;place-items:center;font-weight:700;font-size:13px;letter-spacing:.04em}
+.brand h1{margin:0;font-size:17px;line-height:1.25}
+.brand span{font-size:11.5px;opacity:.8;letter-spacing:.1em;text-transform:uppercase}
+.links{display:flex;gap:9px;flex-wrap:wrap}
+.links a{background:rgba(255,255,255,.14);color:#fff;text-decoration:none;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap}
+.links a:hover{background:rgba(255,255,255,.26)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 70px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:11px;margin-bottom:22px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+.stat b{display:block;font-size:24px;color:var(--teal);line-height:1.15}
+.stat span{font-size:11.5px;color:var(--muted)}
+.tools{position:sticky;top:0;z-index:20;background:var(--bg);padding:12px 0 10px;border-bottom:1px solid var(--line);margin-bottom:18px}
+#q{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;background:var(--card)}
+#q:focus{outline:2px solid var(--teal);outline-offset:-1px}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--muted);padding:6px 13px;border-radius:20px;font-size:12.5px;cursor:pointer;font-family:inherit}
+.chip:hover{border-color:var(--teal);color:var(--teal)}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:600}
+.count{font-size:12.5px;color:var(--muted);margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:13px}
+.c{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px 13px;display:flex;flex-direction:column;gap:8px;transition:.15s}
+.c:hover{border-color:var(--teal);box-shadow:0 3px 14px rgba(15,95,87,.09);transform:translateY(-1px)}
+  .chead{display:flex;align-items:flex-start;gap:10px}
+.num{background:var(--teal);color:#fff;min-width:36px;height:36px;border-radius:9px;display:grid;place-items:center;font-weight:700;font-size:14px;flex-shrink:0}
+.ttl{font-weight:600;font-size:14.5px;line-height:1.35}
+.badge{display:inline-block;background:var(--amber-s);color:var(--amber);font-size:9.5px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:.07em;vertical-align:middle;margin-left:5px}
+.desc{font-size:12.8px;color:var(--muted);line-height:1.5}
+.meta{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.kat{background:var(--soft);color:var(--teal);font-size:11px;font-weight:600;padding:2px 8px;border-radius:5px}
+.kode{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:var(--muted);background:#f2f5f5;padding:2px 6px;border-radius:4px}
+.act{display:flex;gap:7px;margin-top:auto;padding-top:9px;border-top:1px solid var(--line)}
+.act a,.act button{flex:1;text-align:center;padding:8px;border-radius:7px;font-size:12.5px;font-weight:600;text-decoration:none;cursor:pointer;font-family:inherit;border:1px solid var(--line);background:var(--card);color:var(--teal)}
+.act a{background:var(--teal);color:#fff;border-color:var(--teal)}
+.act a:hover{background:var(--teal2)}
+  .act button:hover{border-color:var(--teal)}
+  .empty{text-align:center;padding:50px 20px;color:var(--muted)}
+footer{max-width:1180px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font-size:12px}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:var(--teal);color:#fff;padding:11px 20px;border-radius:9px;font-size:13.5px;opacity:0;transition:.25s;pointer-events:none;z-index:99}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}.brand h1{font-size:15px}}
+</style>
+  </head>
+  <body>
+  <div class="top"><div class="in">
+  <div class="brand">
+  <div class="mark">SOP</div>
+  <div>
+  <span>Pusat Dokumen</span>
+<h1>SPPG Indramayu Anjatan Kedungwungu</h1>
+</div>
+</div>
+<div class="links">
+<a href="../">Kontrol Ops</a>
+  <a href="https://drive.google.com/drive/folders/1bMKrh2NHNelhEJc7qEmGi0lOPy64lDxd" target="_blank" rel="noopener">Folder Drive</a>
+  </div>
+  </div></div>
+  <div class="wrap">
+<div class="stats">
+  <div class="stat"><b>50</b><span>Total SOP</span></div>
+<div class="stat"><b>10</b><span>Kategori</span></div>
+<div class="stat"><b>4</b><span>SOP baru</span></div>
+<div class="stat"><b>1.0</b><span>Revisi aktif</span></div>
+</div>
+<div class="tools">
+<input id="q" type="search" placeholder="Cari SOP… (nama, nomor, kode kontrol-ops)" autocomplete="off">
+<div class="chips" id="chips"></div>
+</div>
+<div class="count" id="count"></div>
+<div class="grid" id="grid"></div>
+<div class="empty" id="empty" style="display:none">Tidak ada SOP yang cocok.</div>
+</div>
+<footer>
+Seluruh dokumen tersimpan di Google Drive. Revisi 1.0 · Status Aktif · Yayasan Anugerah Pekerti Nusantara · Badan Gizi Nasional
+</footer>
+<div class="toast" id="toast">Tautan disalin</div>
+<script>
+const SOP=[
+{n:1,t:"Kebersihan Fasilitas Dapur",id:"1VeMHgzQdB-y8aWaNb7FnR1MVbUJU67aKFKGmqd5bb1M",k:"Keamanan Pangan",c:["KMN/SAN"],d:"Daily cleaning & deep cleaning seluruh area dapur.",b:0},
+  {n:2,t:"Sanitasi Alat Masak & Peralatan Produksi",id:"1kKhFQ9UpzFdUVE1aVte5yeQBj7njchcGotHqOhqHvLs",k:"Keamanan Pangan",c:["KMN/SAN"],d:"Pencucian dan disinfeksi alat masak serta peralatan produksi.",b:0},
+{n:3,t:"Personal Hygiene Karyawan Dapur",id:"1fTOR1mIBQUOhkgg7FpNgHTcQGRPCyygWzxVP-vEQ-Sg",k:"Keamanan Pangan",c:["KMN/SAN"],d:"Standar kebersihan diri penjamah makanan.",b:0},
+{n:4,t:"Pemeriksaan Kesehatan Karyawan",id:"17b84EWlsoSck4qAiX4xTs-q5Elo-3FN09lmQL6CgB5E",k:"SDM",c:["SDM/KES"],d:"Cek kesehatan berkala penjamah makanan.",b:0},
+{n:5,t:"Pemisahan Zona Kotor & Zona Bersih",id:"1X-nEzxBlbI1uFLA_RmvTZHdkBSGmjTyfi0Z-h59p8lE",k:"Keamanan Pangan",c:["KMN/SAN"],d:"Pengaturan alur zona untuk cegah kontaminasi silang.",b:0},
+{n:6,t:"Receiving Bahan Baku Aman",id:"11XADINZDUCqJKlTcPd_NFhity1cY48_OA0m0gOf7P_Y",k:"Pengadaan & Gudang",c:["LOG/SOP"],d:"Prosedur penerimaan bahan baku dari pemasok.",b:0},
+{n:7,t:"Penyimpanan Bahan Baku",id:"1fa9aXeaZ0R8-PU9ovNEQ1LdfK9D4THKvqNN1DvqWEYg",k:"Pengadaan & Gudang",c:["WHS/STK","WHS/MUT"],d:"FIFO/FEFO, kontrol suhu, chiller-freezer-dry storage.",b:0},
+{n:8,t:"Penanganan Kontaminasi",id:"1PgGEJJCjomoTMTS_fmnIgt1zbw8tfcFInKxy63Ee9Bc",k:"Keamanan Pangan",c:["KMN/INS"],d:"Langkah saat ditemukan kontaminasi biologis, fisik, kimia.",b:0},
+{n:9,t:"Perencanaan Menu Harian & Penghitungan Gramasi",id:"1_pngXvvAMexVh2MNyX3tlQSyfgKDYQ4Ds0QHYZXnglQ",k:"Gizi & Menu",c:["GIZI/SOP-MENU","PRD/RCP"],d:"Penyusunan menu harian beserta hitungan gramasinya.",b:0},
+{n:10,t:"Persiapan Bahan Pagi (Prep Work)",id:"1zafMTojqVYoASwqC_CFKc3r-afE93HwfOVqiGKfa_gU",k:"Gizi & Menu",c:["OP/SOP-PRP","PRD/PRP"],d:"Prep bahan sebelum masuk tahap masak.",b:0},
+{n:11,t:"Waktu Memasak (Time & Temperature Control)",id:"14xfsa5ZO8IyQ4n_v1S8ClyIqTOBJmtcPdCjV15H9B6g",k:"Keamanan Pangan",c:["KMN/SUH","PRD/MSK"],d:"Suhu dan durasi masak, danger zone, holding temperature.",b:0},
+{n:12,t:"Cooking Flow (Batching & Tahapan Masak Besar)",id:"183A0tDWnSdodQ5fDvr-RlCoDPpJSYzSHKYKFx_OB4pw",k:"Produksi",c:["GIZI/SOP-PGL","PRD/MSK"],d:"Alur produksi bertahap untuk volume besar.",b:0},
+{n:13,t:"Pendinginan Cepat & Pemanasan Ulang Aman",id:"1SdULiVYpvtO5-QF4N6kSPmNLWzADSA0PvMsTcDxry38",k:"Keamanan Pangan",c:["KMN/SUH"],d:"Cooling dan reheating tanpa melewati zona bahaya.",b:0},
+{n:14,t:"Packing dan Portioning Makanan",id:"1XsQj1OmKhoT66LLUClRLmOJmw6hbTKw7nsIfpVJsKfU",k:"Produksi",c:["GIZI/SOP-PMR","PRD/PKG"],d:"Kontrol berat dan konsistensi saat pemorsian.",b:0},
+{n:15,t:"Kontrol Suhu Sebelum Berangkat Distribusi",id:"1hI6qXdJuA5hHoNjMgBPorwBs4EVd_-7czOK8VmTPlVg",k:"Keamanan Pangan",c:["KMN/SUH","DST/DIS"],d:"Verifikasi suhu minimal 60 derajat sebelum armada jalan.",b:0},
+{n:16,t:"Manajemen Waktu Distribusi",id:"17pKP5KxSw7v-dgFwcdwOBrVAl4K6ox6Ry5SmwX9BO1o",k:"Distribusi",c:["DST/RUT"],d:"Pengaturan jadwal agar tidak terlambat ke sekolah.",b:0},
+{n:17,t:"Penghitungan Kebutuhan Modal Harian & Mingguan",id:"1WQg_7yC1OD2_EPcWO0W3VGfO9_6gOvhGh7JbV2uol8o",k:"Keuangan",c:["KEU/SOP-RAB","KEU/ANG"],d:"Proyeksi modal belanja harian dan mingguan.",b:0},
+{n:18,t:"Perhitungan HPP per Porsi MBG",id:"1E1BwaGx2dZfu_FRlKUaf1vlG1_EEACyRbxqJ5-yrhtY",k:"Keuangan",c:["KEU/HPP"],d:"Harga pokok produksi per porsi: bahan, gas, upah.",b:0},
+{n:19,t:"Pengendalian Pemborosan Bahan (Waste Control)",id:"1QZxfdjAZZ7A_hoql--PtShQCwkPWdmNbeJVGfWQTxIw",k:"Produksi",c:["PRD/LMB","LOG/SOP-RPB"],d:"Menekan waste bahan dan sisa pangan matang.",b:0},
+{n:20,t:"Pengeluaran Harian & Rekap Cashflow Dapur",id:"1i-HZbcPD1FePR4_ENVcsWNeSpQiaigFTLc52Qd1pX4s",k:"Keuangan",c:["KEU/OPS"],d:"Pencatatan belanja harian dan arus kas dapur.",b:0},
+{n:21,t:"Audit Internal Mingguan (Keuangan + Stok)",id:"1wfSO4q3EepfSZQkgoTUzqTdFcCcWYqsn-fci-njaqCc",k:"Audit & Dokumen",c:["AUD/INT","LOG/SOP-OPN"],d:"Pemeriksaan mingguan keuangan dan stok gudang.",b:0},
+{n:22,t:"Struktur Tim & Jobdesk Lengkap",id:"1GiJzu9V1ZXo_GZxzbGCYnfyQjg8RsmyjsUt2QJCC5eI",k:"SDM",c:["SDM/KRY","PLN/TGS"],d:"Susunan tim beserta uraian tugas tiap posisi.",b:0},
+{n:23,t:"Shift Pagi, Siang & Rotasi Kerja Harian",id:"1T21B8uXkGgJp8qywZ9DopP8yCYmVMQgtK8q7NmvK6NQ",k:"SDM",c:["SDM/SHF"],d:"Pembagian shift dan rotasi tim per hari operasional.",b:0},
+{n:24,t:"Briefing Pagi & Evaluasi Sore",id:"1umcxpQ5uSjzobAZHc_0QU1_u8V1KYpuzdi_lQRD58L8",k:"Rencana & Tim",c:["PLN/TGS"],d:"Ritme harian pembuka dan penutup operasional.",b:0},
+{n:25,t:"Penanganan Ketidakhadiran & Tim Darurat",id:"1wwCDRXK-cfD9xh7hKsget_0rTwQHMLZXVXad_2D2G9g",k:"SDM",c:["SDM/ABS"],d:"Back-up team saat ada personel tidak hadir.",b:0},
+{n:26,t:"Pelatihan Karyawan Baru & Onboarding 3 Hari",id:"1lTmSULJ5Rb5ha5uENiDh1xtwIsPDvbR8aNfZq9lVESA",k:"SDM",c:["SDM/PLT"],d:"Program onboarding tiga hari pertama karyawan baru.",b:0},
+{n:27,t:"Kontrol Mutu Harian (QC Pagi, Produksi, Packing)",id:"1ySVgI3sLdZkbmZXLAlpJ4l86Va-Yb-TB4XumddHMBh8",k:"Keamanan Pangan",c:["KMN/CHK"],d:"SOP payung yang menaungi SOP 31 sampai 35.",b:0},
+{n:28,t:"Loading Barang Distribusi & Penataan Crate",id:"15xWVpW9tzkUKJDa5mGhiFn18LK376ui_1oTNNmiQ7iI",k:"Distribusi",c:["DST/DIS"],d:"Tata cara memuat dan menata crate di kendaraan.",b:0},
+{n:29,t:"Distribusi Aman ke Sekolah",id:"1Bd32Fy6FyJwWuRnAjVWcQeqYkGOTLoHPmDVaM70_YZ4",k:"Distribusi",c:["DST/DIS"],d:"Pengantaran porsi sampai ke titik penerima.",b:0},
+{n:30,t:"Dokumentasi Harian & Logsheet MBG",id:"1yaGkxE1b7jqQxIE8CZVqVoBlWoDvF-WJjBVsSZQojYI",k:"Audit & Dokumen",c:["DOK/SOP"],d:"SOP induk pencatatan seluruh lembar kerja harian.",b:0},
+{n:31,t:"QC Bahan Baku (Incoming)",id:"1TymEuzRb8Z2yGAilb4c2ksBNUHJFzzGwsK89eEtO92E",k:"Pengadaan & Gudang",c:["PRC/QC"],d:"Pemeriksaan mutu bahan saat diterima.",b:0},
+{n:32,t:"QC Proses Masak (In-Process)",id:"16lcDj2iymHzhx2y8QtalfsLvIsMnaZ7wF_Ai9AinSKc",k:"Produksi",c:["PRD/MSK"],d:"Kontrol mutu selama proses memasak berlangsung.",b:0},
+{n:33,t:"QC Packing & Portioning (Final Product)",id:"1PpFFIMbIP57qviX29kjZiVbJxeueONxclwYa-KZEX6Y",k:"Produksi",c:["PRD/PKG"],d:"Pemeriksaan akhir sebelum makanan dikirim.",b:0},
+{n:34,t:"QC Suhu & Keamanan Makanan",id:"15gXoNHvi9MYNWkopdEU15yqf1C6shFAUtuMUBGByBUY",k:"Keamanan Pangan",c:["KMN/SUH"],d:"Verifikasi suhu di tiap titik kritis.",b:0},
+{n:35,t:"QC Distribusi & Penerimaan di Sekolah",id:"1nkGPkj3vqKPTgdQxSafu7aAvJ5Q0rCBNd46fqs50oXA",k:"Distribusi",c:["DST/SRT"],d:"Serah terima dan pengecekan di titik penerima.",b:0},
+{n:36,t:"Menu Gizi Standar AKG",id:"1W_YKh9xPQTEysIqvpyWKlkMtM1C-W6gW17VtfJMNts0",k:"Gizi & Menu",c:["GIZI/STD"],d:"Formulasi dan penyusunan menu sesuai AKG.",b:0},
+{n:37,t:"Gramasi & Penimbangan Porsi",id:"1Gy5Ci6tneh5xzwbKJuZ2lz0G76WBGkzi0iX5nhUotFc",k:"Gizi & Menu",c:["GIZI/RSP"],d:"Standarisasi berat per komponen menu.",b:0},
+{n:38,t:"Teknik Masak Preservasi Gizi",id:"1by2wEF2Tc7I013koI-szFjpVkBvhm7bd7tQ6wbU26AQ",k:"Gizi & Menu",c:["GIZI/SOP-PGL"],d:"Memasak tanpa menghancurkan kandungan nutrisi.",b:0},
+{n:39,t:"QC Gizi & Mutu Makanan",id:"1SmnlYKFxD9TDd0jIaSH4LmviaFgMC7ipd8zAfBjmv0s",k:"Gizi & Menu",c:["GIZI/STD"],d:"Audit nutrisi dan organoleptik makanan.",b:0},
+{n:40,t:"Monitoring & Evaluasi Gizi (Feedback Sekolah)",id:"1DWQhzihFMzwKK8XSafyrLr8D1KYYbp1YNt5irJ3pLZE",k:"Distribusi",c:["DST/KLH"],d:"Umpan balik dari sekolah dan tindak lanjutnya.",b:0},
+{n:41,t:"Kepatuhan Keamanan Pangan Sesuai Regulasi BPOM",id:"13T50sLwZGuYx3Fj0w-1enJeMXyCStwoe1P_iIhAwa8U",k:"Keamanan Pangan",c:["KMN/CHK","AUD/INT"],d:"Checklist kepatuhan terhadap regulasi BPOM.",b:0},
+{n:42,t:"Standar BPOM Penanganan & Penyimpanan Makanan Matang",id:"17CPwf9xF7Bb9gY6V8m6VdCj3PW9dnPfKAnI_D_5felY",k:"Keamanan Pangan",c:["KMN/SUH"],d:"Aturan BPOM untuk makanan matang.",b:0},
+{n:43,t:"Validasi Suhu, Higienitas & Proses Masak Sesuai BPOM",id:"1PD4PkdqnbQS8amTe9W4WgdLH-Gdrrcb3fOV46hAnOag",k:"Keamanan Pangan",c:["KMN/SUH"],d:"Validasi parameter kritis sesuai standar BPOM.",b:0},
+{n:44,t:"Pelabelan & Dokumentasi Produksi Harian",id:"1XOA43aaghA6C05tpZA_2cg-X-RMxAO-r3qX-XxCbE3c",k:"Audit & Dokumen",c:["DOK/SOP","PRD/PKG"],d:"Format label dan dokumentasi sesuai BPOM.",b:0},
+{n:45,t:"Penanganan Insiden Keamanan Pangan (BPOM)",id:"1CD5xuPPiuHwCXIZ2H8kV5p51vf2tFdoUINsvyDQbcK4",k:"Keamanan Pangan",c:["KMN/INS","AUD/CAP"],d:"Food incident response, recall, dan corrective action.",b:0},
+{n:46,t:"Struktur Gaji & Insentif Per Posisi",id:"12wuK1_TKGI3KKA3dR2NcUXf4Gu-mZHUiB6agOCDAF3Y",k:"SDM",c:["SDM/PAY"],d:"Standar upah, insentif, bonus, dan mekanisme bayar.",b:0},
+{n:47,t:"Pengadaan Barang & Rantai Pemasok",id:"1PjM3krjAHOdjw-UAXqWyeH63hBTrHzbv-k72AWK19F4",k:"Pengadaan & Gudang",c:["PRC/SUP","PRC/PR","PRC/PO","PRC/KTR","LOG/SOP-PNH"],d:"Registrasi supplier, penawaran harga, PR, PO, kontrak.",b:1},
+{n:48,t:"Data Master & Perencanaan Kebutuhan Porsi",id:"1Y_TfZubJLnO459gJyOoM9fu0aa-ccu3ibDLxBwLet8U",k:"Data Master",c:["MST/SPPG","MST/PM","MST/TTK","MST/KBP"],d:"Satu sumber angka sah untuk seluruh perhitungan dapur.",b:1},
+{n:49,t:"Retensi Sampel, Uji Laboratorium & Kalibrasi Alat",id:"1yrx-xZ40sSiYJoYe9QjGvCLmdAALLmHGMrXqbk3cGIs",k:"Keamanan Pangan",c:["KMN/SMP","KMN/LAB","AST/ALT","AST/MTC"],d:"Sampel 2x24 jam, uji lab berkala, kalibrasi alat ukur.",b:1},
+{n:50,t:"Kendaraan & Armada Distribusi Pangan",id:"1xM2YiKiATvukO6h-k2GInoIwC0yTMTo3lW_VASaZbXo",k:"Distribusi",c:["DST/KND"],d:"Kelayakan armada, sanitasi, pre-trip, darurat di jalan.",b:1}
+];
+const KAT=[...new Set(SOP.map(s=>s.k))].sort();
+let aktif="Semua",cari="";
+const chips=document.getElementById('chips');
+["Semua",...KAT].forEach(k=>{
+  const b=document.createElement('button');
+b.className='chip'+(k==="Semua"?' on':'');
+b.textContent=k==="Semua"?"Semua ("+SOP.length+")":k+" ("+SOP.filter(s=>s.k===k).length+")";
+b.onclick=()=>{aktif=k;[...chips.children].forEach(c=>c.classList.remove('on'));b.classList.add('on');render();};
+chips.appendChild(b);
+});
+document.getElementById('q').addEventListener('input',e=>{cari=e.target.value.toLowerCase().trim();render();});
+function salin(url){
+  navigator.clipboard.writeText(url).then(()=>{
+const t=document.getElementById('toast');
+t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1500);
+});
+}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function render(){
+  const grid=document.getElementById('grid');
+const list=SOP.filter(s=>{
+if(aktif!=="Semua"&&s.k!==aktif)return false;
+if(!cari)return true;
+return (s.n+". "+s.t+" "+s.k+" "+s.d+" "+s.c.join(" ")+" MBG-SOP-"+s.n).toLowerCase().includes(cari);
+});
+document.getElementById('count').textContent="Menampilkan "+list.length+" dari "+SOP.length+" SOP";
+document.getElementById('empty').style.display=list.length?'none':'block';
+grid.innerHTML=list.map(s=>{
+  const url="https://docs.google.com/document/d/"+s.id+"/edit";
+return '<div class="c"><div class="chead"><div class="num">'+s.n+'</div><div class="ttl">SOP '+s.n+' — '+esc(s.t)+(s.b?'<span class="badge">BARU</span>':'')+'</div></div>'
+  +'<div class="desc">'+esc(s.d)+'</div>'
+  +'<div class="meta"><span class="kat">'+esc(s.k)+'</span>'+s.c.map(c=>'<span class="kode">'+esc(c)+'</span>').join('')+'</div>'
+  +'<div class="act"><a href="'+url+'" target="_blank" rel="noopener">Buka Dokumen</a>'
+  +'<button onclick="salin(\''+url+'\')">Salin</button></div></div>';
+  }).join('');
+}
+render();
+</script>
+  </body>
+  </html>
+  
