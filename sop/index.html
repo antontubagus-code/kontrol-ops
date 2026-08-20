@@ -38,12 +38,22 @@ a{color:inherit}
 .dot.warn{background:#d97706}
 .dot.err{background:#b91c1c}
 .notice{background:#fdf3dd;border:1px solid #f0dcae;color:#7a5400;padding:11px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;line-height:1.5}
-.fab{position:fixed;right:22px;bottom:22px;z-index:80;width:56px;height:56px;border-radius:50%;background:var(--teal);color:#fff;text-decoration:none;display:grid;place-items:center;font-size:30px;font-weight:300;line-height:1;box-shadow:0 4px 16px rgba(15,95,87,.34);transition:.15s}
-.fab:hover{background:var(--teal2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(15,95,87,.42)}
-.fab:active{transform:translateY(0)}
-.fab span{position:absolute;right:68px;white-space:nowrap;background:var(--ink);color:#fff;font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:7px;opacity:0;pointer-events:none;transition:.15s}
-.fab:hover span{opacity:.95}
-@media(max-width:560px){.fab{right:16px;bottom:16px;width:52px;height:52px;font-size:27px}.fab span{display:none}}
+.fab{position:fixed;right:26px;bottom:26px;z-index:80;width:60px;height:60px;border-radius:50%;
+  background:radial-gradient(120% 120% at 30% 22%,#1a8f80 0%,#0f5f57 52%,#0a4640 100%);
+  color:#fff;text-decoration:none;display:grid;place-items:center;
+  box-shadow:0 2px 5px rgba(10,70,64,.30),0 10px 26px -6px rgba(10,70,64,.52),inset 0 1px 0 rgba(255,255,255,.30);
+  transition:transform .16s cubic-bezier(.34,1.4,.64,1),box-shadow .16s,filter .16s}
+.fab:hover{filter:saturate(1.12);transform:translateY(-3px) scale(1.04);
+  box-shadow:0 3px 7px rgba(10,70,64,.32),0 16px 34px -8px rgba(10,70,64,.60),inset 0 1px 0 rgba(255,255,255,.34)}
+.fab:active{transform:translateY(-1px) scale(.99);transition-duration:.06s}
+.fab svg{width:24px;height:24px;display:block;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round}
+.fab span{position:absolute;right:72px;top:50%;transform:translateY(-50%) translateX(6px);white-space:nowrap;
+  background:var(--ink);color:#fff;font-size:12.5px;font-weight:600;padding:8px 13px;border-radius:8px;
+  opacity:0;pointer-events:none;transition:.16s;box-shadow:0 4px 14px rgba(0,0,0,.22)}
+.fab span::after{content:"";position:absolute;right:-5px;top:50%;margin-top:-5px;border:5px solid transparent;border-left-color:var(--ink)}
+.fab:hover span{opacity:1;transform:translateY(-50%) translateX(0)}
+@media(max-width:560px){.fab{right:16px;bottom:16px;width:56px;height:56px}.fab span{display:none}}
+@media(prefers-reduced-motion:reduce){.fab,.fab span{transition:none}.fab:hover{transform:none}}
 .notice code{background:rgba(0,0,0,.06);padding:1px 5px;border-radius:4px;font-size:12px;word-break:break-all}
 .tools{background:var(--bg);padding:12px 0 10px;border-bottom:1px solid var(--line);margin-bottom:18px}
 #q{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;background:var(--card)}
@@ -120,7 +130,7 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 40px;color:var(--muted);fon
 <footer>
 Seluruh dokumen tersimpan di Google Drive. Katalog dikendalikan lewat spreadsheet — tambah, ubah, atau arsipkan SOP tanpa mengubah kode. Yayasan Anugerah Pekerti Nusantara · Badan Gizi Nasional
 </footer>
-<a class="fab" id="kelola" href="#" target="_blank" rel="noopener" aria-label="Tambah atau hapus SOP di spreadsheet">+<span>Tambah / hapus SOP</span></a>
+<a class="fab" id="kelola" href="#" target="_blank" rel="noopener" aria-label="Tambah atau hapus SOP di spreadsheet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5.5v13M5.5 12h13"/></svg><span>Tambah / hapus SOP</span></a>
 <div class="toast" id="toast">Tautan disalin</div>
 
 <script>
