@@ -19,6 +19,15 @@ a{color:inherit}
 .links{display:flex;gap:9px;flex-wrap:wrap}
 .links a,.links button{background:rgba(255,255,255,.14);color:#fff;text-decoration:none;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap;border:0;font-family:inherit;cursor:pointer}
 .links a:hover,.links button:hover{background:rgba(255,255,255,.26)}
+.pemisah{width:1px;align-self:stretch;background:rgba(255,255,255,.28);margin:2px 4px}
+.links a.home{background:#fff;color:var(--teal);display:inline-flex;align-items:center;gap:9px;padding:7px 15px 7px 12px;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.links a.home:hover{background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.26);transform:translateY(-1px)}
+.links a.home{transition:.15s}
+.links a.home svg{width:19px;height:19px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.links a.home span{display:flex;flex-direction:column;line-height:1.15;text-align:left}
+.links a.home b{font-size:13px;font-weight:700}
+.links a.home em{font-size:9.5px;font-style:normal;letter-spacing:.09em;text-transform:uppercase;opacity:.66}
+@media(max-width:560px){.links a.home em{display:none}.pemisah{display:none}}
 .wrap{max-width:1180px;margin:0 auto;padding:24px 20px 70px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:11px;margin-bottom:16px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
@@ -85,7 +94,11 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 40px;color:var(--muted);fon
 </div>
 </div>
 <div class="links">
-<a href="../">Kontrol Ops</a>
+<a class="home" href="../" title="Kembali ke beranda Kontrol Ops">
+<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.2 12 4l9 7.2"/><path d="M5.6 9.6V19a1 1 0 0 0 1 1h3.2v-5.2h4.4V20h3.2a1 1 0 0 0 1-1V9.6"/></svg>
+<span><b>Kontrol Ops</b><em>Beranda</em></span>
+</a>
+<span class="pemisah" aria-hidden="true"></span>
 <a href="https://drive.google.com/drive/folders/1bMKrh2NHNelhEJc7qEmGi0lOPy64lDxd" target="_blank" rel="noopener">Folder Drive</a>
 <button id="refresh" type="button">Muat Ulang</button>
 </div>
@@ -146,10 +159,44 @@ const STATUS_STYLE = {
 const STATUS_ORDER = ["Aktif","Pending Review","Draft","Kedaluwarsa","Arsip"];
 const DIM_STATUS = ["arsip","kedaluwarsa"];
 
-/* Hanya status di daftar ini yang dokumennya boleh dibuka.
-   Status lain: tombol mati, tautan tidak dirender sama sekali. */
-const STATUS_BOLEH_BUKA = ["aktif"];
+/* ----------------------------------------------------------------------
+   Status mana yang dokumennya boleh dibuka — DIATUR DARI SPREADSHEET.
+
+   Buat tab bernama "PENGATURAN" dengan dua kolom: kunci | nilai
+   Lalu isi satu baris:
+
+       kunci                 nilai
+       status_boleh_buka     Aktif
+
+   Mau reviewer boleh membaca yang belum final? Ubah nilainya jadi:
+       status_boleh_buka     Aktif, Pending Review
+
+   Pisahkan dengan koma. Huruf besar-kecil tidak berpengaruh.
+   Kalau tab PENGATURAN tidak ada, yang berlaku hanya "Aktif".
+   ---------------------------------------------------------------------- */
+const TAB_PENGATURAN = "PENGATURAN";
+let STATUS_BOLEH_BUKA = ["aktif"];
 function bolehBuka(s){ return STATUS_BOLEH_BUKA.indexOf(norm(s.status).toLowerCase()) !== -1; }
+
+async function muatPengaturan(){
+  if (!SHEET_ID) return;
+  const dasar = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID;
+  try{
+    const res = await fetch(dasar + '/gviz/tq?tqx=out:csv&sheet=' +
+      encodeURIComponent(TAB_PENGATURAN) + '&cb=' + Date.now(), {cache:'no-store'});
+    if (!res.ok) return;
+    const b = parseCSV(await res.text()).filter(r => r.some(x => String(x).trim() !== ''));
+    if (b.length < 2) return;
+    const kol = b[0].map(x => norm(x).toLowerCase());
+    const iK = kol.indexOf('kunci'), iN = kol.indexOf('nilai');
+    if (iK < 0 || iN < 0) return;
+    b.slice(1).forEach(r => {
+      if (norm(r[iK]).toLowerCase() !== 'status_boleh_buka') return;
+      const daftar = norm(r[iN]).split(',').map(x => x.trim().toLowerCase()).filter(Boolean);
+      if (daftar.length) STATUS_BOLEH_BUKA = daftar;
+    });
+  }catch(e){ /* pakai bawaan */ }
+}
 
 /* ---- Data cadangan: dipakai kalau spreadsheet belum diisi / gagal dimuat ---- */
 const FALLBACK = [
@@ -420,6 +467,7 @@ async function muat(){
     return;
   }
   setSync('warn','Memuat data…');
+  await muatPengaturan();
   const cb = Date.now();
   const dasar = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID;
   const g = SHEET_GID ? '&gid=' + SHEET_GID : '';
