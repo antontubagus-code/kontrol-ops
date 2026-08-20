@@ -146,6 +146,11 @@ const STATUS_STYLE = {
 const STATUS_ORDER = ["Aktif","Pending Review","Draft","Kedaluwarsa","Arsip"];
 const DIM_STATUS = ["arsip","kedaluwarsa"];
 
+/* Hanya status di daftar ini yang dokumennya boleh dibuka.
+   Status lain: tombol mati, tautan tidak dirender sama sekali. */
+const STATUS_BOLEH_BUKA = ["aktif"];
+function bolehBuka(s){ return STATUS_BOLEH_BUKA.indexOf(norm(s.status).toLowerCase()) !== -1; }
+
 /* ---- Data cadangan: dipakai kalau spreadsheet belum diisi / gagal dimuat ---- */
 const FALLBACK = [
 {"n":"1","t":"Kebersihan Fasilitas Dapur","k":"Keamanan Pangan","c":["KMN/SAN"],"d":"Daily cleaning & deep cleaning seluruh area dapur.","id":"1VeMHgzQdB-y8aWaNb7FnR1MVbUJU67aKFKGmqd5bb1M","status":"Aktif","warna":"","b":false,"rev":"1.0","pic":"","note":""},
@@ -372,7 +377,8 @@ function render(){
   document.getElementById('count').textContent="Menampilkan "+list.length+" dari "+SOP.length+" SOP";
   document.getElementById('empty').style.display=list.length?'none':'block';
   grid.innerHTML=list.map(s=>{
-    const url=docUrl(s.id), sty=styleFor(s);
+    const buka=bolehBuka(s);
+    const url=buka?docUrl(s.id):"", sty=styleFor(s);
     const key=norm(s.status).toLowerCase();
     const dim=DIM_STATUS.includes(key)?' dim':'';
     const label=sty.label||norm(s.status).toUpperCase();
@@ -386,8 +392,10 @@ function render(){
       +(s.pic?'<span class="kode">PIC: '+esc(s.pic)+'</span>':'')+'</div>'
       +(s.note?'<div class="note">'+esc(s.note)+'</div>':'')
       +'<div class="act">'
-      +(url?'<a href="'+esc(url)+'" target="_blank" rel="noopener">Buka Dokumen</a>':'<a class="off">Dokumen belum ada</a>')
-      +(url?'<button onclick="salin(\''+esc(url)+'\')">Salin</button>':'')
+      +(url
+          ? '<a href="'+esc(url)+'" target="_blank" rel="noopener">Buka Dokumen</a>'
+            +'<button onclick="salin(\''+esc(url)+'\')">Salin</button>'
+          : '<a class="off">'+(buka?'Dokumen belum ada':'Terkunci — '+esc(label))+'</a>')
       +'</div></div>';
   }).join('');
 }
