@@ -10,30 +10,30 @@
 :root{
   --ikon-drive:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 7.5A1.5 1.5 0 0 1 4.5 6h4.2l2 2.4h8.8A1.5 1.5 0 0 1 21 9.9v8.6a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5Z'/%3E%3C/svg%3E");
   --ikon-ulang:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.5 12a8.5 8.5 0 1 1-2.6-6.1'/%3E%3Cpath d='M20.5 4v5h-5'/%3E%3C/svg%3E");
-  --bg:#eef3f2; --card:#fff; --ink:#0d1c1a; --muted:#48605c; --line:#d7e3e1;
-  --teal:#0f5f57; --teal2:#0b4a44; --teal-ink:#0f5f57; --soft:#e2efec;
-  --amber:#8a5d00; --amber-s:#fdf1d6; --chip:#f1f5f4;
+  --bg:#F1F6F7; --card:#fff; --ink:#16242A; --muted:#5A6E77; --line:#DDE7EA;
+  --teal:#137A7F; --teal2:#0F5563; --teal-ink:#0B3C49; --soft:#E6F2F2;
+  --amber:#8A5B00; --amber-s:#FFF4DA; --chip:#F6FAFB;
   --bayang:0 1px 2px rgba(13,28,26,.05),0 4px 14px -6px rgba(13,28,26,.12);
   --bayang-h:0 2px 5px rgba(13,28,26,.07),0 12px 28px -10px rgba(13,28,26,.22);
-  --head:#0f5f57;
+  --head:linear-gradient(135deg,#0B3C49 0%,#0F5563 55%,#12706B 100%);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-tema="terang"]){
-    --bg:#0c1614; --card:#132320; --ink:#e8f2f0; --muted:#93aba6; --line:#223a35;
-    --teal:#3ec2ad; --teal2:#5bd6c1; --teal-ink:#8ee6d6; --soft:#17342f;
-    --amber:#f0c46a; --amber-s:#3a2f14; --chip:#1a2f2b;
+    --bg:#0A1417; --card:#101F24; --ink:#E6F0F1; --muted:#93AAB2; --line:#22383E;
+    --teal:#2FB3A6; --teal2:#3ED0B8; --teal-ink:#E9F3F4; --soft:#12302F;
+    --amber:#F0C46A; --amber-s:#33280F; --chip:#152A30;
     --bayang:0 1px 2px rgba(0,0,0,.4),0 6px 18px -8px rgba(0,0,0,.6);
     --bayang-h:0 2px 6px rgba(0,0,0,.5),0 16px 34px -12px rgba(0,0,0,.75);
-    --head:#0d1f1c;
+    --head:linear-gradient(135deg,#0a1a1f 0%,#0d2830 55%,#0f3a38 100%);
   }
 }
 :root[data-tema="gelap"]{
-  --bg:#0c1614; --card:#132320; --ink:#e8f2f0; --muted:#93aba6; --line:#223a35;
-  --teal:#3ec2ad; --teal2:#5bd6c1; --teal-ink:#8ee6d6; --soft:#17342f;
-  --amber:#f0c46a; --amber-s:#3a2f14; --chip:#1a2f2b;
+  --bg:#0A1417; --card:#101F24; --ink:#E6F0F1; --muted:#93AAB2; --line:#22383E;
+  --teal:#2FB3A6; --teal2:#3ED0B8; --teal-ink:#E9F3F4; --soft:#12302F;
+  --amber:#F0C46A; --amber-s:#33280F; --chip:#152A30;
   --bayang:0 1px 2px rgba(0,0,0,.4),0 6px 18px -8px rgba(0,0,0,.6);
   --bayang-h:0 2px 6px rgba(0,0,0,.5),0 16px 34px -12px rgba(0,0,0,.75);
-  --head:#0d1f1c;
+  --head:linear-gradient(135deg,#0a1a1f 0%,#0d2830 55%,#0f3a38 100%);
 }
 
 /* ---------- Dasar ---------- */
@@ -58,7 +58,7 @@ a{color:inherit}
   font-size:clamp(13px,.6vw,16px);font-weight:600;white-space:nowrap;border:0;font-family:inherit;cursor:pointer;transition:.15s}
 .links a:hover,.links button:hover{background:rgba(255,255,255,.24)}
 .pemisah{width:1px;background:rgba(255,255,255,.25);margin:6px 4px}
-.links a.home{background:#fff;color:#0f5f57;gap:10px;padding:0 18px 0 15px;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.links a.home{background:#fff;color:#0B3C49;gap:10px;padding:0 18px 0 15px;box-shadow:0 2px 12px rgba(0,0,0,.2)}
 .links a.home:hover{background:#fff;box-shadow:0 5px 18px rgba(0,0,0,.3);transform:translateY(-1px)}
 .links a.home svg{width:clamp(19px,1vw,24px);aspect-ratio:1;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .links a.home span{display:flex;flex-direction:column;line-height:1.1;text-align:left}
@@ -157,12 +157,12 @@ footer{max-width:1400px;margin:0 auto;padding:0 20px 50px;color:var(--muted);fon
 
 /* ---------- Tombol tambah ---------- */
 .fab{position:fixed;right:26px;bottom:26px;z-index:80;width:clamp(58px,3.6vw,76px);aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(120% 120% at 30% 22%,#1a8f80 0%,#0f5f57 52%,#0a4640 100%);
+  background:radial-gradient(120% 120% at 30% 22%,#17A79B 0%,#137A7F 52%,#0B3C49 100%);
   color:#fff;text-decoration:none;display:grid;place-items:center;
-  box-shadow:0 2px 5px rgba(10,70,64,.3),0 10px 26px -6px rgba(10,70,64,.52),inset 0 1px 0 rgba(255,255,255,.3);
+  box-shadow:0 2px 5px rgba(11,60,73,.3),0 10px 26px -6px rgba(11,60,73,.52),inset 0 1px 0 rgba(255,255,255,.3);
   transition:transform .16s cubic-bezier(.34,1.4,.64,1),box-shadow .16s,filter .16s}
 .fab:hover{filter:saturate(1.12);transform:translateY(-3px) scale(1.04);
-  box-shadow:0 3px 7px rgba(10,70,64,.32),0 16px 34px -8px rgba(10,70,64,.6),inset 0 1px 0 rgba(255,255,255,.34)}
+  box-shadow:0 3px 7px rgba(11,60,73,.32),0 16px 34px -8px rgba(11,60,73,.6),inset 0 1px 0 rgba(255,255,255,.34)}
 .fab:active{transform:translateY(-1px) scale(.99);transition-duration:.06s}
 .fab svg{width:clamp(24px,1.5vw,32px);aspect-ratio:1;display:block;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round}
 .fab span{position:absolute;right:calc(100% + 14px);top:50%;transform:translateY(-50%) translateX(6px);white-space:nowrap;
@@ -274,16 +274,33 @@ const SHEET_ID  = "1LoVX1tECQ1CzqWDSVOjRqnGecsul5G-8FSj2Opbwz0c";
 const SHEET_GID = "0";
 
 /* ---- Palet status bawaan ---- */
-const STATUS_STYLE = {
-  "aktif":          {bg:"#e7f6ed", fg:"#15803d", bar:"#16a34a", label:"AKTIF"},
-  "pending review": {bg:"#fdf3dd", fg:"#9a6b00", bar:"#d97706", label:"PENDING REVIEW"},
-  "pending":        {bg:"#fdf3dd", fg:"#9a6b00", bar:"#d97706", label:"PENDING REVIEW"},
-  "review":         {bg:"#fdf3dd", fg:"#9a6b00", bar:"#d97706", label:"PENDING REVIEW"},
-  "draft":          {bg:"#e8f0fe", fg:"#1d4ed8", bar:"#2563eb", label:"DRAFT"},
-  "arsip":          {bg:"#eef1f1", fg:"#5d716e", bar:"#94a3a1", label:"ARSIP"},
-  "kedaluwarsa":    {bg:"#fdeaea", fg:"#b91c1c", bar:"#dc2626", label:"KEDALUWARSA"},
-  "expired":        {bg:"#fdeaea", fg:"#b91c1c", bar:"#dc2626", label:"KEDALUWARSA"}
+const STATUS_TERANG = {
+  "aktif":          {bg:"#E8F7F2", fg:"#0E7C63", bar:"#12A594", label:"AKTIF"},
+  "pending review": {bg:"#FFF4DA", fg:"#8A5B00", bar:"#F0A500", label:"PENDING REVIEW"},
+  "pending":        {bg:"#FFF4DA", fg:"#8A5B00", bar:"#F0A500", label:"PENDING REVIEW"},
+  "review":         {bg:"#FFF4DA", fg:"#8A5B00", bar:"#F0A500", label:"PENDING REVIEW"},
+  "draft":          {bg:"#E7EEF7", fg:"#1F4C7A", bar:"#2F6FB0", label:"DRAFT"},
+  "arsip":          {bg:"#E9F0F2", fg:"#5A6E77", bar:"#8FA6AD", label:"ARSIP"},
+  "kedaluwarsa":    {bg:"#FBEAE8", fg:"#9B2C22", bar:"#D14636", label:"KEDALUWARSA"},
+  "expired":        {bg:"#FBEAE8", fg:"#9B2C22", bar:"#D14636", label:"KEDALUWARSA"}
 };
+const STATUS_GELAP = {
+  "aktif":          {bg:"#12332C", fg:"#5BD9BC", bar:"#3ED0B8", label:"AKTIF"},
+  "pending review": {bg:"#33280F", fg:"#F0C46A", bar:"#E0A83C", label:"PENDING REVIEW"},
+  "pending":        {bg:"#33280F", fg:"#F0C46A", bar:"#E0A83C", label:"PENDING REVIEW"},
+  "review":         {bg:"#33280F", fg:"#F0C46A", bar:"#E0A83C", label:"PENDING REVIEW"},
+  "draft":          {bg:"#14283C", fg:"#8CBBE8", bar:"#5A97D6", label:"DRAFT"},
+  "arsip":          {bg:"#1B2A2E", fg:"#93AAB2", bar:"#6E858C", label:"ARSIP"},
+  "kedaluwarsa":    {bg:"#3A1A18", fg:"#F0A297", bar:"#D8695A", label:"KEDALUWARSA"},
+  "expired":        {bg:"#3A1A18", fg:"#F0A297", bar:"#D8695A", label:"KEDALUWARSA"}
+};
+function gelapAktif(){
+  const t=document.documentElement.getAttribute('data-tema');
+  if(t==='gelap') return true;
+  if(t==='terang') return false;
+  return matchMedia('(prefers-color-scheme:dark)').matches;
+}
+function paletStatus(){ return gelapAktif() ? STATUS_GELAP : STATUS_TERANG; }
 const STATUS_ORDER = ["Aktif","Pending Review","Draft","Kedaluwarsa","Arsip"];
 const DIM_STATUS = ["arsip","kedaluwarsa"];
 
@@ -397,8 +414,9 @@ function autoColor(str){
 function styleFor(s){
   const key=norm(s.status).toLowerCase();
   if(s.warna && /^#?[0-9a-f]{6}$/i.test(norm(s.warna))) return hexToStyle(norm(s.warna).startsWith('#')?norm(s.warna):'#'+norm(s.warna));
-  if(STATUS_STYLE[key]) return STATUS_STYLE[key];
-  if(!key) return STATUS_STYLE["aktif"];
+  const P=paletStatus();
+  if(P[key]) return P[key];
+  if(!key) return P["aktif"];
   return autoColor(key);
 }
 function docUrl(id){
@@ -641,6 +659,7 @@ async function muat(){
     const baru = gelapSkrg ? 'terang' : 'gelap';
     akar.setAttribute('data-tema',baru);
     try{ localStorage.setItem('tema',baru); }catch(e){}
+    if(typeof SOP!=='undefined' && SOP.length){ buildChips(); render(); }
   });
 })();
 document.getElementById('q').addEventListener('input',e=>{cari=e.target.value.toLowerCase().trim();render();});
