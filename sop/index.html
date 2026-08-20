@@ -29,8 +29,14 @@ a{color:inherit}
 .dot.warn{background:#d97706}
 .dot.err{background:#b91c1c}
 .notice{background:#fdf3dd;border:1px solid #f0dcae;color:#7a5400;padding:11px 14px;border-radius:10px;font-size:13px;margin-bottom:16px;line-height:1.5}
+.kelola{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:11px;padding:13px 16px;margin-bottom:16px}
+.kelola b{display:block;font-size:13.5px;margin-bottom:2px}
+.kelola span{font-size:12.5px;color:var(--muted);line-height:1.5;display:block;max-width:760px}
+.kelola code{background:#f2f5f5;padding:1px 5px;border-radius:4px;font-size:11.5px}
+.kelola a{background:var(--teal);color:#fff;text-decoration:none;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;white-space:nowrap}
+.kelola a:hover{background:var(--teal2)}
 .notice code{background:rgba(0,0,0,.06);padding:1px 5px;border-radius:4px;font-size:12px;word-break:break-all}
-.tools{position:sticky;top:0;z-index:20;background:var(--bg);padding:12px 0 10px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.tools{background:var(--bg);padding:12px 0 10px;border-bottom:1px solid var(--line);margin-bottom:18px}
 #q{width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:10px;font-size:15px;font-family:inherit;background:var(--card)}
 #q:focus{outline:2px solid var(--teal);outline-offset:-1px}
 .chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
@@ -81,11 +87,19 @@ footer{max-width:1180px;margin:0 auto;padding:0 20px 40px;color:var(--muted);fon
 <div class="links">
 <a href="../">Kontrol Ops</a>
 <a href="https://drive.google.com/drive/folders/1bMKrh2NHNelhEJc7qEmGi0lOPy64lDxd" target="_blank" rel="noopener">Folder Drive</a>
+<a id="kelola" href="#" target="_blank" rel="noopener">+ / − Kelola SOP</a>
 <button id="refresh" type="button">Muat Ulang</button>
 </div>
 </div></div>
 <div class="wrap">
 <div id="notice" class="notice" style="display:none"></div>
+<div class="kelola">
+  <div>
+    <b>Tambah atau hapus SOP</b>
+    <span>Semua perubahan dilakukan di spreadsheet. Tambah SOP = tambah baris. Hapus SOP = hapus barisnya. Ganti status = pilih dari dropdown kolom <code>status</code>.</span>
+  </div>
+  <a id="kelola2" href="#" target="_blank" rel="noopener">Buka Spreadsheet</a>
+</div>
 <div class="stats" id="stats"></div>
 <div class="sync" id="sync"><span class="dot"></span><span id="syncText">Memuat data…</span></div>
 <div class="tools">
@@ -432,6 +446,11 @@ async function muat(){
   return false;
 }
 
+(function(){
+  if(!SHEET_ID) return;
+  const u='https://docs.google.com/spreadsheets/d/'+SHEET_ID+'/edit#gid='+(SHEET_GID||'0');
+  ['kelola','kelola2'].forEach(id=>{const a=document.getElementById(id); if(a) a.href=u;});
+})();
 document.getElementById('q').addEventListener('input',e=>{cari=e.target.value.toLowerCase().trim();render();});
 document.getElementById('refresh').addEventListener('click',()=>{document.getElementById('notice').style.display='none';muat();});
 muat();
