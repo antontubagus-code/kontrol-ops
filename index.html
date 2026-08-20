@@ -2883,15 +2883,20 @@ function daftarPintas(){
 function buildPintasan(){
 document.getElementById('quick').innerHTML = daftarPintas().map(l =>
   '<button data-nama="' + esc(l.nama) + '">' + esc(l.nama) +
-  '<em>' + esc(l.url ? l.grup : 'belum ada link') + '</em></button>').join('')
+  '<em>' + esc(!bolehBuka(l) ? ('terkunci — ' + String(l.status || '').trim())
+                             : (l.url ? l.grup : 'belum ada link')) + '</em></button>').join('')
   || '<div style="color:var(--abu);font-size:13px">Belum ada pintasan. ' +
      'Isi kolom <b>pintasan</b> dengan kata <b>ya</b> di spreadsheet.</div>';
 
 document.getElementById('quick').onclick = e => {
   const b = e.target.closest('button'); if (!b) return;
   const l = cari(b.dataset.nama); if (!l) return;
-  if (l.url) window.open(l.url, '_blank', 'noopener');
-  else { filterGrup = l.grup; qEl.value = l.nama; buildNav(); buildChips(); render(); toast('Item ini belum punya link'); }
+  if (l.url && bolehBuka(l)) window.open(l.url, '_blank', 'noopener');
+  else {
+    filterGrup = l.grup; qEl.value = l.nama; buildNav(); buildChips(); render();
+    toast(bolehBuka(l) ? 'Item ini belum punya link'
+                       : 'Terkunci — status ' + String(l.status || '').trim());
+  }
 };
 
 const utama = ITEM.filter(l => /utama/i.test(l.pintas));
@@ -2900,9 +2905,10 @@ const tombol = utama.length
   : HERO_AKSI;
 document.getElementById('heroAct').innerHTML = tombol.map((a,i) => {
   const l = cari(a.item);
-  const href = (l && l.url) ? esc(l.url) : '#';
+  const bisa = !!(l && l.url && bolehBuka(l));
+  const href = bisa ? esc(l.url) : '#';
   return '<a class="' + (i === 0 ? 'a1' : 'a2') + '" href="' + href + '"' +
-         ((l && l.url) ? ' target="_blank" rel="noopener"' : ' data-item="' + esc(a.item) + '"') +
+         (bisa ? ' target="_blank" rel="noopener"' : ' data-item="' + esc(a.item) + '"') +
          '>' + esc(a.teks) + '</a>';
 }).join('');
 }
@@ -2971,12 +2977,55 @@ function buildChips(){
 }
 
 /* ---------- render ---------- */
+/* ----------------------------------------------------------------------
+   Item mana yang tautannya boleh dibuka — DIATUR DARI SPREADSHEET.
+
+   Kolom "status" di tab ITEM bersifat opsional. Bila kosong atau
+   kolomnya belum ada, item dianggap Aktif (perilaku lama dipertahankan).
+
+   Daftar status yang boleh dibuka diambil dari tab "PENGATURAN",
+   dua kolom: kunci | nilai
+
+       kunci                 nilai
+       status_boleh_buka     Aktif
+
+   Pisahkan dengan koma bila lebih dari satu. Kalau tab PENGATURAN
+   tidak ada, yang berlaku hanya "Aktif".
+   ---------------------------------------------------------------------- */
+const TAB_PENGATURAN = 'PENGATURAN';
+let STATUS_BOLEH_BUKA = ['aktif'];
+function bolehBuka(l){
+  const st = String(l.status || '').trim().toLowerCase();
+  if (!st) return true;
+  return STATUS_BOLEH_BUKA.indexOf(st) !== -1;
+}
+
+async function muatPengaturan(){
+  if (!SHEET_ID) return;
+  const dasar = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID;
+  try{
+    const res = await fetch(dasar + '/gviz/tq?tqx=out:csv&sheet=' +
+      encodeURIComponent(TAB_PENGATURAN) + '&cb=' + Date.now(), {cache:'no-store'});
+    if (!res.ok) return;
+    const b = parseCSV(await res.text()).filter(r => r.some(x => String(x).trim() !== ''));
+    if (b.length < 2) return;
+    const kol = b[0].map(x => String(x).trim().toLowerCase());
+    const iK = kol.indexOf('kunci'), iN = kol.indexOf('nilai');
+    if (iK < 0 || iN < 0) return;
+    b.slice(1).forEach(r => {
+      if (String(r[iK] || '').trim().toLowerCase() !== 'status_boleh_buka') return;
+      const daftar = String(r[iN] || '').split(',').map(x => x.trim().toLowerCase()).filter(Boolean);
+      if (daftar.length) STATUS_BOLEH_BUKA = daftar;
+    });
+  }catch(e){ /* pakai bawaan */ }
+}
+
 function render(){
   const kata = qEl.value.trim().toLowerCase();
   const cocok = ITEM.filter(l => {
     if (filterGrup !== 'SEMUA' && (l.grup || 'Lainnya') !== filterGrup) return false;
     if (!kata) return true;
-    return [l.nama, l.ket, l.tag, l.grup, l.url].join(' ').toLowerCase().includes(kata);
+    return [l.nama, l.ket, l.tag, l.grup, l.url, l.status].join(' ').toLowerCase().includes(kata);
   });
 
   document.getElementById('stats').innerHTML =
@@ -3004,7 +3053,9 @@ function render(){
     grid.className = 'grid';
 
     isi.forEach(l => {
-      const ada = !!l.url;
+      const lolos = bolehBuka(l);
+      const ada = !!l.url && lolos;
+      const stLabel = String(l.status || '').trim();
       const card = document.createElement('article');
       card.className = 'card' + (ada ? '' : ' soon');
 
@@ -3013,11 +3064,14 @@ function render(){
 
       card.innerHTML =
         '<div class="card-top">' +
-          '<div class="qr' + (ada ? '' : ' kosong') + '">' + (ada ? '' : 'Belum ada link') + '</div>' +
+          '<div class="qr' + (ada ? '' : ' kosong') + '">' +
+            (ada ? '' : (lolos ? 'Belum ada link' : 'Terkunci')) + '</div>' +
           '<div class="meta">' +
-            '<h3 class="title">' + esc(l.nama) + (ada ? '' : '<span class="badge">segera</span>') + '</h3>' +
+            '<h3 class="title">' + esc(l.nama) +
+              (ada ? '' : '<span class="badge">' + esc(lolos ? 'segera' : stLabel) + '</span>') + '</h3>' +
             (l.ket ? '<p class="desc">' + esc(l.ket) + '</p>' : '') +
-            '<p class="url">' + (ada ? esc(pendek(l.url)) : 'tautan belum diisi') + '</p>' +
+            '<p class="url">' + (ada ? esc(pendek(l.url))
+              : (lolos ? 'tautan belum diisi' : 'terkunci — status ' + esc(stLabel))) + '</p>' +
             (tags ? '<div class="tags">' + tags + '</div>' : '') +
           '</div>' +
         '</div>' +
@@ -3154,7 +3208,8 @@ function dariCSV(teks){
     ket:  (i('ket')  >= 0 ? (r[i('ket')]  || '') : '').trim(),
     grup: (i('grup') >= 0 ? (r[i('grup')] || '') : '').trim() || 'Lainnya',
     tag:  (i('tag')  >= 0 ? (r[i('tag')]  || '') : '').trim(),
-    pintas: (i('pintasan') >= 0 ? String(r[i('pintasan')] || '').trim() : '')
+    pintas: (i('pintasan') >= 0 ? String(r[i('pintasan')] || '').trim() : ''),
+    status: (i('status') >= 0 ? String(r[i('status')] || '').trim() : '')
   })).filter(x => x.nama);
   return out.length ? out : null;
 }
@@ -3167,6 +3222,7 @@ function statusData(t, kelas){
 async function muatSheet(diam){
   if (!SHEET_ID){ statusData('Data bawaan', 'abu'); return; }
   if (!diam) statusData('Memuat data…', 'abu');
+  await muatPengaturan();
   const cb = Date.now();
   const dasar = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID;
   const g = SHEET_GID ? '&gid=' + SHEET_GID : '';
