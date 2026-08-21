@@ -386,6 +386,15 @@ footer{max-width:1400px;margin:0 auto;padding:0 20px 50px;color:var(--muted);fon
   *{transition:none!important;animation:none!important}
   .c:hover,.fab:hover,.chip:hover{transform:none}
 }
+
+/* ==== TOMBOL UTAMA: "Buka Dokumen" dibuat dominan ==== */
+.act{gap:11px}
+.act a{
+  flex:2 1 0;min-height:clamp(54px,3.1vw,66px);
+  font-size:clamp(15px,.72vw,19px);font-weight:800;letter-spacing:.2px;border-radius:13px;
+}
+.act button{flex:1 1 0;font-weight:700;border-radius:13px;min-height:clamp(54px,3.1vw,66px)}
+.act a.off{flex:2 1 0}
 </style>
 </head>
 <body>
@@ -427,7 +436,7 @@ footer{max-width:1400px;margin:0 auto;padding:0 20px 50px;color:var(--muted);fon
 <div class="empty" id="empty" style="display:none">Tidak ada SOP yang cocok.</div>
 </div>
 <footer>
-Seluruh dokumen tersimpan di Google Drive. Katalog dikendalikan lewat spreadsheet — tambah, ubah, atau arsipkan SOP tanpa mengubah kode. Yayasan Anugerah Pekerti Nusantara · Badan Gizi Nasional
+Yayasan Anugerah Pekerti Nusantara · Badan Gizi Nasional
 </footer>
 <a class="fab" id="kelola" href="#" target="_blank" rel="noopener" aria-label="Tambah atau hapus SOP di spreadsheet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5.5v13M5.5 12h13"/></svg><span>Tambah / hapus SOP</span></a>
 <div class="toast" id="toast">Tautan disalin</div>
