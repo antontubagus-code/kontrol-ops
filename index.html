@@ -162,6 +162,15 @@ a{color:var(--teal)}
 .warn-list li{background:var(--kartu2);border:1px solid #E2E8F0;border-left:3px solid #0E7C63}
 .warn-list li.penting{background:var(--amber-soft);border:1px solid #F6E4BC;border-left:3px solid #C98A00}
 .warn-list li.penting svg{stroke:#B47600}
+.side-brand .logo.logo-gambar{background:#fff;padding:4px;overflow:hidden}
+.side-brand .logo.logo-gambar img{width:100%;height:100%;object-fit:contain;display:block;border-radius:6px}
+.card-gambar{margin:-1px -1px 0;height:132px;overflow:hidden;background:var(--kartu3);
+  border-radius:calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0}
+.card-gambar img{width:100%;height:100%;object-fit:cover;display:block}
+.warn-list li.silang{border-left-color:#D14636;background:color-mix(in srgb,#D14636 7%,var(--kartu))}
+.warn-list li.silang svg{color:#D14636}
+.warn-list li.silang b{color:#B23A2C}
+.warn-list li.ceklis svg{color:#12A594}
 .warn-list li.penting b{color:var(--amber-t)}
 .warn-list li.penting span{color:var(--abu)}
 .quick{display:grid;gap:9px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
@@ -326,10 +335,6 @@ footer{padding:34px 26px 50px;color:var(--abu);font-size:12.5px}
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg>
     <span>Kelola Data &amp; Link</span>
   </a>
-  <div class="side-user">
-    <strong id="userName">ANTON TUBAGUS</strong>
-    <span id="userRole">Owner</span>
-  </div>
 </aside>
 
 <div class="main">
@@ -2889,20 +2894,54 @@ function hitungUlang(){
 }
 
 /* ---------- ikon ---------- */
+/* Mengubah tautan Google Drive menjadi alamat gambar langsung.
+   Terima: link "Bagikan" Drive, link uc?id=, atau URL gambar biasa. */
+/* Mengganti logo bawaan dengan gambar dari spreadsheet.
+   Isi baris "logo" di tab PENGATURAN dengan tautan gambar atau link Drive.
+   Kosongkan untuk memakai logo bawaan.                                   */
+function pasangLogo(nilai){
+  const kotak = document.querySelector('.side-brand .logo');
+  if (!kotak) return;
+  const src = urlGambar(nilai);
+  if (!src) return;
+  const img = new Image();
+  img.alt = ''; img.decoding = 'async'; img.loading = 'lazy';
+  img.onload = () => { kotak.innerHTML = ''; kotak.appendChild(img); kotak.classList.add('logo-gambar'); };
+  img.onerror = () => { /* biarkan logo bawaan */ };
+  img.src = src;
+}
+
+function urlGambar(v){
+  v = String(v || '').trim();
+  if (!v) return '';
+  const m = v.match(/\/d\/([a-zA-Z0-9_-]{20,})/) || v.match(/[?&]id=([a-zA-Z0-9_-]{20,})/);
+  if (m) return 'https://drive.google.com/thumbnail?id=' + m[1] + '&sz=w1000';
+  return v;
+}
+
 const IC = {
   go:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>',
   copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg>',
   dl:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v11M8 11l4 4 4-4M4 19h16"/></svg>',
   ok:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>',
-  warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v5M12 17.5v.5"/><path d="M10.3 3.9L2.6 17.3A2 2 0 0 0 4.3 20.3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>'
+  warn: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v5M12 17.5v.5"/><path d="M10.3 3.9L2.6 17.3A2 2 0 0 0 4.3 20.3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>',
+  silang: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>'
 };
 
 /* ---------- peringatan ---------- */
 function renderPeringatan(){
 document.getElementById('peringatan').innerHTML = PERINGATAN.length
   ? '<ul class="warn-list">' + PERINGATAN.map(p => {
-      var pnt = String(p.tipe || '').toLowerCase() === 'penting';
-      return '<li class="' + (pnt ? 'penting' : '') + '">' + (pnt ? IC.warn : IC.ok) +
+      /* Kolom "tanda" di tab PERINGATAN menentukan ikonnya:
+         silang / x / merah / tidak  -> silang merah
+         penting / waspada           -> segitiga amber
+         selain itu (atau kosong)    -> ceklis hijau            */
+      var t = String(p.tanda || p.tipe || '').trim().toLowerCase();
+      var kelas, ikon;
+      if (/^(silang|x|merah|tidak|cross|batal|gagal)$/.test(t)) { kelas='silang'; ikon=IC.silang; }
+      else if (/^(penting|waspada|kuning|warn)$/.test(t))       { kelas='penting'; ikon=IC.warn; }
+      else                                                       { kelas='ceklis';  ikon=IC.ok; }
+      return '<li class="' + kelas + '">' + ikon +
              '<div><b>' + esc(p.judul) + '</b><span>' + esc(p.ket || '') + '</span></div></li>';
     }).join('') + '</ul>'
   : '<div class="warn-empty"><div class="ic">' + IC.ok + '</div><div>' +
@@ -3052,9 +3091,16 @@ async function muatPengaturan(){
     const iK = kol.indexOf('kunci'), iN = kol.indexOf('nilai');
     if (iK < 0 || iN < 0) return;
     b.slice(1).forEach(r => {
-      if (String(r[iK] || '').trim().toLowerCase() !== 'status_boleh_buka') return;
-      const daftar = String(r[iN] || '').split(',').map(x => x.trim().toLowerCase()).filter(Boolean);
-      if (daftar.length) STATUS_BOLEH_BUKA = daftar;
+      const kunci = String(r[iK] || '').trim().toLowerCase();
+      const nilai = String(r[iN] || '').trim();
+      if (kunci === 'status_boleh_buka') {
+        const daftar = nilai.split(',').map(x => x.trim().toLowerCase()).filter(Boolean);
+        if (daftar.length) STATUS_BOLEH_BUKA = daftar;
+      } else if (kunci === 'logo') {
+        pasangLogo(nilai);
+      } else if (kunci === 'judul_situs' && nilai) {
+        const h = document.getElementById('sideTitle'); if (h) h.textContent = nilai;
+      }
     });
   }catch(e){ /* pakai bawaan */ }
 }
@@ -3116,7 +3162,10 @@ function render(){
       const tags = (l.tag || '').split(',').map(t => t.trim()).filter(Boolean)
         .map(t => '<span class="tag">' + esc(t) + '</span>').join('');
 
+      const gbr = urlGambar(l.gambar);
       card.innerHTML =
+        (gbr ? '<div class="card-gambar"><img src="' + esc(gbr) + '" alt="" loading="lazy" decoding="async" ' +
+               'onerror="this.parentNode.remove()"></div>' : '') +
         '<div class="card-top">' +
           '<div class="qr' + (ada ? '' : ' kosong') + '">' +
             (ada ? '' : (lolos ? 'Belum ada link' : 'Terkunci')) + '</div>' +
@@ -3263,6 +3312,8 @@ function dariCSV(teks){
     grup: (i('grup') >= 0 ? (r[i('grup')] || '') : '').trim() || 'Lainnya',
     tag:  (i('tag')  >= 0 ? (r[i('tag')]  || '') : '').trim(),
     pintas: (i('pintasan') >= 0 ? String(r[i('pintasan')] || '').trim() : ''),
+    gambar: (i('gambar') >= 0 ? String(r[i('gambar')] || '').trim()
+             : (i('foto') >= 0 ? String(r[i('foto')] || '').trim() : '')),
     status: (i('status') >= 0 ? String(r[i('status')] || '').trim() : '')
   })).filter(x => x.nama);
   return out.length ? out : null;
@@ -3316,7 +3367,9 @@ async function muatPeringatan(){
     const kol = b[0].map(x => String(x).trim().toLowerCase());
     const iJ = kol.indexOf('judul'), iK = kol.indexOf('ket');
     if (iJ < 0) return;
+    const iT = kol.indexOf('tanda') >= 0 ? kol.indexOf('tanda') : kol.indexOf('tipe');
     PERINGATAN = b.slice(1).map(r => ({
+      tanda: (iT >= 0 ? String(r[iT] || '') : '').trim(),
       judul: (r[iJ] || '').trim(),
       ket:   (iK >= 0 ? (r[iK] || '') : '').trim(),
       tipe:  (function(){ var i = b[0].findIndex(function(h){ return String(h||'').toLowerCase().trim() === 'tipe'; }); return i >= 0 ? String(r[i] || '').trim() : ''; })()
