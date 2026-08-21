@@ -6,34 +6,213 @@
 <title>Pusat SOP — SPPG Indramayu Anjatan Kedungwungu</title>
 <meta name="description" content="Katalog Standar Operasional Prosedur dapur MBG SPPG Indramayu Anjatan Kedungwungu.">
 <style>
+/* ==== PALET WARNA — jangan diubah manual, ganti lewat tombol ==== */
+:root{
+  --p1:#FFFBF5;
+  --p2:#1F2937;
+  --p3:#7C6B58;
+  --p4:#F2E2CC;
+  --p5:#F97316;
+  --p6:#DC2626;
+  --p7:#991B1B;
+  --p8:#FFEDD5;
+  --p9:#92400E;
+  --p10:#FEF3C7;
+  --p11:#FFF7ED;
+  --p12:60,30,10;
+  --p13:#EA580C;
+  --p14:#190E0C;
+  --p15:#2A1614;
+  --p16:#F5EDE3;
+  --p17:#B9A48D;
+  --p18:#4B2C26;
+  --p19:#FB923C;
+  --p20:#FDBA74;
+  --p21:#FBF1E6;
+  --p22:#3A2410;
+  --p23:#FCD34D;
+  --p24:#422006;
+  --p25:#3A1E1B;
+  --p26:#160B09;
+  --p27:#2A1A10;
+  --p28:#3D2412;
+  --p29:#EA580C;
+  --p30:234,88,12;
+  --p31:#2B1206;
+  --p32:#FDBA74;
+  --p33:153,27,27;
+  --p34:#FFEDD5;
+  --p35:#C2410C;
+  --p36:#EA580C;
+  --p37:#D97706;
+  --p38:#DBEAFE;
+  --p39:#1D4ED8;
+  --p40:#3B82F6;
+  --p41:#F5EDE1;
+  --p42:#B0A08C;
+  --p43:#FEE2E2;
+  --p44:#7F1D1D;
+  --p45:#B91C1C;
+  --p46:#431407;
+  --p47:#FDBA74;
+  --p48:#FB923C;
+  --p49:#D97706;
+  --p50:#172554;
+  --p51:#93C5FD;
+  --p52:#60A5FA;
+  --p53:#2E2418;
+  --p54:#9C8871;
+  --p55:#450A0A;
+  --p56:#FCA5A5;
+  --p57:#EF4444;
+}
+:root[data-warna="zaitun"]{
+  --p1:#FFFBF5;
+  --p2:#1F2937;
+  --p3:#7C6B58;
+  --p4:#F2E2CC;
+  --p5:#F97316;
+  --p6:#C2410C;
+  --p7:#7C2D12;
+  --p8:#FFEDD5;
+  --p9:#92400E;
+  --p10:#FEF3C7;
+  --p11:#FFF7ED;
+  --p12:60,30,10;
+  --p13:#EA580C;
+  --p14:#17120D;
+  --p15:#241A12;
+  --p16:#F5EDE3;
+  --p17:#B9A48D;
+  --p18:#40301F;
+  --p19:#FB923C;
+  --p20:#FDBA74;
+  --p21:#FBF1E6;
+  --p22:#3A2410;
+  --p23:#FCD34D;
+  --p24:#422006;
+  --p25:#2E2117;
+  --p26:#140F0A;
+  --p27:#2A1A10;
+  --p28:#3D2412;
+  --p29:#65A30D;
+  --p30:101,163,13;
+  --p31:#2B1206;
+  --p32:#FDBA74;
+  --p33:124,45,18;
+  --p34:#EDF3D6;
+  --p35:#4D7C0F;
+  --p36:#65A30D;
+  --p37:#D97706;
+  --p38:#DBEAFE;
+  --p39:#1D4ED8;
+  --p40:#3B82F6;
+  --p41:#F5EDE1;
+  --p42:#B0A08C;
+  --p43:#FFE4E6;
+  --p44:#9F1239;
+  --p45:#E11D48;
+  --p46:#2E3410;
+  --p47:#BEF264;
+  --p48:#A3E635;
+  --p49:#D97706;
+  --p50:#172554;
+  --p51:#93C5FD;
+  --p52:#60A5FA;
+  --p53:#2E2418;
+  --p54:#9C8871;
+  --p55:#4C0519;
+  --p56:#FDA4AF;
+  --p57:#FB7185;
+}
+:root[data-warna="teal"]{
+  --p1:#F1F6F7;
+  --p2:#16242A;
+  --p3:#5A6E77;
+  --p4:#DDE7EA;
+  --p5:#137A7F;
+  --p6:#0F5563;
+  --p7:#0B3C49;
+  --p8:#E6F2F2;
+  --p9:#8A5B00;
+  --p10:#FFF4DA;
+  --p11:#F6FAFB;
+  --p12:13,28,26;
+  --p13:#12706B;
+  --p14:#0A1417;
+  --p15:#101F24;
+  --p16:#E6F0F1;
+  --p17:#93AAB2;
+  --p18:#22383E;
+  --p19:#2FB3A6;
+  --p20:#3ED0B8;
+  --p21:#E9F3F4;
+  --p22:#12302F;
+  --p23:#F0C46A;
+  --p24:#33280F;
+  --p25:#152A30;
+  --p26:#0A1A1F;
+  --p27:#0D2830;
+  --p28:#0F3A38;
+  --p29:#16A34A;
+  --p30:22,163,74;
+  --p31:#08201D;
+  --p32:#17A79B;
+  --p33:11,60,73;
+  --p34:#E8F7F2;
+  --p35:#0E7C63;
+  --p36:#12A594;
+  --p37:#F0A500;
+  --p38:#E7EEF7;
+  --p39:#1F4C7A;
+  --p40:#2F6FB0;
+  --p41:#E9F0F2;
+  --p42:#8FA6AD;
+  --p43:#FBEAE8;
+  --p44:#9B2C22;
+  --p45:#D14636;
+  --p46:#12332C;
+  --p47:#5BD9BC;
+  --p48:#3ED0B8;
+  --p49:#E0A83C;
+  --p50:#14283C;
+  --p51:#8CBBE8;
+  --p52:#5A97D6;
+  --p53:#1B2A2E;
+  --p54:#6E858C;
+  --p55:#3A1A18;
+  --p56:#F0A297;
+  --p57:#D8695A;
+}
+
 /* ---------- Palet ---------- */
 :root{
   --ikon-drive:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 7.5A1.5 1.5 0 0 1 4.5 6h4.2l2 2.4h8.8A1.5 1.5 0 0 1 21 9.9v8.6a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5Z'/%3E%3C/svg%3E");
   --ikon-ulang:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20.5 12a8.5 8.5 0 1 1-2.6-6.1'/%3E%3Cpath d='M20.5 4v5h-5'/%3E%3C/svg%3E");
-  --bg:#F1F6F7; --card:#fff; --ink:#16242A; --muted:#5A6E77; --line:#DDE7EA;
-  --teal:#137A7F; --teal2:#0F5563; --teal-ink:#0B3C49; --soft:#E6F2F2;
-  --amber:#8A5B00; --amber-s:#FFF4DA; --chip:#F6FAFB;
-  --bayang:0 1px 2px rgba(13,28,26,.05),0 4px 14px -6px rgba(13,28,26,.12);
-  --bayang-h:0 2px 5px rgba(13,28,26,.07),0 12px 28px -10px rgba(13,28,26,.22);
-  --head:linear-gradient(135deg,#0B3C49 0%,#0F5563 55%,#12706B 100%);
+  --bg:var(--p1); --card:#fff; --ink:var(--p2); --muted:var(--p3); --line:var(--p4);
+  --teal:var(--p5); --teal2:var(--p6); --teal-ink:var(--p7); --soft:var(--p8);
+  --amber:var(--p9); --amber-s:var(--p10); --chip:var(--p11);
+  --bayang:0 1px 2px rgba(var(--p12),.05),0 4px 14px -6px rgba(var(--p12),.12);
+  --bayang-h:0 2px 5px rgba(var(--p12),.07),0 12px 28px -10px rgba(var(--p12),.22);
+  --head:linear-gradient(135deg,var(--p7) 0%,var(--p6) 55%,var(--p13) 100%);
 }
 @media (prefers-color-scheme:dark){
   :root:not([data-tema="terang"]){
-    --bg:#0A1417; --card:#101F24; --ink:#E6F0F1; --muted:#93AAB2; --line:#22383E;
-    --teal:#2FB3A6; --teal2:#3ED0B8; --teal-ink:#E9F3F4; --soft:#12302F;
-    --amber:#F0C46A; --amber-s:#33280F; --chip:#152A30;
+    --bg:var(--p14); --card:var(--p15); --ink:var(--p16); --muted:var(--p17); --line:var(--p18);
+    --teal:var(--p19); --teal2:var(--p20); --teal-ink:var(--p21); --soft:var(--p22);
+    --amber:var(--p23); --amber-s:var(--p24); --chip:var(--p25);
     --bayang:0 1px 2px rgba(0,0,0,.4),0 6px 18px -8px rgba(0,0,0,.6);
     --bayang-h:0 2px 6px rgba(0,0,0,.5),0 16px 34px -12px rgba(0,0,0,.75);
-    --head:linear-gradient(135deg,#0a1a1f 0%,#0d2830 55%,#0f3a38 100%);
+    --head:linear-gradient(135deg,var(--p26) 0%,var(--p27) 55%,var(--p28) 100%);
   }
 }
 :root[data-tema="gelap"]{
-  --bg:#0A1417; --card:#101F24; --ink:#E6F0F1; --muted:#93AAB2; --line:#22383E;
-  --teal:#2FB3A6; --teal2:#3ED0B8; --teal-ink:#E9F3F4; --soft:#12302F;
-  --amber:#F0C46A; --amber-s:#33280F; --chip:#152A30;
+  --bg:var(--p14); --card:var(--p15); --ink:var(--p16); --muted:var(--p17); --line:var(--p18);
+  --teal:var(--p19); --teal2:var(--p20); --teal-ink:var(--p21); --soft:var(--p22);
+  --amber:var(--p23); --amber-s:var(--p24); --chip:var(--p25);
   --bayang:0 1px 2px rgba(0,0,0,.4),0 6px 18px -8px rgba(0,0,0,.6);
   --bayang-h:0 2px 6px rgba(0,0,0,.5),0 16px 34px -12px rgba(0,0,0,.75);
-  --head:linear-gradient(135deg,#0a1a1f 0%,#0d2830 55%,#0f3a38 100%);
+  --head:linear-gradient(135deg,var(--p26) 0%,var(--p27) 55%,var(--p28) 100%);
 }
 
 /* ---------- Dasar ---------- */
@@ -58,13 +237,14 @@ a{color:inherit}
   font-size:clamp(13px,.6vw,16px);font-weight:600;white-space:nowrap;border:0;font-family:inherit;cursor:pointer;transition:.15s}
 .links a:hover,.links button:hover{background:rgba(255,255,255,.24)}
 .pemisah{width:1px;background:rgba(255,255,255,.25);margin:6px 4px}
-.links a.home{background:#fff;color:#0B3C49;gap:10px;padding:0 18px 0 15px;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.links a.home{background:#fff;color:var(--p7);gap:10px;padding:0 18px 0 15px;box-shadow:0 2px 12px rgba(0,0,0,.2)}
 .links a.home:hover{background:#fff;box-shadow:0 5px 18px rgba(0,0,0,.3);transform:translateY(-1px)}
 .links a.home svg{width:clamp(19px,1vw,24px);aspect-ratio:1;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .links a.home span{display:flex;flex-direction:column;line-height:1.1;text-align:left}
 .links a.home b{font-size:clamp(13px,.62vw,17px);font-weight:800}
 .links a.home em{font-size:clamp(9.5px,.45vw,12px);font-style:normal;letter-spacing:.1em;text-transform:uppercase;opacity:.62;font-weight:700}
-#tema{width:46px;padding:0;justify-content:center}
+#tema,#warna{width:46px;padding:0;justify-content:center}
+#warna svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 #tema svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 #tema .bulan{display:none}
 :root[data-tema="gelap"] #tema .bulan,
@@ -86,7 +266,7 @@ a{color:inherit}
 .stat span{font-size:clamp(11.5px,.55vw,15px);color:var(--muted);font-weight:600;letter-spacing:.02em}
 
 .sync{display:flex;align-items:center;gap:9px;font-size:clamp(12px,.55vw,15px);color:var(--muted);margin-bottom:clamp(14px,1vw,22px);flex-wrap:wrap;font-weight:500}
-.dot{width:9px;height:9px;border-radius:50%;background:#16a34a;flex-shrink:0;box-shadow:0 0 0 3px rgba(22,163,74,.18)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--p29);flex-shrink:0;box-shadow:0 0 0 3px rgba(var(--p30),.18)}
 .dot.warn{background:#d97706;box-shadow:0 0 0 3px rgba(217,119,6,.18)}
 .dot.err{background:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.18)}
 
@@ -108,7 +288,7 @@ a{color:inherit}
 .chip:hover{border-color:var(--teal);color:var(--teal-ink);transform:translateY(-1px)}
 .chip.on{background:var(--teal);border-color:var(--teal);color:#fff;font-weight:700}
 :root[data-tema="gelap"] .chip.on,
-:root:not([data-tema="terang"]) .chip.on{color:#08201d}
+:root:not([data-tema="terang"]) .chip.on{color:var(--p31)}
 @media (prefers-color-scheme:light){:root:not([data-tema="gelap"]) .chip.on{color:#fff}}
 .chip .sw{width:10px;height:10px;border-radius:50%;flex-shrink:0}
 
@@ -142,8 +322,8 @@ a{color:inherit}
   border-radius:11px;font-size:clamp(13px,.6vw,16px);font-weight:700;text-decoration:none;cursor:pointer;font-family:inherit;
   border:1.5px solid var(--line);background:var(--card);color:var(--teal-ink);transition:.14s}
 .act a{background:var(--teal);color:#fff;border-color:var(--teal)}
-:root[data-tema="gelap"] .act a{color:#08201d}
-@media (prefers-color-scheme:dark){:root:not([data-tema="terang"]) .act a{color:#08201d}}
+:root[data-tema="gelap"] .act a{color:var(--p31)}
+@media (prefers-color-scheme:dark){:root:not([data-tema="terang"]) .act a{color:var(--p31)}}
 .act a.off{background:var(--chip);color:var(--muted);border-color:var(--line);pointer-events:none;font-weight:600}
 .act a:hover{background:var(--teal2);border-color:var(--teal2)}
 .act button:hover{border-color:var(--teal);color:var(--teal-ink)}
@@ -157,12 +337,12 @@ footer{max-width:1400px;margin:0 auto;padding:0 20px 50px;color:var(--muted);fon
 
 /* ---------- Tombol tambah ---------- */
 .fab{position:fixed;right:26px;bottom:26px;z-index:80;width:clamp(58px,3.6vw,76px);aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(120% 120% at 30% 22%,#17A79B 0%,#137A7F 52%,#0B3C49 100%);
+  background:radial-gradient(120% 120% at 30% 22%,var(--p32) 0%,var(--p5) 52%,var(--p7) 100%);
   color:#fff;text-decoration:none;display:grid;place-items:center;
-  box-shadow:0 2px 5px rgba(11,60,73,.3),0 10px 26px -6px rgba(11,60,73,.52),inset 0 1px 0 rgba(255,255,255,.3);
+  box-shadow:0 2px 5px rgba(var(--p33),.3),0 10px 26px -6px rgba(var(--p33),.52),inset 0 1px 0 rgba(255,255,255,.3);
   transition:transform .16s cubic-bezier(.34,1.4,.64,1),box-shadow .16s,filter .16s}
 .fab:hover{filter:saturate(1.12);transform:translateY(-3px) scale(1.04);
-  box-shadow:0 3px 7px rgba(11,60,73,.32),0 16px 34px -8px rgba(11,60,73,.6),inset 0 1px 0 rgba(255,255,255,.34)}
+  box-shadow:0 3px 7px rgba(var(--p33),.32),0 16px 34px -8px rgba(var(--p33),.6),inset 0 1px 0 rgba(255,255,255,.34)}
 .fab:active{transform:translateY(-1px) scale(.99);transition-duration:.06s}
 .fab svg{width:clamp(24px,1.5vw,32px);aspect-ratio:1;display:block;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round}
 .fab span{position:absolute;right:calc(100% + 14px);top:50%;transform:translateY(-50%) translateX(6px);white-space:nowrap;
@@ -224,6 +404,7 @@ footer{max-width:1400px;margin:0 auto;padding:0 20px 50px;color:var(--muted);fon
 </a>
 <span class="pemisah" aria-hidden="true"></span>
 <a id="drive" href="https://drive.google.com/drive/folders/1bMKrh2NHNelhEJc7qEmGi0lOPy64lDxd" target="_blank" rel="noopener" title="Folder Drive">Folder Drive</a>
+<button id="warna" type="button" title="Ganti warna tema" aria-label="Ganti warna tema"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2c-5 0-9 3.9-9 8.8a8.8 8.8 0 0 0 8.8 8.8c1.5 0 2.5-1 2.5-2.2 0-.6-.2-1.1-.6-1.5-.4-.4-.6-.9-.6-1.4 0-1 .8-1.8 1.9-1.8h1.4c2.6 0 4.6-2.1 4.6-4.7 0-3.5-3.9-6-9-6Z"/><circle cx="7.3" cy="12.4" r="1.15" fill="currentColor" stroke="none"/><circle cx="9.5" cy="8.2" r="1.15" fill="currentColor" stroke="none"/><circle cx="14.4" cy="7.9" r="1.15" fill="currentColor" stroke="none"/></svg></button>
 <button id="tema" type="button" title="Ganti tema terang / gelap" aria-label="Ganti tema terang atau gelap">
 <svg class="bulan" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
 <svg class="mentari" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></svg>
@@ -275,24 +456,24 @@ const SHEET_GID = "0";
 
 /* ---- Palet status bawaan ---- */
 const STATUS_TERANG = {
-  "aktif":          {bg:"#E8F7F2", fg:"#0E7C63", bar:"#12A594", label:"AKTIF"},
-  "pending review": {bg:"#FFF4DA", fg:"#8A5B00", bar:"#F0A500", label:"PENDING REVIEW"},
-  "pending":        {bg:"#FFF4DA", fg:"#8A5B00", bar:"#F0A500", label:"PENDING REVIEW"},
-  "review":         {bg:"#FFF4DA", fg:"#8A5B00", bar:"#F0A500", label:"PENDING REVIEW"},
-  "draft":          {bg:"#E7EEF7", fg:"#1F4C7A", bar:"#2F6FB0", label:"DRAFT"},
-  "arsip":          {bg:"#E9F0F2", fg:"#5A6E77", bar:"#8FA6AD", label:"ARSIP"},
-  "kedaluwarsa":    {bg:"#FBEAE8", fg:"#9B2C22", bar:"#D14636", label:"KEDALUWARSA"},
-  "expired":        {bg:"#FBEAE8", fg:"#9B2C22", bar:"#D14636", label:"KEDALUWARSA"}
+  "aktif":          {bg:'--p34', fg:'--p35', bar:'--p36', label:"AKTIF"},
+  "pending review": {bg:'--p10', fg:'--p9', bar:'--p37', label:"PENDING REVIEW"},
+  "pending":        {bg:'--p10', fg:'--p9', bar:'--p37', label:"PENDING REVIEW"},
+  "review":         {bg:'--p10', fg:'--p9', bar:'--p37', label:"PENDING REVIEW"},
+  "draft":          {bg:'--p38', fg:'--p39', bar:'--p40', label:"DRAFT"},
+  "arsip":          {bg:'--p41', fg:'--p3', bar:'--p42', label:"ARSIP"},
+  "kedaluwarsa":    {bg:'--p43', fg:'--p44', bar:'--p45', label:"KEDALUWARSA"},
+  "expired":        {bg:'--p43', fg:'--p44', bar:'--p45', label:"KEDALUWARSA"}
 };
 const STATUS_GELAP = {
-  "aktif":          {bg:"#12332C", fg:"#5BD9BC", bar:"#3ED0B8", label:"AKTIF"},
-  "pending review": {bg:"#33280F", fg:"#F0C46A", bar:"#E0A83C", label:"PENDING REVIEW"},
-  "pending":        {bg:"#33280F", fg:"#F0C46A", bar:"#E0A83C", label:"PENDING REVIEW"},
-  "review":         {bg:"#33280F", fg:"#F0C46A", bar:"#E0A83C", label:"PENDING REVIEW"},
-  "draft":          {bg:"#14283C", fg:"#8CBBE8", bar:"#5A97D6", label:"DRAFT"},
-  "arsip":          {bg:"#1B2A2E", fg:"#93AAB2", bar:"#6E858C", label:"ARSIP"},
-  "kedaluwarsa":    {bg:"#3A1A18", fg:"#F0A297", bar:"#D8695A", label:"KEDALUWARSA"},
-  "expired":        {bg:"#3A1A18", fg:"#F0A297", bar:"#D8695A", label:"KEDALUWARSA"}
+  "aktif":          {bg:'--p46', fg:'--p47', bar:'--p48', label:"AKTIF"},
+  "pending review": {bg:'--p24', fg:'--p23', bar:'--p49', label:"PENDING REVIEW"},
+  "pending":        {bg:'--p24', fg:'--p23', bar:'--p49', label:"PENDING REVIEW"},
+  "review":         {bg:'--p24', fg:'--p23', bar:'--p49', label:"PENDING REVIEW"},
+  "draft":          {bg:'--p50', fg:'--p51', bar:'--p52', label:"DRAFT"},
+  "arsip":          {bg:'--p53', fg:'--p17', bar:'--p54', label:"ARSIP"},
+  "kedaluwarsa":    {bg:'--p55', fg:'--p56', bar:'--p57', label:"KEDALUWARSA"},
+  "expired":        {bg:'--p55', fg:'--p56', bar:'--p57', label:"KEDALUWARSA"}
 };
 function gelapAktif(){
   const t=document.documentElement.getAttribute('data-tema');
@@ -300,7 +481,12 @@ function gelapAktif(){
   if(t==='terang') return false;
   return matchMedia('(prefers-color-scheme:dark)').matches;
 }
-function paletStatus(){ return gelapAktif() ? STATUS_GELAP : STATUS_TERANG; }
+function _pecahkan(o){
+  const r={};
+  for (const k in o){ r[k]={bg:W(o[k].bg), fg:W(o[k].fg), bar:W(o[k].bar), label:o[k].label}; }
+  return r;
+}
+function paletStatus(){ return _pecahkan(gelapAktif() ? STATUS_GELAP : STATUS_TERANG); }
 const STATUS_ORDER = ["Aktif","Pending Review","Draft","Kedaluwarsa","Arsip"];
 const DIM_STATUS = ["arsip","kedaluwarsa"];
 
@@ -665,6 +851,48 @@ async function muat(){
 document.getElementById('q').addEventListener('input',e=>{cari=e.target.value.toLowerCase().trim();render();});
 document.getElementById('refresh').addEventListener('click',()=>{document.getElementById('notice').style.display='none';muat();});
 muat();
+
+
+/* ---------------------------------------------------------------------
+   PALET WARNA — tombol di samping tombol mode malam.
+   Pilihan disimpan di HP masing-masing, terpisah dari terang/gelap.
+   --------------------------------------------------------------------- */
+const PALET = [
+  { kode:'merah',  nama:'Oranye Merah' },
+  { kode:'zaitun', nama:'Oranye Zaitun' },
+  { kode:'teal',   nama:'Teal Asli' }
+];
+function W(n){
+  const v = getComputedStyle(document.documentElement).getPropertyValue(n);
+  return (v || '').trim() || '#888888';
+}
+function paletSekarang(){
+  const a = document.documentElement.getAttribute('data-warna');
+  return a || 'merah';
+}
+function pasangPalet(kode, simpan){
+  if (kode === 'merah') document.documentElement.removeAttribute('data-warna');
+  else document.documentElement.setAttribute('data-warna', kode);
+  if (simpan){ try{ localStorage.setItem('warna', kode); }catch(e){} }
+  const t = document.getElementById('warna');
+  const p = PALET.find(x => x.kode === kode) || PALET[0];
+  if (t) t.title = 'Warna: ' + p.nama + ' — klik untuk ganti';
+  try{ if (typeof render === 'function') render(); }catch(e){}
+  try{ if (typeof renderPeringatan === 'function') renderPeringatan(); }catch(e){}
+  try{ if (typeof buildChips === 'function') buildChips(); }catch(e){}
+}
+(function(){
+  let awal = null;
+  try{ awal = localStorage.getItem('warna'); }catch(e){}
+  if (!PALET.some(x => x.kode === awal)) awal = 'merah';
+  pasangPalet(awal, false);
+  const t = document.getElementById('warna');
+  if (t) t.addEventListener('click', function(){
+    const i = PALET.findIndex(x => x.kode === paletSekarang());
+    pasangPalet(PALET[(i + 1) % PALET.length].kode, true);
+  });
+})();
+
 </script>
 </body>
 </html>
