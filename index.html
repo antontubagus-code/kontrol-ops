@@ -505,6 +505,27 @@ footer{padding:34px 26px 50px;color:var(--abu);font-size:12.5px}
   :root:not([data-tema="terang"]) .tema .mentari{display:block}
 }
 :focus-visible{outline:3px solid var(--teal);outline-offset:2px;border-radius:8px}
+
+/* ==== TOMBOL UTAMA: "Buka" dibuat dominan ==== */
+.actions{gap:9px;padding:12px;align-items:stretch}
+.actions>*{
+  flex:0 0 auto;border-radius:12px;padding:0 12px;min-height:52px;
+  font-size:13.5px;font-weight:700;
+}
+.actions>*+*{border-left:0}
+.actions>*:first-child{
+  flex:1 1 auto;background:var(--teal);color:var(--kartu);
+  font-size:16px;font-weight:800;letter-spacing:.2px;
+}
+.actions>*:first-child svg{width:19px;height:19px;stroke-width:2.4}
+.actions .go:hover{background:var(--teal);color:var(--kartu);filter:brightness(1.08)}
+.actions .salin,.actions .unduh{
+  border:1.5px solid var(--line);background:var(--kartu);color:var(--abu);min-width:84px;
+}
+.actions .mati:first-child{background:var(--kartu3);color:var(--abu);filter:none}
+@media (max-width:520px){
+  .actions .salin,.actions .unduh{min-width:64px;padding:0 8px}
+}
 </style>
 </head>
 <body>
@@ -582,8 +603,7 @@ footer{padding:34px 26px 50px;color:var(--abu);font-size:12.5px}
   </div>
 
   <footer>
-    Scan QR dengan kamera HP, atau ketuk <strong>Buka</strong>. Item bertanda <em>segera</em> belum punya tautan —
-    isi kolom <code>url</code> pada daftar item untuk mengaktifkannya. •
+    Yayasan Anugerah Pekerti Nusantara · Badan Gizi Nasional ·
     Terakhir diperbarui <span id="upd"></span>
   </footer>
 </div>
