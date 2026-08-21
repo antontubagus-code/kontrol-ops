@@ -12,32 +12,223 @@
 <!-- ==================================================================== -->
 
 <style>
+/* ==== PALET WARNA — jangan diubah manual, ganti lewat tombol ==== */
 :root{
-  --navy:#0B3C49; --navy-2:#08303A; --teal:#137A7F; --teal-soft:#E6F2F2;
-  --emerald:#12A594; --amber:#F0A500; --amber-soft:#FFF4DA;
-  --ink:#16242A; --abu:#5A6E77; --line:#DDE7EA; --bg:#F1F6F7;
-  --kartu:#fff; --kartu2:#F6FAFB; --kartu3:#E9F0F2; --judul:#0B3C49; --amber-t:#8A5B00; --topbar:rgba(255,255,255,.92);
-  --hijau-s:#E8F7F2; --hijau-t:#0E7C63; --hijau-b:#C7EBE0;
-  --radius:16px; --shadow:0 1px 2px rgba(11,60,73,.06), 0 8px 24px rgba(11,60,73,.07);
+  --p1:#991B1B;
+  --p2:#7F1D1D;
+  --p3:#F97316;
+  --p4:#FFEDD5;
+  --p5:#EA580C;
+  --p6:#FBBF24;
+  --p7:#5A2600;
+  --p8:#D97706;
+  --p9:#FEF3C7;
+  --p10:#1F2937;
+  --p11:#7C6B58;
+  --p12:#F2E2CC;
+  --p13:#FFFBF5;
+  --p14:#FFF7ED;
+  --p15:#F5EDE1;
+  --p16:#92400E;
+  --p17:#FFEDD5;
+  --p18:#C2410C;
+  --p19:#FED7AA;
+  --p20:153,27,27;
+  --p21:#160B09;
+  --p22:#0E0605;
+  --p23:#FB923C;
+  --p24:#3A2410;
+  --p25:#FDBA74;
+  --p26:#FCD34D;
+  --p27:#3A1A05;
+  --p28:#FBBF24;
+  --p29:#422006;
+  --p30:#F5EDE3;
+  --p31:#B9A48D;
+  --p32:#4B2C26;
+  --p33:#190E0C;
+  --p34:#2A1614;
+  --p35:#3A1E1B;
+  --p36:#4A2622;
+  --p37:#FBF1E6;
+  --p38:#FCD34D;
+  --p39:36,26,18;
+  --p40:#431407;
+  --p41:#FDBA74;
+  --p42:#7C2D12;
+  --p43:#D6B893;
+  --p44:#F5E3CA;
+  --p45:249,115,22;
+  --p46:#A98A66;
+  --p47:#FFEDD5;
+  --p48:#DC2626;
+  --p49:#EA580C;
+  --p50:#FED7AA;
+  --p51:#F0DCC0;
+  --p52:#FDBA74;
+  --p53:#F1E4D2;
+  --p54:#B45309;
+  --p55:#92400E;
+  --p56:#B91C1C;
+  --p57:#7F1D1D;
+  --p58:#B8A288;
+  --p59:#FFF8F0;
+  --p60:#FDF0E0;
+  --p61:#A8927A;
+}
+:root[data-warna="zaitun"]{
+  --p1:#7C2D12;
+  --p2:#601F0A;
+  --p3:#F97316;
+  --p4:#FFEDD5;
+  --p5:#65A30D;
+  --p6:#FBBF24;
+  --p7:#5A2600;
+  --p8:#D97706;
+  --p9:#FEF3C7;
+  --p10:#1F2937;
+  --p11:#7C6B58;
+  --p12:#F2E2CC;
+  --p13:#FFFBF5;
+  --p14:#FFF7ED;
+  --p15:#F5EDE1;
+  --p16:#92400E;
+  --p17:#EDF3D6;
+  --p18:#4D7C0F;
+  --p19:#D9E8A8;
+  --p20:124,45,18;
+  --p21:#140F0A;
+  --p22:#0D0906;
+  --p23:#FB923C;
+  --p24:#3A2410;
+  --p25:#FDBA74;
+  --p26:#FCD34D;
+  --p27:#3A1A05;
+  --p28:#FBBF24;
+  --p29:#422006;
+  --p30:#F5EDE3;
+  --p31:#B9A48D;
+  --p32:#40301F;
+  --p33:#17120D;
+  --p34:#241A12;
+  --p35:#2E2117;
+  --p36:#3A2A1C;
+  --p37:#FBF1E6;
+  --p38:#FCD34D;
+  --p39:36,26,18;
+  --p40:#2E3410;
+  --p41:#BEF264;
+  --p42:#3F4A16;
+  --p43:#D6B893;
+  --p44:#F5E3CA;
+  --p45:249,115,22;
+  --p46:#A98A66;
+  --p47:#FFEDD5;
+  --p48:#C2410C;
+  --p49:#EA580C;
+  --p50:#FED7AA;
+  --p51:#F0DCC0;
+  --p52:#FDBA74;
+  --p53:#F1E4D2;
+  --p54:#B45309;
+  --p55:#92400E;
+  --p56:#E11D48;
+  --p57:#9F1239;
+  --p58:#B8A288;
+  --p59:#FFF8F0;
+  --p60:#FDF0E0;
+  --p61:#A8927A;
+}
+:root[data-warna="teal"]{
+  --p1:#0B3C49;
+  --p2:#08303A;
+  --p3:#137A7F;
+  --p4:#E6F2F2;
+  --p5:#12A594;
+  --p6:#12A594;
+  --p7:#06251F;
+  --p8:#F0A500;
+  --p9:#FFF4DA;
+  --p10:#16242A;
+  --p11:#5A6E77;
+  --p12:#DDE7EA;
+  --p13:#F1F6F7;
+  --p14:#F6FAFB;
+  --p15:#E9F0F2;
+  --p16:#8A5B00;
+  --p17:#E8F7F2;
+  --p18:#0E7C63;
+  --p19:#C7EBE0;
+  --p20:11,60,73;
+  --p21:#0A1A1F;
+  --p22:#071317;
+  --p23:#2FB3A6;
+  --p24:#12302F;
+  --p25:#3ED0B8;
+  --p26:#3ED0B8;
+  --p27:#08201D;
+  --p28:#F0B84E;
+  --p29:#33280F;
+  --p30:#E6F0F1;
+  --p31:#93AAB2;
+  --p32:#22383E;
+  --p33:#0A1417;
+  --p34:#101F24;
+  --p35:#152A30;
+  --p36:#1B343B;
+  --p37:#E9F3F4;
+  --p38:#F0C46A;
+  --p39:16,31,36;
+  --p40:#12332C;
+  --p41:#5BD9BC;
+  --p42:#1E5148;
+  --p43:#8FB6BC;
+  --p44:#D3E4E7;
+  --p45:18,165,148;
+  --p46:#6E959C;
+  --p47:#BFEDE5;
+  --p48:#0F5563;
+  --p49:#12706B;
+  --p50:#7FD8C9;
+  --p51:#C3DDE1;
+  --p52:#15BBA8;
+  --p53:#E2E8F0;
+  --p54:#C98A00;
+  --p55:#B47600;
+  --p56:#D14636;
+  --p57:#B23A2C;
+  --p58:#9FB0B7;
+  --p59:#F3F7F8;
+  --p60:#EAF1F3;
+  --p61:#93A5AD;
+}
+
+:root{
+  --navy:var(--p1); --navy-2:var(--p2); --teal:var(--p3); --teal-soft:var(--p4);
+  --emerald:var(--p5); --sorot:var(--p6); --sorot-t:var(--p7); --amber:var(--p8); --amber-soft:var(--p9);
+  --ink:var(--p10); --abu:var(--p11); --line:var(--p12); --bg:var(--p13);
+  --kartu:#fff; --kartu2:var(--p14); --kartu3:var(--p15); --judul:var(--p1); --amber-t:var(--p16); --topbar:rgba(255,255,255,.92);
+  --hijau-s:var(--p17); --hijau-t:var(--p18); --hijau-b:var(--p19);
+  --radius:16px; --shadow:0 1px 2px rgba(var(--p20),.06), 0 8px 24px rgba(var(--p20),.07);
   --side:268px;
 }
 /* ---------- MODE GELAP ---------- */
 @media (prefers-color-scheme:dark){
   :root:not([data-tema="terang"]){
-    --navy:#0a1a1f; --navy-2:#071317; --teal:#2FB3A6; --teal-soft:#12302F;
-    --emerald:#3ED0B8; --amber:#F0B84E; --amber-soft:#33280F;
-    --ink:#E6F0F1; --abu:#93AAB2; --line:#22383E; --bg:#0A1417;
-    --kartu:#101F24; --kartu2:#152A30; --kartu3:#1B343B; --judul:#E9F3F4; --amber-t:#F0C46A; --topbar:rgba(16,31,36,.92);
-    --hijau-s:#12332C; --hijau-t:#5BD9BC; --hijau-b:#1E5148;
+    --navy:var(--p21); --navy-2:var(--p22); --teal:var(--p23); --teal-soft:var(--p24);
+    --emerald:var(--p25); --sorot:var(--p26); --sorot-t:var(--p27); --amber:var(--p28); --amber-soft:var(--p29);
+    --ink:var(--p30); --abu:var(--p31); --line:var(--p32); --bg:var(--p33);
+    --kartu:var(--p34); --kartu2:var(--p35); --kartu3:var(--p36); --judul:var(--p37); --amber-t:var(--p38); --topbar:rgba(var(--p39),.92);
+    --hijau-s:var(--p40); --hijau-t:var(--p41); --hijau-b:var(--p42);
     --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 26px rgba(0,0,0,.5);
   }
 }
 :root[data-tema="gelap"]{
-  --navy:#0a1a1f; --navy-2:#071317; --teal:#2FB3A6; --teal-soft:#12302F;
-  --emerald:#3ED0B8; --amber:#F0B84E; --amber-soft:#33280F;
-  --ink:#E6F0F1; --abu:#93AAB2; --line:#22383E; --bg:#0A1417;
-  --kartu:#101F24; --kartu2:#152A30; --kartu3:#1B343B; --judul:#E9F3F4; --amber-t:#F0C46A; --topbar:rgba(16,31,36,.92);
-  --hijau-s:#12332C; --hijau-t:#5BD9BC; --hijau-b:#1E5148;
+  --navy:var(--p21); --navy-2:var(--p22); --teal:var(--p23); --teal-soft:var(--p24);
+  --emerald:var(--p25); --sorot:var(--p26); --sorot-t:var(--p27); --amber:var(--p28); --amber-soft:var(--p29);
+  --ink:var(--p30); --abu:var(--p31); --line:var(--p32); --bg:var(--p33);
+  --kartu:var(--p34); --kartu2:var(--p35); --kartu3:var(--p36); --judul:var(--p37); --amber-t:var(--p38); --topbar:rgba(var(--p39),.92);
+  --hijau-s:var(--p40); --hijau-t:var(--p41); --hijau-b:var(--p42);
   --shadow:0 1px 2px rgba(0,0,0,.45), 0 10px 26px rgba(0,0,0,.5);
 }
 *{box-sizing:border-box}
@@ -59,32 +250,32 @@ a{color:var(--teal)}
 .logo{width:42px;height:42px;border-radius:12px;background:var(--teal);display:grid;place-items:center;flex:none}
 .logo svg{width:23px;height:23px}
 .side-brand h1{margin:0;font-size:13.5px;font-weight:800;letter-spacing:.2px;line-height:1.25}
-.side-brand p{margin:3px 0 0;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:#8FB6BC}
+.side-brand p{margin:3px 0 0;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--p43)}
 .side-nav{flex:1;overflow-y:auto;padding:12px 10px 8px}
 .side-nav::-webkit-scrollbar{width:6px}
 .side-nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:99px}
 .nav-item{
   display:flex;align-items:center;gap:9px;width:100%;text-align:left;border:0;cursor:pointer;
-  background:transparent;color:#D3E4E7;font:600 13.5px/1.3 inherit;
+  background:transparent;color:var(--p44);font:600 13.5px/1.3 inherit;
   padding:9px 11px;border-radius:10px;margin-bottom:2px;transition:.15s;
 }
 .nav-item:hover{background:rgba(255,255,255,.08);color:#fff}
-.nav-item.on{background:rgba(18,165,148,.22);color:#fff;box-shadow:inset 3px 0 0 var(--emerald)}
-.nav-item .n{margin-left:auto;font-size:11px;font-weight:800;color:#8FB6BC;background:rgba(255,255,255,.09);
+.nav-item.on{background:rgba(var(--p45),.22);color:#fff;box-shadow:inset 3px 0 0 var(--sorot)}
+.nav-item .n{margin-left:auto;font-size:11px;font-weight:800;color:var(--p43);background:rgba(255,255,255,.09);
   padding:1px 7px;border-radius:99px;flex:none}
 .nav-item.on .n{background:rgba(255,255,255,.18);color:#fff}
 .nav-sec{font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;
-  color:#6E959C;padding:14px 11px 6px}
+  color:var(--p46);padding:14px 11px 6px}
 .side-kelola{
   display:flex;align-items:center;gap:9px;margin:0 10px 10px;padding:11px 12px;border-radius:11px;
-  background:rgba(18,165,148,.16);border:1px solid rgba(18,165,148,.35);color:#BFEDE5;
+  background:rgba(var(--p45),.16);border:1px solid rgba(var(--p45),.35);color:var(--p47);
   font:700 13px/1.2 inherit;text-decoration:none;transition:.15s;
 }
-.side-kelola:hover{background:rgba(18,165,148,.28);color:#fff}
+.side-kelola:hover{background:rgba(var(--p45),.28);color:#fff}
 .side-kelola svg{width:17px;height:17px;flex:none}
 .side-user{border-top:1px solid rgba(255,255,255,.09);padding:13px 18px;font-size:12.5px}
 .side-user strong{display:block;font-size:13px;letter-spacing:.3px}
-.side-user span{color:#8FB6BC;font-size:11.5px}
+.side-user span{color:var(--p43);font-size:11.5px}
 
 /* ================= MAIN ================= */
 .main{margin-left:var(--side);min-height:100vh;display:flex;flex-direction:column}
@@ -104,7 +295,7 @@ a{color:var(--teal)}
 .pill-data.ok{background:var(--hijau-s);color:var(--hijau-t);border-color:var(--hijau-b)}
 .pill-data.warn{background:var(--amber-soft);color:var(--amber-t);border-color:#F3E0B4}
 .pill-data.abu{background:var(--kartu2);color:var(--abu)}
-.dot{width:7px;height:7px;border-radius:99px;background:#12A594;box-shadow:0 0 0 3px rgba(18,165,148,.2)}
+.dot{width:7px;height:7px;border-radius:99px;background:var(--p5);box-shadow:0 0 0 3px rgba(var(--p45),.2)}
 .avatar{width:36px;height:36px;border-radius:11px;background:var(--navy);color:#fff;display:grid;place-items:center;
   font-weight:800;font-size:14px;flex:none}
 .burger{display:none;border:1px solid var(--line);background:var(--kartu);border-radius:10px;padding:7px 9px;cursor:pointer}
@@ -115,20 +306,20 @@ a{color:var(--teal)}
 /* ---------- hero ---------- */
 .hero{
   border-radius:20px;padding:30px 32px;color:#fff;position:relative;overflow:hidden;
-  background:linear-gradient(135deg,var(--navy) 0%,#0F5563 55%,#12706B 100%);
+  background:linear-gradient(135deg,var(--navy) 0%,var(--p48) 55%,var(--p49) 100%);
 }
 .hero::after{content:"";position:absolute;right:-70px;top:-70px;width:280px;height:280px;border-radius:50%;
   background:rgba(255,255,255,.05)}
-.hero .kick{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:#7FD8C9}
+.hero .kick{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--p50)}
 .hero h3{margin:8px 0 0;font-size:30px;font-weight:800;line-height:1.15;letter-spacing:-.5px;max-width:640px}
-.hero p{margin:10px 0 0;font-size:14.5px;color:#C3DDE1;max-width:560px}
+.hero p{margin:10px 0 0;font-size:14.5px;color:var(--p51);max-width:560px}
 .hero-act{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;position:relative;z-index:1}
 .hero-act a{
   display:inline-flex;align-items:center;gap:8px;border-radius:12px;padding:11px 18px;
   font-size:14px;font-weight:700;text-decoration:none;transition:.15s;
 }
-.hero-act .a1{background:var(--emerald);color:#06251F}
-.hero-act .a1:hover{background:#15BBA8}
+.hero-act .a1{background:var(--sorot);color:var(--sorot-t)}
+.hero-act .a1:hover{background:var(--p52)}
 .hero-act .a2{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)}
 .hero-act .a2:hover{background:rgba(255,255,255,.2)}
 
@@ -150,7 +341,7 @@ a{color:var(--teal)}
 .panel-b{padding:16px 18px 18px}
 .warn-empty{display:flex;gap:12px;align-items:flex-start;color:var(--abu);font-size:13.5px}
 .warn-empty .ic{width:34px;height:34px;border-radius:10px;background:var(--hijau-s);display:grid;place-items:center;flex:none}
-.warn-empty .ic svg{width:18px;height:18px;stroke:#0E7C63}
+.warn-empty .ic svg{width:18px;height:18px;stroke:var(--p18)}
 .warn-empty strong{display:block;color:var(--judul);font-size:14px;margin-bottom:2px}
 .warn-list{list-style:none;margin:0;padding:0;display:grid;gap:9px}
 .warn-list li{display:flex;gap:11px;align-items:flex-start;background:var(--amber-soft);border:1px solid #F6E4BC;
@@ -158,19 +349,19 @@ a{color:var(--teal)}
 .warn-list b{display:block;color:var(--amber-t);font-size:13.5px}
 .warn-list span{color:var(--abu)}
 .warn-list b{color:var(--judul)}
-.warn-list svg{width:18px;height:18px;flex:none;margin-top:2px;stroke:#0E7C63}
-.warn-list li{background:var(--kartu2);border:1px solid #E2E8F0;border-left:3px solid #0E7C63}
-.warn-list li.penting{background:var(--amber-soft);border:1px solid #F6E4BC;border-left:3px solid #C98A00}
-.warn-list li.penting svg{stroke:#B47600}
+.warn-list svg{width:18px;height:18px;flex:none;margin-top:2px;stroke:var(--p18)}
+.warn-list li{background:var(--kartu2);border:1px solid var(--p53);border-left:3px solid var(--p18)}
+.warn-list li.penting{background:var(--amber-soft);border:1px solid #F6E4BC;border-left:3px solid var(--p54)}
+.warn-list li.penting svg{stroke:var(--p55)}
 .side-brand .logo.logo-gambar{background:#fff;padding:4px;overflow:hidden}
 .side-brand .logo.logo-gambar img{width:100%;height:100%;object-fit:contain;display:block;border-radius:6px}
 .card-gambar{margin:-1px -1px 0;height:132px;overflow:hidden;background:var(--kartu3);
   border-radius:calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0}
 .card-gambar img{width:100%;height:100%;object-fit:cover;display:block}
-.warn-list li.silang{border-left-color:#D14636;background:color-mix(in srgb,#D14636 7%,var(--kartu))}
-.warn-list li.silang svg{color:#D14636}
-.warn-list li.silang b{color:#B23A2C}
-.warn-list li.ceklis svg{color:#12A594}
+.warn-list li.silang{border-left-color:var(--p56);background:color-mix(in srgb,var(--p56) 7%,var(--kartu))}
+.warn-list li.silang svg{color:var(--p56)}
+.warn-list li.silang b{color:var(--p57)}
+.warn-list li.ceklis svg{color:var(--p5)}
 .warn-list li.penting b{color:var(--amber-t)}
 .warn-list li.penting span{color:var(--abu)}
 .quick{display:grid;gap:9px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
@@ -187,7 +378,7 @@ a{color:var(--teal)}
   width:100%;padding:14px 16px 14px 46px;border-radius:13px;border:1px solid var(--line);
   background:var(--kartu);color:var(--ink);font-size:15px;outline:none;box-shadow:var(--shadow);
 }
-.searchbar input::placeholder{color:#9FB0B7}
+.searchbar input::placeholder{color:var(--p58)}
 .searchbar input:focus{border-color:var(--teal)}
 .searchbar svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;
   stroke:var(--abu);fill:none;stroke-width:2}
@@ -228,7 +419,7 @@ a{color:var(--teal)}
   border:1px solid var(--line);display:grid;place-items:center;padding:5px;
 }
 .qr canvas,.qr img{width:100%!important;height:100%!important;display:block;image-rendering:pixelated}
-.qr.kosong{background:repeating-linear-gradient(45deg,#F3F7F8,#F3F7F8 6px,#EAF1F3 6px,#EAF1F3 12px);
+.qr.kosong{background:repeating-linear-gradient(45deg,var(--p59),var(--p59) 6px,var(--p60) 6px,var(--p60) 12px);
   font-size:10.5px;color:var(--abu);text-align:center;font-weight:600;padding:8px}
 .meta{min-width:0;flex:1}
 .title{margin:0;font-size:15.5px;font-weight:700;line-height:1.3;color:var(--judul)}
@@ -266,7 +457,7 @@ footer{padding:34px 26px 50px;color:var(--abu);font-size:12.5px}
   font-size:13.5px;font-weight:600;opacity:0;pointer-events:none;transition:.22s;z-index:99;
 }
 #toast.show{opacity:1;transform:translate(-50%,0)}
-.veil{display:none;position:fixed;inset:0;background:rgba(11,60,73,.45);z-index:55}
+.veil{display:none;position:fixed;inset:0;background:rgba(var(--p20),.45);z-index:55}
 .veil.on{display:block}
 
 /* ---------- cetak ---------- */
@@ -349,6 +540,7 @@ footer{padding:34px 26px 50px;color:var(--abu);font-size:12.5px}
     <div class="sp"></div>
     <span class="pill-data abu" id="sumber">Data bawaan</span>
     <div class="pill-live"><span class="dot"></span> Sistem Aktif</div>
+    <button class="tema" id="warna" type="button" title="Ganti warna tema" aria-label="Ganti warna tema"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2c-5 0-9 3.9-9 8.8a8.8 8.8 0 0 0 8.8 8.8c1.5 0 2.5-1 2.5-2.2 0-.6-.2-1.1-.6-1.5-.4-.4-.6-.9-.6-1.4 0-1 .8-1.8 1.9-1.8h1.4c2.6 0 4.6-2.1 4.6-4.7 0-3.5-3.9-6-9-6Z"/><circle cx="7.3" cy="12.4" r="1.15" fill="currentColor" stroke="none"/><circle cx="9.5" cy="8.2" r="1.15" fill="currentColor" stroke="none"/><circle cx="14.4" cy="7.9" r="1.15" fill="currentColor" stroke="none"/></svg></button>
     <button class="tema" id="tema" type="button" title="Ganti tema terang / gelap" aria-label="Ganti tema terang atau gelap">
       <svg class="bulan" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
       <svg class="mentari" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></svg>
@@ -3222,7 +3414,7 @@ function gambarQR(box, teks){
     c.width = c.height = sisi;
     const x = c.getContext('2d');
     x.fillStyle = '#ffffff'; x.fillRect(0,0,sisi,sisi);
-    x.fillStyle = '#0B3C49';
+    x.fillStyle = W('--p1');
     for (let r=0; r<n; r++)
       for (let k=0; k<n; k++)
         if (qr.isDark(r,k))
@@ -3231,7 +3423,7 @@ function gambarQR(box, teks){
     box.innerHTML = '';
     box.appendChild(c);
   }catch(e){
-    box.innerHTML = '<span style="font-size:10px;color:#93A5AD;text-align:center;padding:4px">QR terlalu panjang</span>';
+    box.innerHTML = '<span style="font-size:10px;color:' + W('--p61') + ';text-align:center;padding:4px">QR terlalu panjang</span>';
   }
 }
 
@@ -3249,7 +3441,7 @@ function unduhQR(box, nama){
   x.imageSmoothingEnabled = false;
   x.drawImage(src, P, P, S, S);
 
-  x.fillStyle = '#0B3C49';
+  x.fillStyle = W('--p1');
   x.font = 'bold 26px -apple-system,Segoe UI,Roboto,Arial,sans-serif';
   x.textAlign = 'center';
   let t = nama;
@@ -3388,6 +3580,48 @@ muatSheet();
 muatPeringatan();
 setInterval(() => { muatSheet(true); muatPeringatan(); }, 60000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) muatSheet(true); });
+
+
+/* ---------------------------------------------------------------------
+   PALET WARNA — tombol di samping tombol mode malam.
+   Pilihan disimpan di HP masing-masing, terpisah dari terang/gelap.
+   --------------------------------------------------------------------- */
+const PALET = [
+  { kode:'merah',  nama:'Oranye Merah' },
+  { kode:'zaitun', nama:'Oranye Zaitun' },
+  { kode:'teal',   nama:'Teal Asli' }
+];
+function W(n){
+  const v = getComputedStyle(document.documentElement).getPropertyValue(n);
+  return (v || '').trim() || '#888888';
+}
+function paletSekarang(){
+  const a = document.documentElement.getAttribute('data-warna');
+  return a || 'merah';
+}
+function pasangPalet(kode, simpan){
+  if (kode === 'merah') document.documentElement.removeAttribute('data-warna');
+  else document.documentElement.setAttribute('data-warna', kode);
+  if (simpan){ try{ localStorage.setItem('warna', kode); }catch(e){} }
+  const t = document.getElementById('warna');
+  const p = PALET.find(x => x.kode === kode) || PALET[0];
+  if (t) t.title = 'Warna: ' + p.nama + ' — klik untuk ganti';
+  try{ if (typeof render === 'function') render(); }catch(e){}
+  try{ if (typeof renderPeringatan === 'function') renderPeringatan(); }catch(e){}
+  try{ if (typeof buildChips === 'function') buildChips(); }catch(e){}
+}
+(function(){
+  let awal = null;
+  try{ awal = localStorage.getItem('warna'); }catch(e){}
+  if (!PALET.some(x => x.kode === awal)) awal = 'merah';
+  pasangPalet(awal, false);
+  const t = document.getElementById('warna');
+  if (t) t.addEventListener('click', function(){
+    const i = PALET.findIndex(x => x.kode === paletSekarang());
+    pasangPalet(PALET[(i + 1) % PALET.length].kode, true);
+  });
+})();
+
 </script>
 </body>
 </html>
